@@ -3811,25 +3811,37 @@ diagrama = {
 }
 
 def criar_cases():
+    finais = ['L','M','N','O','P','R','S','T','U','V','W','X','AC','AM','AO','AP','AQ','AR','AS','AT','BI','BL','BR','BU','BY','CA','CB','CD','CE','CN','CR','CS','CU','CW','CZ','DA','ER']
     file = open('cod_direta.txt', 'w+')
     file.write(f"\twhile True:\n")
     file.write(f"\t\tmatch state:\n")
     estadoAnterior = ''
+    finalApareceu = []
+    finalTratado = []
     for key, value in diagrama.items():
         key_ = key.split(':')
 
         if key_[0] != estadoAnterior:
+            for final in finalApareceu:
+                file.write(f"\t\t\tcase '{final}':\n")
+                file.write(f"\t\t\t\tprint('Tratar retorno estado final')\n")
+                finalTratado.append(final)
+                finalApareceu = []
+
             file.write(f"\t\t\tcase '{key_[0]}':\n")
-            file.write(f"\t\t\t\tc = nextChat()\n")
+            file.write('\t\t\t\tc = nextChar()\n')
             estadoAnterior = key_[0]
 
         caracter = "\\n" if key_[1] == '\n' else ("\\t" if key_[1] == '\t' else ("\\'" if key_[1] == '\'' else key_[1]))
 
         if key_[1] == 'a':
-            file.write(f"t\t\t\t\tif c == '{caracter}':\n")
+            file.write(f"\t\t\t\tif c == '{caracter}':\n")
         else:
             file.write(f"\t\t\t\telif c == '{caracter}':\n")
         file.write(f"\t\t\t\t\tstate = '{value}'\n")
+
+        if value in finais and value not in finalTratado and value not in finalApareceu:
+            finalApareceu.append(value)
 
         if key_[1] == '\'':
             file.write(f"\t\t\t\telse:\n")
@@ -3837,4 +3849,7971 @@ def criar_cases():
 
 
 criar_cases()
+
+def cod_direta():
+    while True:
+        match state:
+            case 'A':
+                c = nextChar()
+                if c == 'a':
+                    state = 'B'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'D'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'E'
+                elif c == 'f':
+                    state = 'F'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'G'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'H'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'I'
+                elif c == 's':
+                    state = 'J'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'K'
+                elif c == '-':
+                    state = 'L'
+                elif c == '+':
+                    state = 'M'
+                elif c == '/':
+                    state = 'N'
+                elif c == '*':
+                    state = 'O'
+                elif c == '^':
+                    state = 'P'
+                elif c == '>':
+                    state = 'Q'
+                elif c == '=':
+                    state = 'R'
+                elif c == '.':
+                    state = 'ER'
+                elif c == ',':
+                    state = 'S'
+                elif c == ';':
+                    state = 'T'
+                elif c == '(':
+                    state = 'U'
+                elif c == ')':
+                    state = 'V'
+                elif c == '[':
+                    state = 'W'
+                elif c == ']':
+                    state = 'X'
+                elif c == '\n':
+                    state = 'Y'
+                elif c == '\t':
+                    state = 'Y'
+                elif c == ' ':
+                    state = 'Y'
+                elif c == '0':
+                    state = 'Z'
+                elif c == '1':
+                    state = 'Z'
+                elif c == '2':
+                    state = 'Z'
+                elif c == '3':
+                    state = 'Z'
+                elif c == '4':
+                    state = 'Z'
+                elif c == '5':
+                    state = 'Z'
+                elif c == '6':
+                    state = 'Z'
+                elif c == '7':
+                    state = 'Z'
+                elif c == '8':
+                    state = 'Z'
+                elif c == '9':
+                    state = 'Z'
+                elif c == '\'':
+                    state = 'AA'
+                else:
+                    fail()
+            case 'L':
+                print('Tratar retorno estado final')
+            case 'M':
+                print('Tratar retorno estado final')
+            case 'N':
+                print('Tratar retorno estado final')
+            case 'O':
+                print('Tratar retorno estado final')
+            case 'P':
+                print('Tratar retorno estado final')
+            case 'R':
+                print('Tratar retorno estado final')
+            case 'ER':
+                print('Tratar retorno estado final')
+            case 'S':
+                print('Tratar retorno estado final')
+            case 'T':
+                print('Tratar retorno estado final')
+            case 'U':
+                print('Tratar retorno estado final')
+            case 'V':
+                print('Tratar retorno estado final')
+            case 'W':
+                print('Tratar retorno estado final')
+            case 'X':
+                print('Tratar retorno estado final')
+            case 'B':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'AB'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AC':
+                print('Tratar retorno estado final')
+            case 'C':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'D':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'AD'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'E':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'AE'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'F':
+                c = nextChar()
+                if c == 'a':
+                    state = 'AF'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'AG'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'AH'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'G':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'AI'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'H':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'AJ'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'I':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'AK'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'J':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'AL'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'K':
+                c = nextChar()
+                if c == 'a':
+                    state = 'AM'
+                elif c == 'b':
+                    state = 'AM'
+                elif c == 'c':
+                    state = 'AM'
+                elif c == 'd':
+                    state = 'AM'
+                elif c == 'e':
+                    state = 'AM'
+                elif c == 'f':
+                    state = 'AM'
+                elif c == 'g':
+                    state = 'AM'
+                elif c == 'h':
+                    state = 'AM'
+                elif c == 'i':
+                    state = 'AM'
+                elif c == 'j':
+                    state = 'AM'
+                elif c == 'k':
+                    state = 'AM'
+                elif c == 'l':
+                    state = 'AM'
+                elif c == 'm':
+                    state = 'AM'
+                elif c == 'n':
+                    state = 'AM'
+                elif c == 'o':
+                    state = 'AM'
+                elif c == 'p':
+                    state = 'AM'
+                elif c == 'q':
+                    state = 'AM'
+                elif c == 'r':
+                    state = 'AM'
+                elif c == 's':
+                    state = 'AM'
+                elif c == 't':
+                    state = 'AM'
+                elif c == 'u':
+                    state = 'AM'
+                elif c == 'v':
+                    state = 'AM'
+                elif c == 'w':
+                    state = 'AM'
+                elif c == 'x':
+                    state = 'AM'
+                elif c == 'y':
+                    state = 'AM'
+                elif c == 'z':
+                    state = 'AM'
+                elif c == '_':
+                    state = 'AM'
+                elif c == '<':
+                    state = 'AM'
+                elif c == '-':
+                    state = 'AN'
+                elif c == '+':
+                    state = 'AM'
+                elif c == '/':
+                    state = 'AM'
+                elif c == '*':
+                    state = 'AM'
+                elif c == '^':
+                    state = 'AM'
+                elif c == '>':
+                    state = 'AO'
+                elif c == '=':
+                    state = 'AP'
+                elif c == '.':
+                    state = 'AM'
+                elif c == ',':
+                    state = 'AM'
+                elif c == ';':
+                    state = 'AM'
+                elif c == '(':
+                    state = 'AM'
+                elif c == ')':
+                    state = 'AM'
+                elif c == '[':
+                    state = 'AM'
+                elif c == ']':
+                    state = 'AM'
+                elif c == '\n':
+                    state = 'AM'
+                elif c == '\t':
+                    state = 'AM'
+                elif c == ' ':
+                    state = 'AM'
+                elif c == '0':
+                    state = 'AM'
+                elif c == '1':
+                    state = 'AM'
+                elif c == '2':
+                    state = 'AM'
+                elif c == '3':
+                    state = 'AM'
+                elif c == '4':
+                    state = 'AM'
+                elif c == '5':
+                    state = 'AM'
+                elif c == '6':
+                    state = 'AM'
+                elif c == '7':
+                    state = 'AM'
+                elif c == '8':
+                    state = 'AM'
+                elif c == '9':
+                    state = 'AM'
+                elif c == '\'':
+                    state = 'AM'
+                else:
+                    fail()
+            case 'AM':
+                print('Tratar retorno estado final')
+            case 'AO':
+                print('Tratar retorno estado final')
+            case 'AP':
+                print('Tratar retorno estado final')
+            case 'Q':
+                c = nextChar()
+                if c == 'a':
+                    state = 'AQ'
+                elif c == 'b':
+                    state = 'AQ'
+                elif c == 'c':
+                    state = 'AQ'
+                elif c == 'd':
+                    state = 'AQ'
+                elif c == 'e':
+                    state = 'AQ'
+                elif c == 'f':
+                    state = 'AQ'
+                elif c == 'g':
+                    state = 'AQ'
+                elif c == 'h':
+                    state = 'AQ'
+                elif c == 'i':
+                    state = 'AQ'
+                elif c == 'j':
+                    state = 'AQ'
+                elif c == 'k':
+                    state = 'AQ'
+                elif c == 'l':
+                    state = 'AQ'
+                elif c == 'm':
+                    state = 'AQ'
+                elif c == 'n':
+                    state = 'AQ'
+                elif c == 'o':
+                    state = 'AQ'
+                elif c == 'p':
+                    state = 'AQ'
+                elif c == 'q':
+                    state = 'AQ'
+                elif c == 'r':
+                    state = 'AQ'
+                elif c == 's':
+                    state = 'AQ'
+                elif c == 't':
+                    state = 'AQ'
+                elif c == 'u':
+                    state = 'AQ'
+                elif c == 'v':
+                    state = 'AQ'
+                elif c == 'w':
+                    state = 'AQ'
+                elif c == 'x':
+                    state = 'AQ'
+                elif c == 'y':
+                    state = 'AQ'
+                elif c == 'z':
+                    state = 'AQ'
+                elif c == '_':
+                    state = 'AQ'
+                elif c == '<':
+                    state = 'AQ'
+                elif c == '-':
+                    state = 'AQ'
+                elif c == '+':
+                    state = 'AQ'
+                elif c == '/':
+                    state = 'AQ'
+                elif c == '*':
+                    state = 'AQ'
+                elif c == '^':
+                    state = 'AQ'
+                elif c == '>':
+                    state = 'AQ'
+                elif c == '=':
+                    state = 'AR'
+                elif c == '.':
+                    state = 'AQ'
+                elif c == ',':
+                    state = 'AQ'
+                elif c == ';':
+                    state = 'AQ'
+                elif c == '(':
+                    state = 'AQ'
+                elif c == ')':
+                    state = 'AQ'
+                elif c == '[':
+                    state = 'AQ'
+                elif c == ']':
+                    state = 'AQ'
+                elif c == '\n':
+                    state = 'AQ'
+                elif c == '\t':
+                    state = 'AQ'
+                elif c == ' ':
+                    state = 'AQ'
+                elif c == '0':
+                    state = 'AQ'
+                elif c == '1':
+                    state = 'AQ'
+                elif c == '2':
+                    state = 'AQ'
+                elif c == '3':
+                    state = 'AQ'
+                elif c == '4':
+                    state = 'AQ'
+                elif c == '5':
+                    state = 'AQ'
+                elif c == '6':
+                    state = 'AQ'
+                elif c == '7':
+                    state = 'AQ'
+                elif c == '8':
+                    state = 'AQ'
+                elif c == '9':
+                    state = 'AQ'
+                elif c == '\'':
+                    state = 'AQ'
+                else:
+                    fail()
+            case 'AQ':
+                print('Tratar retorno estado final')
+            case 'AR':
+                print('Tratar retorno estado final')
+            case 'Y':
+                c = nextChar()
+                if c == 'a':
+                    state = 'AS'
+                elif c == 'b':
+                    state = 'AS'
+                elif c == 'c':
+                    state = 'AS'
+                elif c == 'd':
+                    state = 'AS'
+                elif c == 'e':
+                    state = 'AS'
+                elif c == 'f':
+                    state = 'AS'
+                elif c == 'g':
+                    state = 'AS'
+                elif c == 'h':
+                    state = 'AS'
+                elif c == 'i':
+                    state = 'AS'
+                elif c == 'j':
+                    state = 'AS'
+                elif c == 'k':
+                    state = 'AS'
+                elif c == 'l':
+                    state = 'AS'
+                elif c == 'm':
+                    state = 'AS'
+                elif c == 'n':
+                    state = 'AS'
+                elif c == 'o':
+                    state = 'AS'
+                elif c == 'p':
+                    state = 'AS'
+                elif c == 'q':
+                    state = 'AS'
+                elif c == 'r':
+                    state = 'AS'
+                elif c == 's':
+                    state = 'AS'
+                elif c == 't':
+                    state = 'AS'
+                elif c == 'u':
+                    state = 'AS'
+                elif c == 'v':
+                    state = 'AS'
+                elif c == 'w':
+                    state = 'AS'
+                elif c == 'x':
+                    state = 'AS'
+                elif c == 'y':
+                    state = 'AS'
+                elif c == 'z':
+                    state = 'AS'
+                elif c == '_':
+                    state = 'AS'
+                elif c == '<':
+                    state = 'AS'
+                elif c == '-':
+                    state = 'AS'
+                elif c == '+':
+                    state = 'AS'
+                elif c == '/':
+                    state = 'AS'
+                elif c == '*':
+                    state = 'AS'
+                elif c == '^':
+                    state = 'AS'
+                elif c == '>':
+                    state = 'AS'
+                elif c == '=':
+                    state = 'AS'
+                elif c == '.':
+                    state = 'AS'
+                elif c == ',':
+                    state = 'AS'
+                elif c == ';':
+                    state = 'AS'
+                elif c == '(':
+                    state = 'AS'
+                elif c == ')':
+                    state = 'AS'
+                elif c == '[':
+                    state = 'AS'
+                elif c == ']':
+                    state = 'AS'
+                elif c == '\n':
+                    state = 'Y'
+                elif c == '\t':
+                    state = 'Y'
+                elif c == ' ':
+                    state = 'Y'
+                elif c == '0':
+                    state = 'AS'
+                elif c == '1':
+                    state = 'AS'
+                elif c == '2':
+                    state = 'AS'
+                elif c == '3':
+                    state = 'AS'
+                elif c == '4':
+                    state = 'AS'
+                elif c == '5':
+                    state = 'AS'
+                elif c == '6':
+                    state = 'AS'
+                elif c == '7':
+                    state = 'AS'
+                elif c == '8':
+                    state = 'AS'
+                elif c == '9':
+                    state = 'AS'
+                elif c == '\'':
+                    state = 'AS'
+                else:
+                    fail()
+            case 'AS':
+                print('Tratar retorno estado final')
+            case 'Z':
+                c = nextChar()
+                if c == 'a':
+                    state = 'AT'
+                elif c == 'b':
+                    state = 'AT'
+                elif c == 'c':
+                    state = 'AT'
+                elif c == 'd':
+                    state = 'AT'
+                elif c == 'e':
+                    state = 'AT'
+                elif c == 'f':
+                    state = 'AT'
+                elif c == 'g':
+                    state = 'AT'
+                elif c == 'h':
+                    state = 'AT'
+                elif c == 'i':
+                    state = 'AT'
+                elif c == 'j':
+                    state = 'AT'
+                elif c == 'k':
+                    state = 'AT'
+                elif c == 'l':
+                    state = 'AT'
+                elif c == 'm':
+                    state = 'AT'
+                elif c == 'n':
+                    state = 'AT'
+                elif c == 'o':
+                    state = 'AT'
+                elif c == 'p':
+                    state = 'AT'
+                elif c == 'q':
+                    state = 'AT'
+                elif c == 'r':
+                    state = 'AT'
+                elif c == 's':
+                    state = 'AT'
+                elif c == 't':
+                    state = 'AT'
+                elif c == 'u':
+                    state = 'AT'
+                elif c == 'v':
+                    state = 'AT'
+                elif c == 'w':
+                    state = 'AT'
+                elif c == 'x':
+                    state = 'AT'
+                elif c == 'y':
+                    state = 'AT'
+                elif c == 'z':
+                    state = 'AT'
+                elif c == '_':
+                    state = 'AT'
+                elif c == '<':
+                    state = 'AT'
+                elif c == '-':
+                    state = 'AT'
+                elif c == '+':
+                    state = 'AT'
+                elif c == '/':
+                    state = 'AT'
+                elif c == '*':
+                    state = 'AT'
+                elif c == '^':
+                    state = 'AT'
+                elif c == '>':
+                    state = 'AT'
+                elif c == '=':
+                    state = 'AT'
+                elif c == '.':
+                    state = 'AT'
+                elif c == ',':
+                    state = 'AT'
+                elif c == ';':
+                    state = 'AT'
+                elif c == '(':
+                    state = 'AT'
+                elif c == ')':
+                    state = 'AT'
+                elif c == '[':
+                    state = 'AT'
+                elif c == ']':
+                    state = 'AT'
+                elif c == '\n':
+                    state = 'AT'
+                elif c == '\t':
+                    state = 'AT'
+                elif c == ' ':
+                    state = 'AT'
+                elif c == '0':
+                    state = 'Z'
+                elif c == '1':
+                    state = 'Z'
+                elif c == '2':
+                    state = 'Z'
+                elif c == '3':
+                    state = 'Z'
+                elif c == '4':
+                    state = 'Z'
+                elif c == '5':
+                    state = 'Z'
+                elif c == '6':
+                    state = 'Z'
+                elif c == '7':
+                    state = 'Z'
+                elif c == '8':
+                    state = 'Z'
+                elif c == '9':
+                    state = 'Z'
+                elif c == '\'':
+                    state = 'AT'
+                else:
+                    fail()
+            case 'AT':
+                print('Tratar retorno estado final')
+            case 'AA':
+                c = nextChar()
+                if c == 'a':
+                    state = 'AV'
+                elif c == 'b':
+                    state = 'AV'
+                elif c == 'c':
+                    state = 'AV'
+                elif c == 'd':
+                    state = 'AV'
+                elif c == 'e':
+                    state = 'AV'
+                elif c == 'f':
+                    state = 'AV'
+                elif c == 'g':
+                    state = 'AV'
+                elif c == 'h':
+                    state = 'AV'
+                elif c == 'i':
+                    state = 'AV'
+                elif c == 'j':
+                    state = 'AV'
+                elif c == 'k':
+                    state = 'AV'
+                elif c == 'l':
+                    state = 'AV'
+                elif c == 'm':
+                    state = 'AV'
+                elif c == 'n':
+                    state = 'AV'
+                elif c == 'o':
+                    state = 'AV'
+                elif c == 'p':
+                    state = 'AV'
+                elif c == 'q':
+                    state = 'AV'
+                elif c == 'r':
+                    state = 'AV'
+                elif c == 's':
+                    state = 'AV'
+                elif c == 't':
+                    state = 'AV'
+                elif c == 'u':
+                    state = 'AV'
+                elif c == 'v':
+                    state = 'AV'
+                elif c == 'w':
+                    state = 'AV'
+                elif c == 'x':
+                    state = 'AV'
+                elif c == 'y':
+                    state = 'AV'
+                elif c == 'z':
+                    state = 'AV'
+                elif c == '_':
+                    state = 'ER'
+                elif c == '<':
+                    state = 'ER'
+                elif c == '-':
+                    state = 'ER'
+                elif c == '+':
+                    state = 'ER'
+                elif c == '/':
+                    state = 'ER'
+                elif c == '*':
+                    state = 'ER'
+                elif c == '^':
+                    state = 'ER'
+                elif c == '>':
+                    state = 'ER'
+                elif c == '=':
+                    state = 'ER'
+                elif c == '.':
+                    state = 'ER'
+                elif c == ',':
+                    state = 'ER'
+                elif c == ';':
+                    state = 'ER'
+                elif c == '(':
+                    state = 'ER'
+                elif c == ')':
+                    state = 'ER'
+                elif c == '[':
+                    state = 'ER'
+                elif c == ']':
+                    state = 'ER'
+                elif c == '\n':
+                    state = 'ER'
+                elif c == '\t':
+                    state = 'ER'
+                elif c == ' ':
+                    state = 'ER'
+                elif c == '0':
+                    state = 'ER'
+                elif c == '1':
+                    state = 'ER'
+                elif c == '2':
+                    state = 'ER'
+                elif c == '3':
+                    state = 'ER'
+                elif c == '4':
+                    state = 'ER'
+                elif c == '5':
+                    state = 'ER'
+                elif c == '6':
+                    state = 'ER'
+                elif c == '7':
+                    state = 'ER'
+                elif c == '8':
+                    state = 'ER'
+                elif c == '9':
+                    state = 'ER'
+                elif c == '\'':
+                    state = 'ER'
+                else:
+                    fail()
+            case 'AB':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'AW'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AD':
+                c = nextChar()
+                if c == 'a':
+                    state = 'AY'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AE':
+                c = nextChar()
+                if c == 'a':
+                    state = 'AY'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'AX'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'AZ'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AF':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'BA'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AG':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'BB'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AH':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'BC'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AI':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'BD'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'BE'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AJ':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AK':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'BG'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AL':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'BH'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'BI'
+                elif c == '-':
+                    state = 'BI'
+                elif c == '+':
+                    state = 'BI'
+                elif c == '/':
+                    state = 'BI'
+                elif c == '*':
+                    state = 'BI'
+                elif c == '^':
+                    state = 'BI'
+                elif c == '>':
+                    state = 'BI'
+                elif c == '=':
+                    state = 'BI'
+                elif c == '.':
+                    state = 'BI'
+                elif c == ',':
+                    state = 'BI'
+                elif c == ';':
+                    state = 'BI'
+                elif c == '(':
+                    state = 'BI'
+                elif c == ')':
+                    state = 'BI'
+                elif c == '[':
+                    state = 'BI'
+                elif c == ']':
+                    state = 'BI'
+                elif c == '\n':
+                    state = 'BI'
+                elif c == '\t':
+                    state = 'BI'
+                elif c == ' ':
+                    state = 'BI'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'BI'
+                else:
+                    fail()
+            case 'BI':
+                print('Tratar retorno estado final')
+            case 'AU':
+                c = nextChar()
+                if c == 'a':
+                    state = 'ER'
+                elif c == 'b':
+                    state = 'ER'
+                elif c == 'c':
+                    state = 'ER'
+                elif c == 'd':
+                    state = 'ER'
+                elif c == 'e':
+                    state = 'ER'
+                elif c == 'f':
+                    state = 'ER'
+                elif c == 'g':
+                    state = 'ER'
+                elif c == 'h':
+                    state = 'ER'
+                elif c == 'i':
+                    state = 'ER'
+                elif c == 'j':
+                    state = 'ER'
+                elif c == 'k':
+                    state = 'ER'
+                elif c == 'l':
+                    state = 'ER'
+                elif c == 'm':
+                    state = 'ER'
+                elif c == 'n':
+                    state = 'ER'
+                elif c == 'o':
+                    state = 'ER'
+                elif c == 'p':
+                    state = 'ER'
+                elif c == 'q':
+                    state = 'ER'
+                elif c == 'r':
+                    state = 'ER'
+                elif c == 's':
+                    state = 'ER'
+                elif c == 't':
+                    state = 'ER'
+                elif c == 'u':
+                    state = 'ER'
+                elif c == 'v':
+                    state = 'ER'
+                elif c == 'w':
+                    state = 'ER'
+                elif c == 'x':
+                    state = 'ER'
+                elif c == 'y':
+                    state = 'ER'
+                elif c == 'z':
+                    state = 'ER'
+                elif c == '_':
+                    state = 'ER'
+                elif c == '<':
+                    state = 'ER'
+                elif c == '-':
+                    state = 'ER'
+                elif c == '+':
+                    state = 'ER'
+                elif c == '/':
+                    state = 'ER'
+                elif c == '*':
+                    state = 'ER'
+                elif c == '^':
+                    state = 'ER'
+                elif c == '>':
+                    state = 'ER'
+                elif c == '=':
+                    state = 'ER'
+                elif c == '.':
+                    state = 'ER'
+                elif c == ',':
+                    state = 'ER'
+                elif c == ';':
+                    state = 'ER'
+                elif c == '(':
+                    state = 'ER'
+                elif c == ')':
+                    state = 'ER'
+                elif c == '[':
+                    state = 'ER'
+                elif c == ']':
+                    state = 'ER'
+                elif c == '\n':
+                    state = 'ER'
+                elif c == '\t':
+                    state = 'ER'
+                elif c == ' ':
+                    state = 'ER'
+                elif c == '0':
+                    state = 'BK'
+                elif c == '1':
+                    state = 'BK'
+                elif c == '2':
+                    state = 'BK'
+                elif c == '3':
+                    state = 'BK'
+                elif c == '4':
+                    state = 'BK'
+                elif c == '5':
+                    state = 'BK'
+                elif c == '6':
+                    state = 'BK'
+                elif c == '7':
+                    state = 'BK'
+                elif c == '8':
+                    state = 'BK'
+                elif c == '9':
+                    state = 'BK'
+                elif c == '\'':
+                    state = 'ER'
+                else:
+                    fail()
+            case 'AV':
+                c = nextChar()
+                if c == 'a':
+                    state = 'ER'
+                elif c == 'b':
+                    state = 'ER'
+                elif c == 'c':
+                    state = 'ER'
+                elif c == 'd':
+                    state = 'ER'
+                elif c == 'e':
+                    state = 'ER'
+                elif c == 'f':
+                    state = 'ER'
+                elif c == 'g':
+                    state = 'ER'
+                elif c == 'h':
+                    state = 'ER'
+                elif c == 'i':
+                    state = 'ER'
+                elif c == 'j':
+                    state = 'ER'
+                elif c == 'k':
+                    state = 'ER'
+                elif c == 'l':
+                    state = 'ER'
+                elif c == 'm':
+                    state = 'ER'
+                elif c == 'n':
+                    state = 'ER'
+                elif c == 'o':
+                    state = 'ER'
+                elif c == 'p':
+                    state = 'ER'
+                elif c == 'q':
+                    state = 'ER'
+                elif c == 'r':
+                    state = 'ER'
+                elif c == 's':
+                    state = 'ER'
+                elif c == 't':
+                    state = 'ER'
+                elif c == 'u':
+                    state = 'ER'
+                elif c == 'v':
+                    state = 'ER'
+                elif c == 'w':
+                    state = 'ER'
+                elif c == 'x':
+                    state = 'ER'
+                elif c == 'y':
+                    state = 'ER'
+                elif c == 'z':
+                    state = 'ER'
+                elif c == '_':
+                    state = 'ER'
+                elif c == '<':
+                    state = 'ER'
+                elif c == '-':
+                    state = 'ER'
+                elif c == '+':
+                    state = 'ER'
+                elif c == '/':
+                    state = 'ER'
+                elif c == '*':
+                    state = 'ER'
+                elif c == '^':
+                    state = 'ER'
+                elif c == '>':
+                    state = 'ER'
+                elif c == '=':
+                    state = 'ER'
+                elif c == '.':
+                    state = 'ER'
+                elif c == ',':
+                    state = 'ER'
+                elif c == ';':
+                    state = 'ER'
+                elif c == '(':
+                    state = 'ER'
+                elif c == ')':
+                    state = 'ER'
+                elif c == '[':
+                    state = 'ER'
+                elif c == ']':
+                    state = 'ER'
+                elif c == '\n':
+                    state = 'ER'
+                elif c == '\t':
+                    state = 'ER'
+                elif c == ' ':
+                    state = 'ER'
+                elif c == '0':
+                    state = 'ER'
+                elif c == '1':
+                    state = 'ER'
+                elif c == '2':
+                    state = 'ER'
+                elif c == '3':
+                    state = 'ER'
+                elif c == '4':
+                    state = 'ER'
+                elif c == '5':
+                    state = 'ER'
+                elif c == '6':
+                    state = 'ER'
+                elif c == '7':
+                    state = 'ER'
+                elif c == '8':
+                    state = 'ER'
+                elif c == '9':
+                    state = 'ER'
+                elif c == '\'':
+                    state = 'BL'
+                else:
+                    fail()
+            case 'BL':
+                print('Tratar retorno estado final')
+            case 'AW':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'BM'
+                elif c == '-':
+                    state = 'BM'
+                elif c == '+':
+                    state = 'BM'
+                elif c == '/':
+                    state = 'BM'
+                elif c == '*':
+                    state = 'BM'
+                elif c == '^':
+                    state = 'BM'
+                elif c == '>':
+                    state = 'BM'
+                elif c == '=':
+                    state = 'BM'
+                elif c == '.':
+                    state = 'BM'
+                elif c == ',':
+                    state = 'BM'
+                elif c == ';':
+                    state = 'BM'
+                elif c == '(':
+                    state = 'BM'
+                elif c == ')':
+                    state = 'BM'
+                elif c == '[':
+                    state = 'BM'
+                elif c == ']':
+                    state = 'BM'
+                elif c == '\n':
+                    state = 'BM'
+                elif c == '\t':
+                    state = 'BM'
+                elif c == ' ':
+                    state = 'BM'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'BM'
+                else:
+                    fail()
+            case 'AY':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'BN'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AX':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'BO'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'AZ':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'BP'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BA':
+                c = nextChar()
+                if c == 'a':
+                    state = 'BQ'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BB':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'BR'
+                elif c == '-':
+                    state = 'BR'
+                elif c == '+':
+                    state = 'BR'
+                elif c == '/':
+                    state = 'BR'
+                elif c == '*':
+                    state = 'BR'
+                elif c == '^':
+                    state = 'BR'
+                elif c == '>':
+                    state = 'BR'
+                elif c == '=':
+                    state = 'BR'
+                elif c == '.':
+                    state = 'BR'
+                elif c == ',':
+                    state = 'BR'
+                elif c == ';':
+                    state = 'BR'
+                elif c == '(':
+                    state = 'BR'
+                elif c == ')':
+                    state = 'BR'
+                elif c == '[':
+                    state = 'BR'
+                elif c == ']':
+                    state = 'BR'
+                elif c == '\n':
+                    state = 'BR'
+                elif c == '\t':
+                    state = 'BR'
+                elif c == ' ':
+                    state = 'BR'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'BR'
+                else:
+                    fail()
+            case 'BR':
+                print('Tratar retorno estado final')
+            case 'BC':
+                c = nextChar()
+                if c == 'a':
+                    state = 'BS'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BD':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'BT'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BE':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'BU'
+                elif c == '-':
+                    state = 'BU'
+                elif c == '+':
+                    state = 'BU'
+                elif c == '/':
+                    state = 'BU'
+                elif c == '*':
+                    state = 'BU'
+                elif c == '^':
+                    state = 'BU'
+                elif c == '>':
+                    state = 'BU'
+                elif c == '=':
+                    state = 'BU'
+                elif c == '.':
+                    state = 'BU'
+                elif c == ',':
+                    state = 'BU'
+                elif c == ';':
+                    state = 'BU'
+                elif c == '(':
+                    state = 'BU'
+                elif c == ')':
+                    state = 'BU'
+                elif c == '[':
+                    state = 'BU'
+                elif c == ']':
+                    state = 'BU'
+                elif c == '\n':
+                    state = 'BU'
+                elif c == '\t':
+                    state = 'BU'
+                elif c == ' ':
+                    state = 'BU'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'BU'
+                else:
+                    fail()
+            case 'BU':
+                print('Tratar retorno estado final')
+            case 'BF':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'BV'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BG':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'BW'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BH':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'BX'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BJ':
+                c = nextChar()
+                if c == 'a':
+                    state = 'BY'
+                elif c == 'b':
+                    state = 'BY'
+                elif c == 'c':
+                    state = 'BY'
+                elif c == 'd':
+                    state = 'BY'
+                elif c == 'e':
+                    state = 'BY'
+                elif c == 'f':
+                    state = 'BY'
+                elif c == 'g':
+                    state = 'BY'
+                elif c == 'h':
+                    state = 'BY'
+                elif c == 'i':
+                    state = 'BY'
+                elif c == 'j':
+                    state = 'BY'
+                elif c == 'k':
+                    state = 'BY'
+                elif c == 'l':
+                    state = 'BY'
+                elif c == 'm':
+                    state = 'BY'
+                elif c == 'n':
+                    state = 'BY'
+                elif c == 'o':
+                    state = 'BY'
+                elif c == 'p':
+                    state = 'BY'
+                elif c == 'q':
+                    state = 'BY'
+                elif c == 'r':
+                    state = 'BY'
+                elif c == 's':
+                    state = 'BY'
+                elif c == 't':
+                    state = 'BY'
+                elif c == 'u':
+                    state = 'BY'
+                elif c == 'v':
+                    state = 'BY'
+                elif c == 'w':
+                    state = 'BY'
+                elif c == 'x':
+                    state = 'BY'
+                elif c == 'y':
+                    state = 'BY'
+                elif c == 'z':
+                    state = 'BY'
+                elif c == '_':
+                    state = 'BY'
+                elif c == '<':
+                    state = 'BY'
+                elif c == '-':
+                    state = 'BY'
+                elif c == '+':
+                    state = 'BY'
+                elif c == '/':
+                    state = 'BY'
+                elif c == '*':
+                    state = 'BY'
+                elif c == '^':
+                    state = 'BY'
+                elif c == '>':
+                    state = 'BY'
+                elif c == '=':
+                    state = 'BY'
+                elif c == '.':
+                    state = 'BY'
+                elif c == ',':
+                    state = 'BY'
+                elif c == ';':
+                    state = 'BY'
+                elif c == '(':
+                    state = 'BY'
+                elif c == ')':
+                    state = 'BY'
+                elif c == '[':
+                    state = 'BY'
+                elif c == ']':
+                    state = 'BY'
+                elif c == '\n':
+                    state = 'BY'
+                elif c == '\t':
+                    state = 'BY'
+                elif c == ' ':
+                    state = 'BY'
+                elif c == '0':
+                    state = 'BY'
+                elif c == '1':
+                    state = 'BY'
+                elif c == '2':
+                    state = 'BY'
+                elif c == '3':
+                    state = 'BY'
+                elif c == '4':
+                    state = 'BY'
+                elif c == '5':
+                    state = 'BY'
+                elif c == '6':
+                    state = 'BY'
+                elif c == '7':
+                    state = 'BY'
+                elif c == '8':
+                    state = 'BY'
+                elif c == '9':
+                    state = 'BY'
+                elif c == '\'':
+                    state = 'BY'
+                else:
+                    fail()
+            case 'BY':
+                print('Tratar retorno estado final')
+            case 'BK':
+                c = nextChar()
+                if c == 'a':
+                    state = 'CA'
+                elif c == 'b':
+                    state = 'CA'
+                elif c == 'c':
+                    state = 'CA'
+                elif c == 'd':
+                    state = 'CA'
+                elif c == 'e':
+                    state = 'BZ'
+                elif c == 'f':
+                    state = 'CA'
+                elif c == 'g':
+                    state = 'CA'
+                elif c == 'h':
+                    state = 'CA'
+                elif c == 'i':
+                    state = 'CA'
+                elif c == 'j':
+                    state = 'CA'
+                elif c == 'k':
+                    state = 'CA'
+                elif c == 'l':
+                    state = 'CA'
+                elif c == 'm':
+                    state = 'CA'
+                elif c == 'n':
+                    state = 'CA'
+                elif c == 'o':
+                    state = 'CA'
+                elif c == 'p':
+                    state = 'CA'
+                elif c == 'q':
+                    state = 'CA'
+                elif c == 'r':
+                    state = 'CA'
+                elif c == 's':
+                    state = 'CA'
+                elif c == 't':
+                    state = 'CA'
+                elif c == 'u':
+                    state = 'CA'
+                elif c == 'v':
+                    state = 'CA'
+                elif c == 'w':
+                    state = 'CA'
+                elif c == 'x':
+                    state = 'CA'
+                elif c == 'y':
+                    state = 'CA'
+                elif c == 'z':
+                    state = 'CA'
+                elif c == '_':
+                    state = 'CA'
+                elif c == '<':
+                    state = 'CA'
+                elif c == '-':
+                    state = 'CA'
+                elif c == '+':
+                    state = 'CA'
+                elif c == '/':
+                    state = 'CA'
+                elif c == '*':
+                    state = 'CA'
+                elif c == '^':
+                    state = 'CA'
+                elif c == '>':
+                    state = 'CA'
+                elif c == '=':
+                    state = 'CA'
+                elif c == '.':
+                    state = 'CA'
+                elif c == ',':
+                    state = 'CA'
+                elif c == ';':
+                    state = 'CA'
+                elif c == '(':
+                    state = 'CA'
+                elif c == ')':
+                    state = 'CA'
+                elif c == '[':
+                    state = 'CA'
+                elif c == ']':
+                    state = 'CA'
+                elif c == '\n':
+                    state = 'CA'
+                elif c == '\t':
+                    state = 'CA'
+                elif c == ' ':
+                    state = 'CA'
+                elif c == '0':
+                    state = 'BK'
+                elif c == '1':
+                    state = 'BK'
+                elif c == '2':
+                    state = 'BK'
+                elif c == '3':
+                    state = 'BK'
+                elif c == '4':
+                    state = 'BK'
+                elif c == '5':
+                    state = 'BK'
+                elif c == '6':
+                    state = 'BK'
+                elif c == '7':
+                    state = 'BK'
+                elif c == '8':
+                    state = 'BK'
+                elif c == '9':
+                    state = 'BK'
+                elif c == '\'':
+                    state = 'CA'
+                else:
+                    fail()
+            case 'CA':
+                print('Tratar retorno estado final')
+            case 'BM':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BN':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'CB'
+                elif c == '-':
+                    state = 'CB'
+                elif c == '+':
+                    state = 'CB'
+                elif c == '/':
+                    state = 'CB'
+                elif c == '*':
+                    state = 'CB'
+                elif c == '^':
+                    state = 'CB'
+                elif c == '>':
+                    state = 'CB'
+                elif c == '=':
+                    state = 'CB'
+                elif c == '.':
+                    state = 'CB'
+                elif c == ',':
+                    state = 'CB'
+                elif c == ';':
+                    state = 'CB'
+                elif c == '(':
+                    state = 'CB'
+                elif c == ')':
+                    state = 'CB'
+                elif c == '[':
+                    state = 'CB'
+                elif c == ']':
+                    state = 'CB'
+                elif c == '\n':
+                    state = 'CB'
+                elif c == '\t':
+                    state = 'CB'
+                elif c == ' ':
+                    state = 'CB'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'CB'
+                else:
+                    fail()
+            case 'CB':
+                print('Tratar retorno estado final')
+            case 'BO':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BP':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'CD'
+                elif c == '-':
+                    state = 'CD'
+                elif c == '+':
+                    state = 'CD'
+                elif c == '/':
+                    state = 'CD'
+                elif c == '*':
+                    state = 'CD'
+                elif c == '^':
+                    state = 'CD'
+                elif c == '>':
+                    state = 'CD'
+                elif c == '=':
+                    state = 'CD'
+                elif c == '.':
+                    state = 'CD'
+                elif c == ',':
+                    state = 'CD'
+                elif c == ';':
+                    state = 'CD'
+                elif c == '(':
+                    state = 'CD'
+                elif c == ')':
+                    state = 'CD'
+                elif c == '[':
+                    state = 'CD'
+                elif c == ']':
+                    state = 'CD'
+                elif c == '\n':
+                    state = 'CD'
+                elif c == '\t':
+                    state = 'CD'
+                elif c == ' ':
+                    state = 'CD'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'CD'
+                else:
+                    fail()
+            case 'CD':
+                print('Tratar retorno estado final')
+            case 'BQ':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'CE'
+                elif c == '-':
+                    state = 'CE'
+                elif c == '+':
+                    state = 'CE'
+                elif c == '/':
+                    state = 'CE'
+                elif c == '*':
+                    state = 'CE'
+                elif c == '^':
+                    state = 'CE'
+                elif c == '>':
+                    state = 'CE'
+                elif c == '=':
+                    state = 'CE'
+                elif c == '.':
+                    state = 'CE'
+                elif c == ',':
+                    state = 'CE'
+                elif c == ';':
+                    state = 'CE'
+                elif c == '(':
+                    state = 'CE'
+                elif c == ')':
+                    state = 'CE'
+                elif c == '[':
+                    state = 'CE'
+                elif c == ']':
+                    state = 'CE'
+                elif c == '\n':
+                    state = 'CE'
+                elif c == '\t':
+                    state = 'CE'
+                elif c == ' ':
+                    state = 'CE'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'CE'
+                else:
+                    fail()
+            case 'CE':
+                print('Tratar retorno estado final')
+            case 'BS':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'CF'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BT':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'CG'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BV':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'CH'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BW':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'CI'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BX':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'CJ'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'BZ':
+                c = nextChar()
+                if c == 'a':
+                    state = 'ER'
+                elif c == 'b':
+                    state = 'ER'
+                elif c == 'c':
+                    state = 'ER'
+                elif c == 'd':
+                    state = 'ER'
+                elif c == 'e':
+                    state = 'ER'
+                elif c == 'f':
+                    state = 'ER'
+                elif c == 'g':
+                    state = 'ER'
+                elif c == 'h':
+                    state = 'ER'
+                elif c == 'i':
+                    state = 'ER'
+                elif c == 'j':
+                    state = 'ER'
+                elif c == 'k':
+                    state = 'ER'
+                elif c == 'l':
+                    state = 'ER'
+                elif c == 'm':
+                    state = 'ER'
+                elif c == 'n':
+                    state = 'ER'
+                elif c == 'o':
+                    state = 'ER'
+                elif c == 'p':
+                    state = 'ER'
+                elif c == 'q':
+                    state = 'ER'
+                elif c == 'r':
+                    state = 'ER'
+                elif c == 's':
+                    state = 'ER'
+                elif c == 't':
+                    state = 'ER'
+                elif c == 'u':
+                    state = 'ER'
+                elif c == 'v':
+                    state = 'ER'
+                elif c == 'w':
+                    state = 'ER'
+                elif c == 'x':
+                    state = 'ER'
+                elif c == 'y':
+                    state = 'ER'
+                elif c == 'z':
+                    state = 'ER'
+                elif c == '_':
+                    state = 'ER'
+                elif c == '<':
+                    state = 'ER'
+                elif c == '-':
+                    state = 'CK'
+                elif c == '+':
+                    state = 'CK'
+                elif c == '/':
+                    state = 'ER'
+                elif c == '*':
+                    state = 'ER'
+                elif c == '^':
+                    state = 'ER'
+                elif c == '>':
+                    state = 'ER'
+                elif c == '=':
+                    state = 'ER'
+                elif c == '.':
+                    state = 'ER'
+                elif c == ',':
+                    state = 'ER'
+                elif c == ';':
+                    state = 'ER'
+                elif c == '(':
+                    state = 'ER'
+                elif c == ')':
+                    state = 'ER'
+                elif c == '[':
+                    state = 'ER'
+                elif c == ']':
+                    state = 'ER'
+                elif c == '\n':
+                    state = 'ER'
+                elif c == '\t':
+                    state = 'ER'
+                elif c == ' ':
+                    state = 'ER'
+                elif c == '0':
+                    state = 'CL'
+                elif c == '1':
+                    state = 'CL'
+                elif c == '2':
+                    state = 'CL'
+                elif c == '3':
+                    state = 'CL'
+                elif c == '4':
+                    state = 'CL'
+                elif c == '5':
+                    state = 'CL'
+                elif c == '6':
+                    state = 'CL'
+                elif c == '7':
+                    state = 'CL'
+                elif c == '8':
+                    state = 'CL'
+                elif c == '9':
+                    state = 'CL'
+                elif c == '\'':
+                    state = 'ER'
+                else:
+                    fail()
+            case 'CC':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'CM'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'CF':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'CN'
+                elif c == '-':
+                    state = 'CN'
+                elif c == '+':
+                    state = 'CN'
+                elif c == '/':
+                    state = 'CN'
+                elif c == '*':
+                    state = 'CN'
+                elif c == '^':
+                    state = 'CN'
+                elif c == '>':
+                    state = 'CN'
+                elif c == '=':
+                    state = 'CN'
+                elif c == '.':
+                    state = 'CN'
+                elif c == ',':
+                    state = 'CN'
+                elif c == ';':
+                    state = 'CN'
+                elif c == '(':
+                    state = 'CN'
+                elif c == ')':
+                    state = 'CN'
+                elif c == '[':
+                    state = 'CN'
+                elif c == ']':
+                    state = 'CN'
+                elif c == '\n':
+                    state = 'CN'
+                elif c == '\t':
+                    state = 'CN'
+                elif c == ' ':
+                    state = 'CN'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'CN'
+                else:
+                    fail()
+            case 'CN':
+                print('Tratar retorno estado final')
+            case 'CG':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'CO'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'CH':
+                c = nextChar()
+                if c == 'a':
+                    state = 'CP'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'CI':
+                c = nextChar()
+                if c == 'a':
+                    state = 'CQ'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'CJ':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'CR'
+                elif c == '-':
+                    state = 'CR'
+                elif c == '+':
+                    state = 'CR'
+                elif c == '/':
+                    state = 'CR'
+                elif c == '*':
+                    state = 'CR'
+                elif c == '^':
+                    state = 'CR'
+                elif c == '>':
+                    state = 'CR'
+                elif c == '=':
+                    state = 'CR'
+                elif c == '.':
+                    state = 'CR'
+                elif c == ',':
+                    state = 'CR'
+                elif c == ';':
+                    state = 'CR'
+                elif c == '(':
+                    state = 'CR'
+                elif c == ')':
+                    state = 'CR'
+                elif c == '[':
+                    state = 'CR'
+                elif c == ']':
+                    state = 'CR'
+                elif c == '\n':
+                    state = 'CR'
+                elif c == '\t':
+                    state = 'CR'
+                elif c == ' ':
+                    state = 'CR'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'CR'
+                else:
+                    fail()
+            case 'CR':
+                print('Tratar retorno estado final')
+            case 'CK':
+                c = nextChar()
+                if c == 'a':
+                    state = 'ER'
+                elif c == 'b':
+                    state = 'ER'
+                elif c == 'c':
+                    state = 'ER'
+                elif c == 'd':
+                    state = 'ER'
+                elif c == 'e':
+                    state = 'ER'
+                elif c == 'f':
+                    state = 'ER'
+                elif c == 'g':
+                    state = 'ER'
+                elif c == 'h':
+                    state = 'ER'
+                elif c == 'i':
+                    state = 'ER'
+                elif c == 'j':
+                    state = 'ER'
+                elif c == 'k':
+                    state = 'ER'
+                elif c == 'l':
+                    state = 'ER'
+                elif c == 'm':
+                    state = 'ER'
+                elif c == 'n':
+                    state = 'ER'
+                elif c == 'o':
+                    state = 'ER'
+                elif c == 'p':
+                    state = 'ER'
+                elif c == 'q':
+                    state = 'ER'
+                elif c == 'r':
+                    state = 'ER'
+                elif c == 's':
+                    state = 'ER'
+                elif c == 't':
+                    state = 'ER'
+                elif c == 'u':
+                    state = 'ER'
+                elif c == 'v':
+                    state = 'ER'
+                elif c == 'w':
+                    state = 'ER'
+                elif c == 'x':
+                    state = 'ER'
+                elif c == 'y':
+                    state = 'ER'
+                elif c == 'z':
+                    state = 'ER'
+                elif c == '_':
+                    state = 'ER'
+                elif c == '<':
+                    state = 'ER'
+                elif c == '-':
+                    state = 'ER'
+                elif c == '+':
+                    state = 'ER'
+                elif c == '/':
+                    state = 'ER'
+                elif c == '*':
+                    state = 'ER'
+                elif c == '^':
+                    state = 'ER'
+                elif c == '>':
+                    state = 'ER'
+                elif c == '=':
+                    state = 'ER'
+                elif c == '.':
+                    state = 'ER'
+                elif c == ',':
+                    state = 'ER'
+                elif c == ';':
+                    state = 'ER'
+                elif c == '(':
+                    state = 'ER'
+                elif c == ')':
+                    state = 'ER'
+                elif c == '[':
+                    state = 'ER'
+                elif c == ']':
+                    state = 'ER'
+                elif c == '\n':
+                    state = 'ER'
+                elif c == '\t':
+                    state = 'ER'
+                elif c == ' ':
+                    state = 'ER'
+                elif c == '0':
+                    state = 'CL'
+                elif c == '1':
+                    state = 'CL'
+                elif c == '2':
+                    state = 'CL'
+                elif c == '3':
+                    state = 'CL'
+                elif c == '4':
+                    state = 'CL'
+                elif c == '5':
+                    state = 'CL'
+                elif c == '6':
+                    state = 'CL'
+                elif c == '7':
+                    state = 'CL'
+                elif c == '8':
+                    state = 'CL'
+                elif c == '9':
+                    state = 'CL'
+                elif c == '\'':
+                    state = 'ER'
+                else:
+                    fail()
+            case 'CL':
+                c = nextChar()
+                if c == 'a':
+                    state = 'CS'
+                elif c == 'b':
+                    state = 'CS'
+                elif c == 'c':
+                    state = 'CS'
+                elif c == 'd':
+                    state = 'CS'
+                elif c == 'e':
+                    state = 'CS'
+                elif c == 'f':
+                    state = 'CS'
+                elif c == 'g':
+                    state = 'CS'
+                elif c == 'h':
+                    state = 'CS'
+                elif c == 'i':
+                    state = 'CS'
+                elif c == 'j':
+                    state = 'CS'
+                elif c == 'k':
+                    state = 'CS'
+                elif c == 'l':
+                    state = 'CS'
+                elif c == 'm':
+                    state = 'CS'
+                elif c == 'n':
+                    state = 'CS'
+                elif c == 'o':
+                    state = 'CS'
+                elif c == 'p':
+                    state = 'CS'
+                elif c == 'q':
+                    state = 'CS'
+                elif c == 'r':
+                    state = 'CS'
+                elif c == 's':
+                    state = 'CS'
+                elif c == 't':
+                    state = 'CS'
+                elif c == 'u':
+                    state = 'CS'
+                elif c == 'v':
+                    state = 'CS'
+                elif c == 'w':
+                    state = 'CS'
+                elif c == 'x':
+                    state = 'CS'
+                elif c == 'y':
+                    state = 'CS'
+                elif c == 'z':
+                    state = 'CS'
+                elif c == '_':
+                    state = 'CS'
+                elif c == '<':
+                    state = 'CS'
+                elif c == '-':
+                    state = 'CS'
+                elif c == '+':
+                    state = 'CS'
+                elif c == '/':
+                    state = 'CS'
+                elif c == '*':
+                    state = 'CS'
+                elif c == '^':
+                    state = 'CS'
+                elif c == '>':
+                    state = 'CS'
+                elif c == '=':
+                    state = 'CS'
+                elif c == '.':
+                    state = 'CS'
+                elif c == ',':
+                    state = 'CS'
+                elif c == ';':
+                    state = 'CS'
+                elif c == '(':
+                    state = 'CS'
+                elif c == ')':
+                    state = 'CS'
+                elif c == '[':
+                    state = 'CS'
+                elif c == ']':
+                    state = 'CS'
+                elif c == '\n':
+                    state = 'CS'
+                elif c == '\t':
+                    state = 'CS'
+                elif c == ' ':
+                    state = 'CS'
+                elif c == '0':
+                    state = 'CL'
+                elif c == '1':
+                    state = 'CL'
+                elif c == '2':
+                    state = 'CL'
+                elif c == '3':
+                    state = 'CL'
+                elif c == '4':
+                    state = 'CL'
+                elif c == '5':
+                    state = 'CL'
+                elif c == '6':
+                    state = 'CL'
+                elif c == '7':
+                    state = 'CL'
+                elif c == '8':
+                    state = 'CL'
+                elif c == '9':
+                    state = 'CL'
+                elif c == '\'':
+                    state = 'CS'
+                else:
+                    fail()
+            case 'CS':
+                print('Tratar retorno estado final')
+            case 'CM':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'CV'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'CT'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'CO':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'CU'
+                elif c == '-':
+                    state = 'CU'
+                elif c == '+':
+                    state = 'CU'
+                elif c == '/':
+                    state = 'CU'
+                elif c == '*':
+                    state = 'CU'
+                elif c == '^':
+                    state = 'CU'
+                elif c == '>':
+                    state = 'CU'
+                elif c == '=':
+                    state = 'CU'
+                elif c == '.':
+                    state = 'CU'
+                elif c == ',':
+                    state = 'CU'
+                elif c == ';':
+                    state = 'CU'
+                elif c == '(':
+                    state = 'CU'
+                elif c == ')':
+                    state = 'CU'
+                elif c == '[':
+                    state = 'CU'
+                elif c == ']':
+                    state = 'CU'
+                elif c == '\n':
+                    state = 'CU'
+                elif c == '\t':
+                    state = 'CU'
+                elif c == ' ':
+                    state = 'CU'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'CU'
+                else:
+                    fail()
+            case 'CU':
+                print('Tratar retorno estado final')
+            case 'CP':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'CV'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'CQ':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'CW'
+                elif c == '-':
+                    state = 'CW'
+                elif c == '+':
+                    state = 'CW'
+                elif c == '/':
+                    state = 'CW'
+                elif c == '*':
+                    state = 'CW'
+                elif c == '^':
+                    state = 'CW'
+                elif c == '>':
+                    state = 'CW'
+                elif c == '=':
+                    state = 'CW'
+                elif c == '.':
+                    state = 'CW'
+                elif c == ',':
+                    state = 'CW'
+                elif c == ';':
+                    state = 'CW'
+                elif c == '(':
+                    state = 'CW'
+                elif c == ')':
+                    state = 'CW'
+                elif c == '[':
+                    state = 'CW'
+                elif c == ']':
+                    state = 'CW'
+                elif c == '\n':
+                    state = 'CW'
+                elif c == '\t':
+                    state = 'CW'
+                elif c == ' ':
+                    state = 'CW'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'CW'
+                else:
+                    fail()
+            case 'CW':
+                print('Tratar retorno estado final')
+            case 'CT':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'CX'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'CV':
+                c = nextChar()
+                if c == 'a':
+                    state = 'CY'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'AC'
+                elif c == '-':
+                    state = 'AC'
+                elif c == '+':
+                    state = 'AC'
+                elif c == '/':
+                    state = 'AC'
+                elif c == '*':
+                    state = 'AC'
+                elif c == '^':
+                    state = 'AC'
+                elif c == '>':
+                    state = 'AC'
+                elif c == '=':
+                    state = 'AC'
+                elif c == '.':
+                    state = 'AC'
+                elif c == ',':
+                    state = 'AC'
+                elif c == ';':
+                    state = 'AC'
+                elif c == '(':
+                    state = 'AC'
+                elif c == ')':
+                    state = 'AC'
+                elif c == '[':
+                    state = 'AC'
+                elif c == ']':
+                    state = 'AC'
+                elif c == '\n':
+                    state = 'AC'
+                elif c == '\t':
+                    state = 'AC'
+                elif c == ' ':
+                    state = 'AC'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'AC'
+                else:
+                    fail()
+            case 'CX':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'CZ'
+                elif c == '-':
+                    state = 'CZ'
+                elif c == '+':
+                    state = 'CZ'
+                elif c == '/':
+                    state = 'CZ'
+                elif c == '*':
+                    state = 'CZ'
+                elif c == '^':
+                    state = 'CZ'
+                elif c == '>':
+                    state = 'CZ'
+                elif c == '=':
+                    state = 'CZ'
+                elif c == '.':
+                    state = 'CZ'
+                elif c == ',':
+                    state = 'CZ'
+                elif c == ';':
+                    state = 'CZ'
+                elif c == '(':
+                    state = 'CZ'
+                elif c == ')':
+                    state = 'CZ'
+                elif c == '[':
+                    state = 'CZ'
+                elif c == ']':
+                    state = 'CZ'
+                elif c == '\n':
+                    state = 'CZ'
+                elif c == '\t':
+                    state = 'CZ'
+                elif c == ' ':
+                    state = 'CZ'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'CZ'
+                else:
+                    fail()
+            case 'CZ':
+                print('Tratar retorno estado final')
+            case 'CY':
+                c = nextChar()
+                if c == 'a':
+                    state = 'C'
+                elif c == 'b':
+                    state = 'C'
+                elif c == 'c':
+                    state = 'C'
+                elif c == 'd':
+                    state = 'C'
+                elif c == 'e':
+                    state = 'C'
+                elif c == 'f':
+                    state = 'C'
+                elif c == 'g':
+                    state = 'C'
+                elif c == 'h':
+                    state = 'C'
+                elif c == 'i':
+                    state = 'C'
+                elif c == 'j':
+                    state = 'C'
+                elif c == 'k':
+                    state = 'C'
+                elif c == 'l':
+                    state = 'C'
+                elif c == 'm':
+                    state = 'C'
+                elif c == 'n':
+                    state = 'C'
+                elif c == 'o':
+                    state = 'C'
+                elif c == 'p':
+                    state = 'C'
+                elif c == 'q':
+                    state = 'C'
+                elif c == 'r':
+                    state = 'C'
+                elif c == 's':
+                    state = 'C'
+                elif c == 't':
+                    state = 'C'
+                elif c == 'u':
+                    state = 'C'
+                elif c == 'v':
+                    state = 'C'
+                elif c == 'w':
+                    state = 'C'
+                elif c == 'x':
+                    state = 'C'
+                elif c == 'y':
+                    state = 'C'
+                elif c == 'z':
+                    state = 'C'
+                elif c == '_':
+                    state = 'C'
+                elif c == '<':
+                    state = 'DA'
+                elif c == '-':
+                    state = 'DA'
+                elif c == '+':
+                    state = 'DA'
+                elif c == '/':
+                    state = 'DA'
+                elif c == '*':
+                    state = 'DA'
+                elif c == '^':
+                    state = 'DA'
+                elif c == '>':
+                    state = 'DA'
+                elif c == '=':
+                    state = 'DA'
+                elif c == '.':
+                    state = 'DA'
+                elif c == ',':
+                    state = 'DA'
+                elif c == ';':
+                    state = 'DA'
+                elif c == '(':
+                    state = 'DA'
+                elif c == ')':
+                    state = 'DA'
+                elif c == '[':
+                    state = 'DA'
+                elif c == ']':
+                    state = 'DA'
+                elif c == '\n':
+                    state = 'DA'
+                elif c == '\t':
+                    state = 'DA'
+                elif c == ' ':
+                    state = 'DA'
+                elif c == '0':
+                    state = 'C'
+                elif c == '1':
+                    state = 'C'
+                elif c == '2':
+                    state = 'C'
+                elif c == '3':
+                    state = 'C'
+                elif c == '4':
+                    state = 'C'
+                elif c == '5':
+                    state = 'C'
+                elif c == '6':
+                    state = 'C'
+                elif c == '7':
+                    state = 'C'
+                elif c == '8':
+                    state = 'C'
+                elif c == '9':
+                    state = 'C'
+                elif c == '\'':
+                    state = 'DA'
+                else:
+                    fail()
+            case 'DA':
+                print('Tratar retorno estado final')
+
 
