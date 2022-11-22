@@ -1399,6 +1399,7 @@ diagrama = {
     'AL:8': 'C',
     'AL:9': 'C',
     'AL:\'': 'BI',
+    'AN:-':'BJ',
     'AU:a': 'ER',
     'AU:b': 'ER',
     'AU:c': 'ER',
@@ -3810,11 +3811,20 @@ diagrama = {
     'CY:\'': 'DA'
 }
 
+
 def criar_cases():
-    finais = ['L','M','N','O','P','R','S','T','U','V','W','X','AC','AM','AO','AP','AQ','AR','AS','AT','BI','BL','BR','BU','BY','CA','CB','CD','CE','CN','CR','CS','CU','CW','CZ','DA','ER']
-    file = open('cod_direta.txt', 'w+')
+    finais = ['L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'AC', 'AN' 'AM', 'AO', 'AP', 'AQ', 'AR', 'AS',
+              'AT', 'BI', 'BL', 'BR', 'BU', 'BY', 'CA', 'CB', 'CD', 'CE', 'CN', 'CR', 'CS', 'CU', 'CW', 'CZ', 'DA',
+              'ER']
+    file = open('cod_direta.py', 'w+')
+    file.write(f"linhaGlobal = 0\n")
+    file.write(f"colunaGlobal = 0\n")
     file.write(f"def cod_direta():\n")
     file.write(f"\tstate = 'A'\n")
+    file.write(f"\tc = ''\n")
+    file.write(f"\tglobal linhaGlobal\n")
+    file.write(f"\tglobal colunaGlobal\n")
+    file.write(f"\tcoluna = colunaGlobal\n")
     file.write(f"\twhile True:\n")
     file.write(f"\t\tmatch state:\n")
     estadoAnterior = ''
@@ -3825,49 +3835,90 @@ def criar_cases():
 
         if key_[0] != estadoAnterior:
             for final in finalApareceu:
-                file.write(f"\t\t\tcase '{final}':\n")
+                if final == 'AN':
+                    file.write(f"\t\t\telse:\n")
+                else:
+                    file.write(f"\t\t\tcase '{final}':\n")
+
                 file.write(f"\t\t\t\tprint('Tratar retorno estado final {final}')\n")
-                file.write(f"\t\t\t\tbreak\n")
+                file.write(f"\t\t\t\treturn Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)\n")
                 finalTratado.append(final)
                 finalApareceu = []
 
             file.write(f"\t\t\tcase '{key_[0]}':\n")
             file.write('\t\t\t\tc = nextChar()\n')
+            file.write('\t\t\t\tcolunaGlobal += 1\n')
             estadoAnterior = key_[0]
 
         caracter = "\\n" if key_[1] == '\n' else ("\\t" if key_[1] == '\t' else ("\\'" if key_[1] == '\'' else key_[1]))
 
-        if key_[1] == 'a':
+        if key_[1] == 'a' or (key_[0] == 'AN' and key_[1] == '-'):
             file.write(f"\t\t\t\tif c == '{caracter}':\n")
         else:
             file.write(f"\t\t\t\telif c == '{caracter}':\n")
+            if key_[1] == '\n':
+                file.write('\t\t\t\t\tlinhaGlobal += 1\n')
+            #
+            # if key_[1] == '\n' or key_[1] == '\t' or key_[1] == ' ':
+            #     file.write('\t\t\t\t\tc = nextChar()\n')
+
         file.write(f"\t\t\t\t\tstate = '{value}'\n")
         file.write(f"\t\t\t\t\tprint('{caracter}')\n")
+        #file.write(f"\t\t\t\t\tprint(state)\n")
 
         if value in finais and value not in finalTratado and value not in finalApareceu:
             finalApareceu.append(value)
 
         if key_[1] == '\'':
             file.write(f"\t\t\t\telse:\n")
-            file.write(f"\t\t\t\t\tfail()\n")
-            file.write(f"\t\t\t\t\tbreak\n")
+            file.write(f"\t\t\t\t\tstate = 'ER'\n")
+            file.write(f"\t\t\t\t\treturn Token('Erro',f\"Erro - caracter {{c}} nao e reconhecido\",linhaGlobal,coluna)\n")
+
+    file.write(f"\n")
+    file.write(f"while True:\n")
+    file.write(f"\ttry:\n")
+    file.write(f"\t\ttoken = cod_direta()\n")
+    file.write(f"\t\tprint(f\"<{{token.tipo}}, {{token.atributo}}, {{token.linha}}, {{token.coluna}}>\")\n")
+    file.write(f"\t\tif token.tipo == 'Erro':\n")
+    file.write(f"\t\t\tbreak\n")
+    file.write(f"\texcept EOFError:\n")
+    file.write(f"\t\tbreak\n")
 
 
 criar_cases()
 
 f = open("prog.txt", "r")
+
+
 def nextChar():
     return f.read(1)
+
 
 def fail():
     print("informar o erro")
 
+
+class Token:
+    def __init__(self, tipo, atributo, linha, coluna):
+        self.tipo = tipo
+        self.atributo = atributo
+        self.linha = linha
+        self.coluna = coluna
+
+
+linhaGlobal = 0
+colunaGlobal = 0
 def cod_direta():
 	state = 'A'
+	c = ''
+	global linhaGlobal
+	global colunaGlobal
+	coluna = colunaGlobal
 	while True:
 		match state:
 			case 'A':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'B'
 					print('a')
@@ -3995,6 +4046,7 @@ def cod_direta():
 					state = 'X'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'Y'
 					print('\n')
 				elif c == '\t':
@@ -4037,49 +4089,50 @@ def cod_direta():
 					state = 'AA'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'L':
 				print('Tratar retorno estado final L')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'M':
 				print('Tratar retorno estado final M')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'N':
 				print('Tratar retorno estado final N')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'O':
 				print('Tratar retorno estado final O')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'P':
 				print('Tratar retorno estado final P')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'R':
 				print('Tratar retorno estado final R')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'ER':
 				print('Tratar retorno estado final ER')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'S':
 				print('Tratar retorno estado final S')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'T':
 				print('Tratar retorno estado final T')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'U':
 				print('Tratar retorno estado final U')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'V':
 				print('Tratar retorno estado final V')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'W':
 				print('Tratar retorno estado final W')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'X':
 				print('Tratar retorno estado final X')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'B':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -4207,6 +4260,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -4249,13 +4303,14 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AC':
 				print('Tratar retorno estado final AC')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'C':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -4383,6 +4438,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -4425,10 +4481,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'D':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -4556,6 +4613,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -4598,10 +4656,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'E':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -4729,6 +4788,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -4771,10 +4831,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'F':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'AF'
 					print('a')
@@ -4902,6 +4963,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -4944,10 +5006,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'G':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -5075,6 +5138,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -5117,10 +5181,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'H':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -5248,6 +5313,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -5290,10 +5356,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'I':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -5421,6 +5488,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -5463,10 +5531,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'J':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -5594,6 +5663,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -5636,10 +5706,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'K':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'AM'
 					print('a')
@@ -5767,6 +5838,7 @@ def cod_direta():
 					state = 'AM'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AM'
 					print('\n')
 				elif c == '\t':
@@ -5809,19 +5881,17 @@ def cod_direta():
 					state = 'AM'
 					print('\'')
 				else:
-					fail()
-					break
-			case 'AM':
-				print('Tratar retorno estado final AM')
-				break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AO':
 				print('Tratar retorno estado final AO')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'AP':
 				print('Tratar retorno estado final AP')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'Q':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'AQ'
 					print('a')
@@ -5949,6 +6019,7 @@ def cod_direta():
 					state = 'AQ'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AQ'
 					print('\n')
 				elif c == '\t':
@@ -5991,16 +6062,17 @@ def cod_direta():
 					state = 'AQ'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AQ':
 				print('Tratar retorno estado final AQ')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'AR':
 				print('Tratar retorno estado final AR')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'Y':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'AS'
 					print('a')
@@ -6128,6 +6200,7 @@ def cod_direta():
 					state = 'AS'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'Y'
 					print('\n')
 				elif c == '\t':
@@ -6170,13 +6243,14 @@ def cod_direta():
 					state = 'AS'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AS':
 				print('Tratar retorno estado final AS')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'Z':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'AT'
 					print('a')
@@ -6304,6 +6378,7 @@ def cod_direta():
 					state = 'AT'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AT'
 					print('\n')
 				elif c == '\t':
@@ -6346,13 +6421,14 @@ def cod_direta():
 					state = 'AT'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AT':
 				print('Tratar retorno estado final AT')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'AA':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'AV'
 					print('a')
@@ -6480,6 +6556,7 @@ def cod_direta():
 					state = 'ER'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'ER'
 					print('\n')
 				elif c == '\t':
@@ -6522,10 +6599,11 @@ def cod_direta():
 					state = 'ER'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AB':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -6653,6 +6731,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -6695,10 +6774,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AD':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'AY'
 					print('a')
@@ -6826,6 +6906,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -6868,10 +6949,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AE':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'AY'
 					print('a')
@@ -6999,6 +7081,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -7041,10 +7124,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AF':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -7172,6 +7256,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -7214,10 +7299,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AG':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -7345,6 +7431,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -7387,10 +7474,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AH':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -7518,6 +7606,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -7560,10 +7649,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AI':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -7691,6 +7781,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -7733,10 +7824,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AJ':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -7864,6 +7956,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -7906,10 +7999,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AK':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -8037,6 +8131,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -8079,10 +8174,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AL':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -8210,6 +8306,7 @@ def cod_direta():
 					state = 'BI'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'BI'
 					print('\n')
 				elif c == '\t':
@@ -8252,13 +8349,20 @@ def cod_direta():
 					state = 'BI'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BI':
 				print('Tratar retorno estado final BI')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+			case 'AN':
+				c = nextChar()
+				colunaGlobal += 1
+				if c == '-':
+					state = 'BJ'
+					print('-')
 			case 'AU':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'ER'
 					print('a')
@@ -8386,6 +8490,7 @@ def cod_direta():
 					state = 'ER'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'ER'
 					print('\n')
 				elif c == '\t':
@@ -8428,10 +8533,11 @@ def cod_direta():
 					state = 'ER'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AV':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'ER'
 					print('a')
@@ -8559,6 +8665,7 @@ def cod_direta():
 					state = 'ER'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'ER'
 					print('\n')
 				elif c == '\t':
@@ -8601,13 +8708,14 @@ def cod_direta():
 					state = 'BL'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BL':
 				print('Tratar retorno estado final BL')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'AW':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -8735,6 +8843,7 @@ def cod_direta():
 					state = 'BM'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'BM'
 					print('\n')
 				elif c == '\t':
@@ -8777,10 +8886,11 @@ def cod_direta():
 					state = 'BM'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AY':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -8908,6 +9018,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -8950,10 +9061,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AX':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -9081,6 +9193,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -9123,10 +9236,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'AZ':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -9254,6 +9368,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -9296,10 +9411,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BA':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'BQ'
 					print('a')
@@ -9427,6 +9543,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -9469,10 +9586,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BB':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -9600,6 +9718,7 @@ def cod_direta():
 					state = 'BR'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'BR'
 					print('\n')
 				elif c == '\t':
@@ -9642,13 +9761,14 @@ def cod_direta():
 					state = 'BR'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BR':
 				print('Tratar retorno estado final BR')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'BC':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'BS'
 					print('a')
@@ -9776,6 +9896,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -9818,10 +9939,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BD':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -9949,6 +10071,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -9991,10 +10114,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BE':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -10122,6 +10246,7 @@ def cod_direta():
 					state = 'BU'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'BU'
 					print('\n')
 				elif c == '\t':
@@ -10164,13 +10289,14 @@ def cod_direta():
 					state = 'BU'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BU':
 				print('Tratar retorno estado final BU')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'BF':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -10298,6 +10424,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -10340,10 +10467,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BG':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -10471,6 +10599,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -10513,10 +10642,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BH':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -10644,6 +10774,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -10686,10 +10817,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BJ':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'BY'
 					print('a')
@@ -10817,6 +10949,7 @@ def cod_direta():
 					state = 'BY'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'BY'
 					print('\n')
 				elif c == '\t':
@@ -10859,13 +10992,14 @@ def cod_direta():
 					state = 'BY'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BY':
 				print('Tratar retorno estado final BY')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'BK':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'CA'
 					print('a')
@@ -10993,6 +11127,7 @@ def cod_direta():
 					state = 'CA'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'CA'
 					print('\n')
 				elif c == '\t':
@@ -11035,13 +11170,14 @@ def cod_direta():
 					state = 'CA'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CA':
 				print('Tratar retorno estado final CA')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'BM':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -11169,6 +11305,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -11211,10 +11348,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BN':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -11342,6 +11480,7 @@ def cod_direta():
 					state = 'CB'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'CB'
 					print('\n')
 				elif c == '\t':
@@ -11384,13 +11523,14 @@ def cod_direta():
 					state = 'CB'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CB':
 				print('Tratar retorno estado final CB')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'BO':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -11518,6 +11658,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -11560,10 +11701,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BP':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -11691,6 +11833,7 @@ def cod_direta():
 					state = 'CD'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'CD'
 					print('\n')
 				elif c == '\t':
@@ -11733,13 +11876,14 @@ def cod_direta():
 					state = 'CD'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CD':
 				print('Tratar retorno estado final CD')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'BQ':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -11867,6 +12011,7 @@ def cod_direta():
 					state = 'CE'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'CE'
 					print('\n')
 				elif c == '\t':
@@ -11909,13 +12054,14 @@ def cod_direta():
 					state = 'CE'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CE':
 				print('Tratar retorno estado final CE')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'BS':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -12043,6 +12189,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -12085,10 +12232,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BT':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -12216,6 +12364,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -12258,10 +12407,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BV':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -12389,6 +12539,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -12431,10 +12582,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BW':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -12562,6 +12714,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -12604,10 +12757,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BX':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -12735,6 +12889,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -12777,10 +12932,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'BZ':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'ER'
 					print('a')
@@ -12908,6 +13064,7 @@ def cod_direta():
 					state = 'ER'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'ER'
 					print('\n')
 				elif c == '\t':
@@ -12950,10 +13107,11 @@ def cod_direta():
 					state = 'ER'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CC':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -13081,6 +13239,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -13123,10 +13282,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CF':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -13254,6 +13414,7 @@ def cod_direta():
 					state = 'CN'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'CN'
 					print('\n')
 				elif c == '\t':
@@ -13296,13 +13457,14 @@ def cod_direta():
 					state = 'CN'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CN':
 				print('Tratar retorno estado final CN')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'CG':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -13430,6 +13592,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -13472,10 +13635,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CH':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'CP'
 					print('a')
@@ -13603,6 +13767,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -13645,10 +13810,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CI':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'CQ'
 					print('a')
@@ -13776,6 +13942,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -13818,10 +13985,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CJ':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -13949,6 +14117,7 @@ def cod_direta():
 					state = 'CR'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'CR'
 					print('\n')
 				elif c == '\t':
@@ -13991,13 +14160,14 @@ def cod_direta():
 					state = 'CR'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CR':
 				print('Tratar retorno estado final CR')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'CK':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'ER'
 					print('a')
@@ -14125,6 +14295,7 @@ def cod_direta():
 					state = 'ER'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'ER'
 					print('\n')
 				elif c == '\t':
@@ -14167,10 +14338,11 @@ def cod_direta():
 					state = 'ER'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CL':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'CS'
 					print('a')
@@ -14298,6 +14470,7 @@ def cod_direta():
 					state = 'CS'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'CS'
 					print('\n')
 				elif c == '\t':
@@ -14340,13 +14513,14 @@ def cod_direta():
 					state = 'CS'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CS':
 				print('Tratar retorno estado final CS')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'CM':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -14474,6 +14648,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -14516,10 +14691,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CO':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -14647,6 +14823,7 @@ def cod_direta():
 					state = 'CU'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'CU'
 					print('\n')
 				elif c == '\t':
@@ -14689,13 +14866,14 @@ def cod_direta():
 					state = 'CU'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CU':
 				print('Tratar retorno estado final CU')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'CP':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -14823,6 +15001,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -14865,10 +15044,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CQ':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -14996,6 +15176,7 @@ def cod_direta():
 					state = 'CW'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'CW'
 					print('\n')
 				elif c == '\t':
@@ -15038,13 +15219,14 @@ def cod_direta():
 					state = 'CW'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CW':
 				print('Tratar retorno estado final CW')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'CT':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -15172,6 +15354,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -15214,10 +15397,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CV':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'CY'
 					print('a')
@@ -15345,6 +15529,7 @@ def cod_direta():
 					state = 'AC'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'AC'
 					print('\n')
 				elif c == '\t':
@@ -15387,10 +15572,11 @@ def cod_direta():
 					state = 'AC'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CX':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -15518,6 +15704,7 @@ def cod_direta():
 					state = 'CZ'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'CZ'
 					print('\n')
 				elif c == '\t':
@@ -15560,13 +15747,14 @@ def cod_direta():
 					state = 'CZ'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 			case 'CZ':
 				print('Tratar retorno estado final CZ')
-				break
+				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'CY':
 				c = nextChar()
+				colunaGlobal += 1
 				if c == 'a':
 					state = 'C'
 					print('a')
@@ -15694,6 +15882,7 @@ def cod_direta():
 					state = 'DA'
 					print(']')
 				elif c == '\n':
+					linhaGlobal += 1
 					state = 'DA'
 					print('\n')
 				elif c == '\t':
@@ -15736,8 +15925,14 @@ def cod_direta():
 					state = 'DA'
 					print('\'')
 				else:
-					fail()
-					break
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
 
-
-cod_direta()
+while True:
+	try:
+		token = cod_direta()
+		print(f"<{token.tipo}, {token.atributo}, {token.linha}, {token.coluna}>")
+		if token.tipo == 'Erro':
+			break
+	except EOFError:
+		break
