@@ -1245,7 +1245,7 @@ diagrama = {
     'AJ:l': 'C',
     'AJ:m': 'C',
     'AJ:n': 'C',
-    'AJ:o': 'C',
+    'AJ:o': 'BF',
     'AJ:p': 'C',
     'AJ:q': 'C',
     'AJ:r': 'C',
@@ -4132,8 +4132,6 @@ def cod_direta():
 				print('Tratar retorno estado final O')
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
-					f.seek(f.tell()-1)
 				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
 			case 'P':
 				print('Tratar retorno estado final P')
@@ -7965,8 +7963,8 @@ def cod_direta():
 					state = 'C'
 					print('leu caracter n foi para C')
 				elif c == 'o':
-					state = 'C'
-					print('leu caracter o foi para C')
+					state = 'BF'
+					print('leu caracter o foi para BF')
 				elif c == 'p':
 					state = 'C'
 					print('leu caracter p foi para C')
@@ -16087,6 +16085,14 @@ def cod_direta():
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
+			case 'DA':
+				print('Tratar retorno estado final DA')
+				state = 'A'
+				lerProx = False
+				if c not in ['\n', '\t', ' ']:
+					f.seek(f.tell() - 1)
+				return Token('TOKEN', 'ATRIBUTO', linhaGlobal, coluna)
+
 
 while True:
 	try:
