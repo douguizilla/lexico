@@ -1,2 +1,17 @@
-programa inicio
-    teste <-- 20 * 2
+programa prog2 [ Programa com erro sintatico ]
+inicio
+    int : x; float: y;
+
+    x <--0;
+
+    repita
+    inicio
+        x <-- x+1;
+    fim
+    ate (x < 10)
+
+    if (x = 10) then
+    inicio
+        y<--1 [erro aqui]
+    fim
+fim
