@@ -1,6 +1,6 @@
 programa prog2 [ Programa com erro sintatico ]
 inicio
-    int : x; float: y;
+    int : xXx; float: y;
 
     x <--0;
 
@@ -10,7 +10,7 @@ inicio
     fim
     ate (x < 10)
 
-    if (x = 10) then
+    se (x = 10) entao
     inicio
         y<--1 [erro aqui]
     fim

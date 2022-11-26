@@ -11,7 +11,10 @@ def cod_direta():
 	while True:
 		match state:
 			case 'A':
-				id = '' 
+				if c not in ['\n', '\t', ' ']:
+					id = c 
+				else:
+					id = ''
 				if lerProx:
 					c = nextChar()
 					id += c
@@ -198,105 +201,162 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'M':
 				print('Tratar retorno estado final M')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'N':
 				print('Tratar retorno estado final N')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'O':
 				print('Tratar retorno estado final O')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'P':
 				print('Tratar retorno estado final P')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'R':
 				print('Tratar retorno estado final R')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'ER':
 				print('Tratar retorno estado final ER')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'S':
 				print('Tratar retorno estado final S')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'T':
 				print('Tratar retorno estado final T')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'RA':
 				print('Tratar retorno estado final RA')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'U':
 				print('Tratar retorno estado final U')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'V':
 				print('Tratar retorno estado final V')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'X':
 				print('Tratar retorno estado final X')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				lerProx = False
-				if c not in ['\n', '\t', ' ']:
-					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+				lerProx = True
 			case 'B':
 				c = nextChar()
 				id += c
@@ -481,9 +541,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'C':
 				c = nextChar()
 				id += c
@@ -2095,22 +2160,45 @@ def cod_direta():
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
+			case 'AM':
+				print('Tratar retorno estado final AM')
+				print(f"Identificador montado {id}")
+				state = 'A'
+				lerProx = False
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AO':
 				print('Tratar retorno estado final AO')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AP':
 				print('Tratar retorno estado final AP')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'Q':
 				c = nextChar()
 				id += c
@@ -2295,17 +2383,27 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AR':
 				print('Tratar retorno estado final AR')
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'Y':
 				c = nextChar()
 				id += c
@@ -2674,9 +2772,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AA':
 				c = nextChar()
 				id += c
@@ -4651,9 +4754,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AN':
 				c = nextChar()
 				id += c
@@ -4661,6 +4769,19 @@ def cod_direta():
 				if c.lower() == '-':
 					state = 'BJ'
 					print('leu caracter - foi para BJ')
+				else:
+					print('Tratar retorno estado final BI')
+					print(f"Identificador montado {id}")
+					state = 'A'
+					lerProx = False
+					if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					elif c in ['\n', '\t', ' ',';',')']:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AU':
 				c = nextChar()
 				id += c
@@ -5024,9 +5145,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AW':
 				c = nextChar()
 				id += c
@@ -5211,9 +5337,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AY':
 				c = nextChar()
 				id += c
@@ -5577,8 +5708,8 @@ def cod_direta():
 				id += c
 				colunaGlobal += 1
 				if c.lower() == 'a':
-					state = 'C'
-					print('leu caracter a foi para C')
+					state = 'AZZ'
+					print('leu caracter a foi para AZZ')
 				elif c.lower() == 'b':
 					state = 'C'
 					print('leu caracter b foi para C')
@@ -5619,8 +5750,8 @@ def cod_direta():
 					state = 'C'
 					print('leu caracter n foi para C')
 				elif c.lower() == 'o':
-					state = 'BP'
-					print('leu caracter o foi para BP')
+					state = 'C'
+					print('leu caracter o foi para C')
 				elif c.lower() == 'p':
 					state = 'C'
 					print('leu caracter p foi para C')
@@ -5748,6 +5879,182 @@ def cod_direta():
 				elif c.lower() == '\'':
 					state = 'AC'
 					print('leu caracter \' foi para AC')
+				else:
+					state = 'ER'
+					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
+			case 'AZZ':
+				c = nextChar()
+				id += c
+				colunaGlobal += 1
+				if c.lower() == 'a':
+					state = 'C'
+					print('leu caracter a foi para C')
+				elif c.lower() == 'b':
+					state = 'C'
+					print('leu caracter b foi para C')
+				elif c.lower() == 'c':
+					state = 'C'
+					print('leu caracter c foi para C')
+				elif c.lower() == 'd':
+					state = 'C'
+					print('leu caracter d foi para C')
+				elif c.lower() == 'e':
+					state = 'C'
+					print('leu caracter e foi para C')
+				elif c.lower() == 'f':
+					state = 'C'
+					print('leu caracter f foi para C')
+				elif c.lower() == 'g':
+					state = 'C'
+					print('leu caracter g foi para C')
+				elif c.lower() == 'h':
+					state = 'C'
+					print('leu caracter h foi para C')
+				elif c.lower() == 'i':
+					state = 'C'
+					print('leu caracter i foi para C')
+				elif c.lower() == 'j':
+					state = 'C'
+					print('leu caracter j foi para C')
+				elif c.lower() == 'k':
+					state = 'C'
+					print('leu caracter k foi para C')
+				elif c.lower() == 'l':
+					state = 'C'
+					print('leu caracter l foi para C')
+				elif c.lower() == 'm':
+					state = 'C'
+					print('leu caracter m foi para C')
+				elif c.lower() == 'n':
+					state = 'C'
+					print('leu caracter n foi para C')
+				elif c.lower() == 'o':
+					state = 'BP'
+					print('leu caracter o foi para BP')
+				elif c.lower() == 'p':
+					state = 'C'
+					print('leu caracter p foi para C')
+				elif c.lower() == 'q':
+					state = 'C'
+					print('leu caracter q foi para C')
+				elif c.lower() == 'r':
+					state = 'C'
+					print('leu caracter r foi para C')
+				elif c.lower() == 's':
+					state = 'C'
+					print('leu caracter s foi para C')
+				elif c.lower() == 't':
+					state = 'C'
+					print('leu caracter t foi para C')
+				elif c.lower() == 'u':
+					state = 'C'
+					print('leu caracter u foi para C')
+				elif c.lower() == 'v':
+					state = 'C'
+					print('leu caracter v foi para C')
+				elif c.lower() == 'w':
+					state = 'C'
+					print('leu caracter w foi para C')
+				elif c.lower() == 'x':
+					state = 'C'
+					print('leu caracter x foi para C')
+				elif c.lower() == 'y':
+					state = 'C'
+					print('leu caracter y foi para C')
+				elif c.lower() == 'z':
+					state = 'C'
+					print('leu caracter z foi para C')
+				elif c.lower() == '_':
+					state = 'C'
+					print('leu caracter _ foi para C')
+				elif c.lower() == '<':
+					state = 'C'
+					print('leu caracter < foi para C')
+				elif c.lower() == '-':
+					state = 'C'
+					print('leu caracter - foi para C')
+				elif c.lower() == '+':
+					state = 'C'
+					print('leu caracter + foi para C')
+				elif c.lower() == '/':
+					state = 'C'
+					print('leu caracter / foi para C')
+				elif c.lower() == '*':
+					state = 'C'
+					print('leu caracter * foi para C')
+				elif c.lower() == '^':
+					state = 'C'
+					print('leu caracter ^ foi para C')
+				elif c.lower() == '>':
+					state = 'C'
+					print('leu caracter > foi para C')
+				elif c.lower() == '=':
+					state = 'C'
+					print('leu caracter = foi para C')
+				elif c.lower() == '.':
+					state = 'C'
+					print('leu caracter . foi para C')
+				elif c.lower() == ',':
+					state = 'C'
+					print('leu caracter , foi para C')
+				elif c.lower() == ';':
+					state = 'C'
+					print('leu caracter ; foi para C')
+				elif c.lower() == '(':
+					state = 'C'
+					print('leu caracter ( foi para C')
+				elif c.lower() == ')':
+					state = 'C'
+					print('leu caracter ) foi para C')
+				elif c.lower() == '[':
+					state = 'C'
+					print('leu caracter [ foi para C')
+				elif c.lower() == ']':
+					state = 'X'
+					print('leu caracter ] foi para X')
+				elif c.lower() == '\n':
+					linhaGlobal += 1
+					state = 'C'
+					print('leu caracter \n foi para C')
+				elif c.lower() == '\t':
+					state = 'C'
+					print('leu caracter \t foi para C')
+				elif c.lower() == ' ':
+					state = 'C'
+					print('leu caracter   foi para C')
+				elif c.lower() == '0':
+					state = 'C'
+					print('leu caracter 0 foi para C')
+				elif c.lower() == '1':
+					state = 'C'
+					print('leu caracter 1 foi para C')
+				elif c.lower() == '2':
+					state = 'C'
+					print('leu caracter 2 foi para C')
+				elif c.lower() == '3':
+					state = 'C'
+					print('leu caracter 3 foi para C')
+				elif c.lower() == '4':
+					state = 'C'
+					print('leu caracter 4 foi para C')
+				elif c.lower() == '5':
+					state = 'C'
+					print('leu caracter 5 foi para C')
+				elif c.lower() == '6':
+					state = 'C'
+					print('leu caracter 6 foi para C')
+				elif c.lower() == '7':
+					state = 'C'
+					print('leu caracter 7 foi para C')
+				elif c.lower() == '8':
+					state = 'C'
+					print('leu caracter 8 foi para C')
+				elif c.lower() == '9':
+					state = 'C'
+					print('leu caracter 9 foi para C')
+				elif c.lower() == '\'':
+					state = 'C'
+					print('leu caracter \' foi para C')
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -6114,9 +6421,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BC':
 				c = nextChar()
 				id += c
@@ -6659,9 +6971,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BF':
 				c = nextChar()
 				id += c
@@ -7383,9 +7700,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BK':
 				c = nextChar()
 				id += c
@@ -7570,9 +7892,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BM':
 				c = nextChar()
 				id += c
@@ -7936,9 +8263,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BO':
 				c = nextChar()
 				id += c
@@ -8302,9 +8634,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BQ':
 				c = nextChar()
 				id += c
@@ -8489,9 +8826,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BS':
 				c = nextChar()
 				id += c
@@ -9929,9 +10271,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CG':
 				c = nextChar()
 				id += c
@@ -10653,9 +11000,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CK':
 				c = nextChar()
 				id += c
@@ -11019,9 +11371,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CM':
 				c = nextChar()
 				id += c
@@ -11385,9 +11742,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CP':
 				c = nextChar()
 				id += c
@@ -11751,9 +12113,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CT':
 				c = nextChar()
 				id += c
@@ -12296,9 +12663,14 @@ def cod_direta():
 				print(f"Identificador montado {id}")
 				state = 'A'
 				lerProx = False
-				if c not in ['\n', '\t', ' ']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in ['\n', '\t', ' ',';',')']:
+					f.seek(f.tell()-1)
+					return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+				else:
+					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CY':
 				c = nextChar()
 				id += c
@@ -12490,7 +12862,7 @@ def cod_direta():
 				lerProx = False
 				if c not in ['\n', '\t', ' ']:
 					f.seek(f.tell()-1)
-				return Token('TOKEN','ATRIBUTO',linhaGlobal,coluna)
+				return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 
 while True:
 	try:
