@@ -8984,8 +8984,8 @@ def lex():
 				id += c
 				colunaGlobal += 1
 				if c.lower() == 'a':
-					state = 'C'
-					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'CC'
+					print(f"leu caracter a foi para CC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
 					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")

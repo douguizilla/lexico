@@ -2507,7 +2507,7 @@ diagrama = {
     'BN&8': 'C',
     'BN&9': 'C',
     'BN&\'': 'CB',
-    'BO&a': 'C',
+    'BO&a': 'CC',
     'BO&b': 'C',
     'BO&c': 'C',
     'BO&d': 'C',
@@ -6647,18 +6647,35 @@ def lex():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
 					print(c)
-					tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					if id != c:
+						f.seek(f.tell()-1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(id[:-1].strip(),'')
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					tabelaSimbolos[id[:-1]] = Atributo(id[:-1],'')
+					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
 					print(c)
-					tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					if id != c:
+						f.seek(f.tell()-1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(id[:-1].strip(),'')
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					print(id)
 					print(c)
-					tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					if id != c:
+						f.seek(f.tell()-1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(id[:-1].strip(),'')
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AP':
 				print('Tratar retorno estado final AP')
 				print(f"Identificador montado {id}")
@@ -6667,18 +6684,35 @@ def lex():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
 					print(c)
-					tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					if id != c:
+						f.seek(f.tell()-1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(id[:-1].strip(),'')
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					tabelaSimbolos[id[:-1]] = Atributo(id[:-1],'')
+					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
 					print(c)
-					tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					if id != c:
+						f.seek(f.tell()-1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(id[:-1].strip(),'')
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					print(id)
 					print(c)
-					tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					if id != c:
+						f.seek(f.tell()-1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(id[:-1].strip(),'')
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'Q':
 				c = nextChar()
 				id += c
@@ -6903,19 +6937,37 @@ def lex():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(id[:-1].strip(),'')
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					tabelaSimbolos[id[:-1]] = Atributo(id[:-1],'')
+					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
 					print(c)
-
-					tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					if id != c:
+						f.seek(f.tell()-1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(id[:-1].strip(),'')
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					print(id)
 					print(c)
-					tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					if id != c:
+						f.seek(f.tell()-1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(id[:-1].strip(),'')
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'Y':
 				c = nextChar()
 				id += c
@@ -13070,8 +13122,8 @@ def lex():
 				id += c
 				colunaGlobal += 1
 				if c.lower() == 'a':
-					state = 'C'
-					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'CC'
+					print(f"leu caracter a foi para CC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
 					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
@@ -17898,7 +17950,7 @@ def lex():
 				lerProx = False
 				if c not in ['\n', '\t', ' ']:
 					f.seek(f.tell()-1)
-					tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+				tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
 				return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 
 def simuladorSintatico():
@@ -17914,3 +17966,4 @@ def simuladorSintatico():
 		except EOFError:
 			break
 simuladorSintatico()
+
