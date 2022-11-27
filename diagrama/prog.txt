@@ -1,4 +1,4 @@
-se x<=10 senao
+se x<=10.2e-8 senao
 inicio
 fim
 enquanto
