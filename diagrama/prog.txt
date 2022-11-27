@@ -1,5 +1,6 @@
 se x<=10.2e-8 senao
 inicio
+inicioo
 fim
 enquanto
 ate
