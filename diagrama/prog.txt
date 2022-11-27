@@ -1,7 +1,1 @@
-programa prog2 [ Programa com erro sintatico ]
-inicio
-    enquanto x<>10 faca
-        inicio
-            x = x + 1
-        fim
-fim
+x>10
