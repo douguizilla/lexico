@@ -1,17 +1,4 @@
 programa prog2 [ Programa com erro sintatico ]
 inicio
-    int : xXx; float: y;
-
-    x <--0;
-
-    .repita
-    inicio
-        x <-- 6.32e-3;
-    fim
-    ate (x < 10)
-
-    se (x = 10) entao
-    inicio
-        y<--1 [erro aqui]
-    fim
+    x<>10
 fim
