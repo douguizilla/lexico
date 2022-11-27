@@ -3943,7 +3943,7 @@ def criar_cases():
 	file = open('cod_direta.py', 'w+')
 	file.write(f"linhaGlobal = 0\n")
 	file.write(f"colunaGlobal = 0\n")
-	file.write(f"def cod_direta():\n")
+	file.write(f"def lex():\n")
 	file.write(f"\tstate = 'A'\n")
 	file.write(f"\tc = ''\n")
 	file.write(f"\tid = ''\n")
@@ -3966,7 +3966,7 @@ def criar_cases():
 				file.write(f"\t\t\t\tprint('Tratar retorno estado final {final}')\n")
 				file.write(f"\t\t\t\tprint(f\"Identificador montado {{id}}\")\n")
 				file.write(f"\t\t\t\tstate = 'A'\n")
-				if final != 'AS' and final != 'X':
+				if final != 'AS' and final != 'X' and final != 'ER':
 					file.write(f"\t\t\t\tlerProx = False\n")
 					file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
 					file.write(f"\t\t\t\t\tprint(id)\n")
@@ -3995,6 +3995,8 @@ def criar_cases():
 					file.write(f"\t\t\t\t\t\treturn Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)\n")
 				elif final == 'X':
 					file.write(f"\t\t\t\tlerProx = True\n")
+				elif final == 'ER':
+					file.write(f"\t\t\t\treturn Token('Erro','ATRIBUTO',linhaGlobal,colunaGlobal)\n")
 				else:
 					file.write(f"\t\t\t\tlerProx = False\n")
 				finalTratado.append(final)
@@ -4028,9 +4030,11 @@ def criar_cases():
 			file.write(f"\t\t\t\telif c.lower() == '{caracter}':\n")
 			if key_[1] == '\n':
 				file.write('\t\t\t\t\tlinhaGlobal += 1\n')
+				file.write('\t\t\t\t\tcolunaGlobal = 0\n')
+				file.write('\t\t\t\t\tcoluna = 0\n')
 
 		file.write(f"\t\t\t\t\tstate = '{value}'\n")
-		file.write(f"\t\t\t\t\tprint('leu caracter {caracter} foi para {value}')\n")
+		file.write(f"\t\t\t\t\tprint(f\"leu caracter {caracter} foi para {value} linha {{linhaGlobal}} colunaG {{colunaGlobal}} coluna {{coluna}}\")\n")
 
 		if key_[0] == 'AN':
 			file.write(f"\t\t\t\telse:\n")
@@ -4083,7 +4087,7 @@ def criar_cases():
 	file.write(f"\n")
 	file.write(f"while True:\n")
 	file.write(f"\ttry:\n")
-	file.write(f"\t\ttoken = cod_direta()\n")
+	file.write(f"\t\ttoken = lex()\n")
 	file.write(f"\t\tprint(f\"<{{token.tipo}}, {{token.atributo}}, {{token.linha}}, {{token.coluna}}>\")\n")
 	file.write(f"\t\tif token.tipo == 'Erro':\n")
 	file.write(f"\t\t\tbreak\n")
@@ -4111,7 +4115,7 @@ class Token:
 
 linhaGlobal = 0
 colunaGlobal = 0
-def cod_direta():
+def lex():
 	state = 'A'
 	c = ''
 	id = ''
@@ -4134,176 +4138,178 @@ def cod_direta():
 					lerProx = True
 				if c.lower() == 'a':
 					state = 'B'
-					print('leu caracter a foi para B')
+					print(f"leu caracter a foi para B linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'D'
-					print('leu caracter c foi para D')
+					print(f"leu caracter c foi para D linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'E'
-					print('leu caracter e foi para E')
+					print(f"leu caracter e foi para E linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'F'
-					print('leu caracter f foi para F')
+					print(f"leu caracter f foi para F linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'G'
-					print('leu caracter i foi para G')
+					print(f"leu caracter i foi para G linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'H'
-					print('leu caracter p foi para H')
+					print(f"leu caracter p foi para H linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'I'
-					print('leu caracter r foi para I')
+					print(f"leu caracter r foi para I linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'J'
-					print('leu caracter s foi para J')
+					print(f"leu caracter s foi para J linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'K'
-					print('leu caracter < foi para K')
+					print(f"leu caracter < foi para K linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'L'
-					print('leu caracter - foi para L')
+					print(f"leu caracter - foi para L linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'M'
-					print('leu caracter + foi para M')
+					print(f"leu caracter + foi para M linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'N'
-					print('leu caracter / foi para N')
+					print(f"leu caracter / foi para N linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'O'
-					print('leu caracter * foi para O')
+					print(f"leu caracter * foi para O linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'P'
-					print('leu caracter ^ foi para P')
+					print(f"leu caracter ^ foi para P linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'Q'
-					print('leu caracter > foi para Q')
+					print(f"leu caracter > foi para Q linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'R'
-					print('leu caracter = foi para R')
+					print(f"leu caracter = foi para R linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'ER'
-					print('leu caracter . foi para ER')
+					print(f"leu caracter . foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'S'
-					print('leu caracter , foi para S')
+					print(f"leu caracter , foi para S linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'T'
-					print('leu caracter ; foi para T')
+					print(f"leu caracter ; foi para T linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'RA'
-					print('leu caracter : foi para RA')
+					print(f"leu caracter : foi para RA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'U'
-					print('leu caracter ( foi para U')
+					print(f"leu caracter ( foi para U linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'V'
-					print('leu caracter ) foi para V')
+					print(f"leu caracter ) foi para V linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'W'
-					print('leu caracter [ foi para W')
+					print(f"leu caracter [ foi para W linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'X'
-					print('leu caracter ] foi para X')
+					print(f"leu caracter ] foi para X linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'Y'
-					print('leu caracter \n foi para Y')
+					print(f"leu caracter \n foi para Y linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'Y'
-					print('leu caracter \t foi para Y')
+					print(f"leu caracter \t foi para Y linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'Y'
-					print('leu caracter   foi para Y')
+					print(f"leu caracter   foi para Y linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'Z'
-					print('leu caracter 0 foi para Z')
+					print(f"leu caracter 0 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'Z'
-					print('leu caracter 1 foi para Z')
+					print(f"leu caracter 1 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'Z'
-					print('leu caracter 2 foi para Z')
+					print(f"leu caracter 2 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'Z'
-					print('leu caracter 3 foi para Z')
+					print(f"leu caracter 3 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'Z'
-					print('leu caracter 4 foi para Z')
+					print(f"leu caracter 4 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'Z'
-					print('leu caracter 5 foi para Z')
+					print(f"leu caracter 5 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'Z'
-					print('leu caracter 6 foi para Z')
+					print(f"leu caracter 6 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'Z'
-					print('leu caracter 7 foi para Z')
+					print(f"leu caracter 7 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'Z'
-					print('leu caracter 8 foi para Z')
+					print(f"leu caracter 8 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'Z'
-					print('leu caracter 9 foi para Z')
+					print(f"leu caracter 9 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AA'
-					print('leu caracter \' foi para AA')
+					print(f"leu caracter \' foi para AA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -4491,32 +4497,7 @@ def cod_direta():
 				print('Tratar retorno estado final ER')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				lerProx = False
-				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					print(id)
-					print(c)
-					if id != c:
-						f.seek(f.tell()-1)
-						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
-					else:
-						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
-					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in [' ',';',')','+']:
-					print(id)
-					print(c)
-					if id != c:
-						f.seek(f.tell()-1)
-						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
-					else:
-						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
-				else:
-					print(id)
-					print(c)
-					if id != c:
-						f.seek(f.tell()-1)
-						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
-					else:
-						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				return Token('Erro','ATRIBUTO',linhaGlobal,colunaGlobal)
 			case 'S':
 				print('Tratar retorno estado final S')
 				print(f"Identificador montado {id}")
@@ -4678,176 +4659,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'AB'
-					print('leu caracter t foi para AB')
+					print(f"leu caracter t foi para AB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -4887,176 +4870,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -5066,176 +5051,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'AD'
-					print('leu caracter h foi para AD')
+					print(f"leu caracter h foi para AD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -5245,176 +5232,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'AE'
-					print('leu caracter n foi para AE')
+					print(f"leu caracter n foi para AE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -5424,176 +5413,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'AF'
-					print('leu caracter a foi para AF')
+					print(f"leu caracter a foi para AF linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'AG'
-					print('leu caracter i foi para AG')
+					print(f"leu caracter i foi para AG linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'AH'
-					print('leu caracter l foi para AH')
+					print(f"leu caracter l foi para AH linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -5603,176 +5594,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'AI'
-					print('leu caracter n foi para AI')
+					print(f"leu caracter n foi para AI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -5782,176 +5775,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'AJ'
-					print('leu caracter r foi para AJ')
+					print(f"leu caracter r foi para AJ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -5961,176 +5956,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'AK'
-					print('leu caracter e foi para AK')
+					print(f"leu caracter e foi para AK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -6140,176 +6137,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'AL'
-					print('leu caracter e foi para AL')
+					print(f"leu caracter e foi para AL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -6319,176 +6318,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'AM'
-					print('leu caracter a foi para AM')
+					print(f"leu caracter a foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'AM'
-					print('leu caracter b foi para AM')
+					print(f"leu caracter b foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'AM'
-					print('leu caracter c foi para AM')
+					print(f"leu caracter c foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'AM'
-					print('leu caracter d foi para AM')
+					print(f"leu caracter d foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'AM'
-					print('leu caracter e foi para AM')
+					print(f"leu caracter e foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'AM'
-					print('leu caracter f foi para AM')
+					print(f"leu caracter f foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'AM'
-					print('leu caracter g foi para AM')
+					print(f"leu caracter g foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'AM'
-					print('leu caracter h foi para AM')
+					print(f"leu caracter h foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'AM'
-					print('leu caracter i foi para AM')
+					print(f"leu caracter i foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'AM'
-					print('leu caracter j foi para AM')
+					print(f"leu caracter j foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'AM'
-					print('leu caracter k foi para AM')
+					print(f"leu caracter k foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'AM'
-					print('leu caracter l foi para AM')
+					print(f"leu caracter l foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'AM'
-					print('leu caracter m foi para AM')
+					print(f"leu caracter m foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'AM'
-					print('leu caracter n foi para AM')
+					print(f"leu caracter n foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'AM'
-					print('leu caracter o foi para AM')
+					print(f"leu caracter o foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'AM'
-					print('leu caracter p foi para AM')
+					print(f"leu caracter p foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'AM'
-					print('leu caracter q foi para AM')
+					print(f"leu caracter q foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'AM'
-					print('leu caracter r foi para AM')
+					print(f"leu caracter r foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'AM'
-					print('leu caracter s foi para AM')
+					print(f"leu caracter s foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'AM'
-					print('leu caracter t foi para AM')
+					print(f"leu caracter t foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'AM'
-					print('leu caracter u foi para AM')
+					print(f"leu caracter u foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'AM'
-					print('leu caracter v foi para AM')
+					print(f"leu caracter v foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'AM'
-					print('leu caracter w foi para AM')
+					print(f"leu caracter w foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'AM'
-					print('leu caracter x foi para AM')
+					print(f"leu caracter x foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'AM'
-					print('leu caracter y foi para AM')
+					print(f"leu caracter y foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'AM'
-					print('leu caracter z foi para AM')
+					print(f"leu caracter z foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'AM'
-					print('leu caracter _ foi para AM')
+					print(f"leu caracter _ foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AM'
-					print('leu caracter < foi para AM')
+					print(f"leu caracter < foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AN'
-					print('leu caracter - foi para AN')
+					print(f"leu caracter - foi para AN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AM'
-					print('leu caracter + foi para AM')
+					print(f"leu caracter + foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AM'
-					print('leu caracter / foi para AM')
+					print(f"leu caracter / foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AM'
-					print('leu caracter * foi para AM')
+					print(f"leu caracter * foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AM'
-					print('leu caracter ^ foi para AM')
+					print(f"leu caracter ^ foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AO'
-					print('leu caracter > foi para AO')
+					print(f"leu caracter > foi para AO linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AP'
-					print('leu caracter = foi para AP')
+					print(f"leu caracter = foi para AP linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AM'
-					print('leu caracter . foi para AM')
+					print(f"leu caracter . foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AM'
-					print('leu caracter , foi para AM')
+					print(f"leu caracter , foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AM'
-					print('leu caracter ; foi para AM')
+					print(f"leu caracter ; foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AM'
-					print('leu caracter : foi para AM')
+					print(f"leu caracter : foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AM'
-					print('leu caracter ( foi para AM')
+					print(f"leu caracter ( foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AM'
-					print('leu caracter ) foi para AM')
+					print(f"leu caracter ) foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AM'
-					print('leu caracter [ foi para AM')
+					print(f"leu caracter [ foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AM'
-					print('leu caracter ] foi para AM')
+					print(f"leu caracter ] foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AM'
-					print('leu caracter \n foi para AM')
+					print(f"leu caracter \n foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AM'
-					print('leu caracter \t foi para AM')
+					print(f"leu caracter \t foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AM'
-					print('leu caracter   foi para AM')
+					print(f"leu caracter   foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'AM'
-					print('leu caracter 0 foi para AM')
+					print(f"leu caracter 0 foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'AM'
-					print('leu caracter 1 foi para AM')
+					print(f"leu caracter 1 foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'AM'
-					print('leu caracter 2 foi para AM')
+					print(f"leu caracter 2 foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'AM'
-					print('leu caracter 3 foi para AM')
+					print(f"leu caracter 3 foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'AM'
-					print('leu caracter 4 foi para AM')
+					print(f"leu caracter 4 foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'AM'
-					print('leu caracter 5 foi para AM')
+					print(f"leu caracter 5 foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'AM'
-					print('leu caracter 6 foi para AM')
+					print(f"leu caracter 6 foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'AM'
-					print('leu caracter 7 foi para AM')
+					print(f"leu caracter 7 foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'AM'
-					print('leu caracter 8 foi para AM')
+					print(f"leu caracter 8 foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'AM'
-					print('leu caracter 9 foi para AM')
+					print(f"leu caracter 9 foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AM'
-					print('leu caracter \' foi para AM')
+					print(f"leu caracter \' foi para AM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -6588,176 +6589,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'AQ'
-					print('leu caracter a foi para AQ')
+					print(f"leu caracter a foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'AQ'
-					print('leu caracter b foi para AQ')
+					print(f"leu caracter b foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'AQ'
-					print('leu caracter c foi para AQ')
+					print(f"leu caracter c foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'AQ'
-					print('leu caracter d foi para AQ')
+					print(f"leu caracter d foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'AQ'
-					print('leu caracter e foi para AQ')
+					print(f"leu caracter e foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'AQ'
-					print('leu caracter f foi para AQ')
+					print(f"leu caracter f foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'AQ'
-					print('leu caracter g foi para AQ')
+					print(f"leu caracter g foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'AQ'
-					print('leu caracter h foi para AQ')
+					print(f"leu caracter h foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'AQ'
-					print('leu caracter i foi para AQ')
+					print(f"leu caracter i foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'AQ'
-					print('leu caracter j foi para AQ')
+					print(f"leu caracter j foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'AQ'
-					print('leu caracter k foi para AQ')
+					print(f"leu caracter k foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'AQ'
-					print('leu caracter l foi para AQ')
+					print(f"leu caracter l foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'AQ'
-					print('leu caracter m foi para AQ')
+					print(f"leu caracter m foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'AQ'
-					print('leu caracter n foi para AQ')
+					print(f"leu caracter n foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'AQ'
-					print('leu caracter o foi para AQ')
+					print(f"leu caracter o foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'AQ'
-					print('leu caracter p foi para AQ')
+					print(f"leu caracter p foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'AQ'
-					print('leu caracter q foi para AQ')
+					print(f"leu caracter q foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'AQ'
-					print('leu caracter r foi para AQ')
+					print(f"leu caracter r foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'AQ'
-					print('leu caracter s foi para AQ')
+					print(f"leu caracter s foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'AQ'
-					print('leu caracter t foi para AQ')
+					print(f"leu caracter t foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'AQ'
-					print('leu caracter u foi para AQ')
+					print(f"leu caracter u foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'AQ'
-					print('leu caracter v foi para AQ')
+					print(f"leu caracter v foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'AQ'
-					print('leu caracter w foi para AQ')
+					print(f"leu caracter w foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'AQ'
-					print('leu caracter x foi para AQ')
+					print(f"leu caracter x foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'AQ'
-					print('leu caracter y foi para AQ')
+					print(f"leu caracter y foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'AQ'
-					print('leu caracter z foi para AQ')
+					print(f"leu caracter z foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'AQ'
-					print('leu caracter _ foi para AQ')
+					print(f"leu caracter _ foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AQ'
-					print('leu caracter < foi para AQ')
+					print(f"leu caracter < foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AQ'
-					print('leu caracter - foi para AQ')
+					print(f"leu caracter - foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AQ'
-					print('leu caracter + foi para AQ')
+					print(f"leu caracter + foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AQ'
-					print('leu caracter / foi para AQ')
+					print(f"leu caracter / foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AQ'
-					print('leu caracter * foi para AQ')
+					print(f"leu caracter * foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AQ'
-					print('leu caracter ^ foi para AQ')
+					print(f"leu caracter ^ foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AQ'
-					print('leu caracter > foi para AQ')
+					print(f"leu caracter > foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AR'
-					print('leu caracter = foi para AR')
+					print(f"leu caracter = foi para AR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AQ'
-					print('leu caracter . foi para AQ')
+					print(f"leu caracter . foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AQ'
-					print('leu caracter , foi para AQ')
+					print(f"leu caracter , foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AQ'
-					print('leu caracter ; foi para AQ')
+					print(f"leu caracter ; foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AQ'
-					print('leu caracter : foi para AQ')
+					print(f"leu caracter : foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AQ'
-					print('leu caracter ( foi para AQ')
+					print(f"leu caracter ( foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AQ'
-					print('leu caracter ) foi para AQ')
+					print(f"leu caracter ) foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AQ'
-					print('leu caracter [ foi para AQ')
+					print(f"leu caracter [ foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AQ'
-					print('leu caracter ] foi para AQ')
+					print(f"leu caracter ] foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AQ'
-					print('leu caracter \n foi para AQ')
+					print(f"leu caracter \n foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AQ'
-					print('leu caracter \t foi para AQ')
+					print(f"leu caracter \t foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AQ'
-					print('leu caracter   foi para AQ')
+					print(f"leu caracter   foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'AQ'
-					print('leu caracter 0 foi para AQ')
+					print(f"leu caracter 0 foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'AQ'
-					print('leu caracter 1 foi para AQ')
+					print(f"leu caracter 1 foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'AQ'
-					print('leu caracter 2 foi para AQ')
+					print(f"leu caracter 2 foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'AQ'
-					print('leu caracter 3 foi para AQ')
+					print(f"leu caracter 3 foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'AQ'
-					print('leu caracter 4 foi para AQ')
+					print(f"leu caracter 4 foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'AQ'
-					print('leu caracter 5 foi para AQ')
+					print(f"leu caracter 5 foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'AQ'
-					print('leu caracter 6 foi para AQ')
+					print(f"leu caracter 6 foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'AQ'
-					print('leu caracter 7 foi para AQ')
+					print(f"leu caracter 7 foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'AQ'
-					print('leu caracter 8 foi para AQ')
+					print(f"leu caracter 8 foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'AQ'
-					print('leu caracter 9 foi para AQ')
+					print(f"leu caracter 9 foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AQ'
-					print('leu caracter \' foi para AQ')
+					print(f"leu caracter \' foi para AQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -6827,176 +6830,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'AS'
-					print('leu caracter a foi para AS')
+					print(f"leu caracter a foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'AS'
-					print('leu caracter b foi para AS')
+					print(f"leu caracter b foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'AS'
-					print('leu caracter c foi para AS')
+					print(f"leu caracter c foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'AS'
-					print('leu caracter d foi para AS')
+					print(f"leu caracter d foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'AS'
-					print('leu caracter e foi para AS')
+					print(f"leu caracter e foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'AS'
-					print('leu caracter f foi para AS')
+					print(f"leu caracter f foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'AS'
-					print('leu caracter g foi para AS')
+					print(f"leu caracter g foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'AS'
-					print('leu caracter h foi para AS')
+					print(f"leu caracter h foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'AS'
-					print('leu caracter i foi para AS')
+					print(f"leu caracter i foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'AS'
-					print('leu caracter j foi para AS')
+					print(f"leu caracter j foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'AS'
-					print('leu caracter k foi para AS')
+					print(f"leu caracter k foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'AS'
-					print('leu caracter l foi para AS')
+					print(f"leu caracter l foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'AS'
-					print('leu caracter m foi para AS')
+					print(f"leu caracter m foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'AS'
-					print('leu caracter n foi para AS')
+					print(f"leu caracter n foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'AS'
-					print('leu caracter o foi para AS')
+					print(f"leu caracter o foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'AS'
-					print('leu caracter p foi para AS')
+					print(f"leu caracter p foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'AS'
-					print('leu caracter q foi para AS')
+					print(f"leu caracter q foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'AS'
-					print('leu caracter r foi para AS')
+					print(f"leu caracter r foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'AS'
-					print('leu caracter s foi para AS')
+					print(f"leu caracter s foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'AS'
-					print('leu caracter t foi para AS')
+					print(f"leu caracter t foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'AS'
-					print('leu caracter u foi para AS')
+					print(f"leu caracter u foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'AS'
-					print('leu caracter v foi para AS')
+					print(f"leu caracter v foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'AS'
-					print('leu caracter w foi para AS')
+					print(f"leu caracter w foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'AS'
-					print('leu caracter x foi para AS')
+					print(f"leu caracter x foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'AS'
-					print('leu caracter y foi para AS')
+					print(f"leu caracter y foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'AS'
-					print('leu caracter z foi para AS')
+					print(f"leu caracter z foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'AS'
-					print('leu caracter _ foi para AS')
+					print(f"leu caracter _ foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AS'
-					print('leu caracter < foi para AS')
+					print(f"leu caracter < foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AS'
-					print('leu caracter - foi para AS')
+					print(f"leu caracter - foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AS'
-					print('leu caracter + foi para AS')
+					print(f"leu caracter + foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AS'
-					print('leu caracter / foi para AS')
+					print(f"leu caracter / foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AS'
-					print('leu caracter * foi para AS')
+					print(f"leu caracter * foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AS'
-					print('leu caracter ^ foi para AS')
+					print(f"leu caracter ^ foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AS'
-					print('leu caracter > foi para AS')
+					print(f"leu caracter > foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AS'
-					print('leu caracter = foi para AS')
+					print(f"leu caracter = foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AS'
-					print('leu caracter . foi para AS')
+					print(f"leu caracter . foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AS'
-					print('leu caracter , foi para AS')
+					print(f"leu caracter , foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AS'
-					print('leu caracter ; foi para AS')
+					print(f"leu caracter ; foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AS'
-					print('leu caracter : foi para AS')
+					print(f"leu caracter : foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AS'
-					print('leu caracter ( foi para AS')
+					print(f"leu caracter ( foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AS'
-					print('leu caracter ) foi para AS')
+					print(f"leu caracter ) foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AS'
-					print('leu caracter [ foi para AS')
+					print(f"leu caracter [ foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AS'
-					print('leu caracter ] foi para AS')
+					print(f"leu caracter ] foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'Y'
-					print('leu caracter \n foi para Y')
+					print(f"leu caracter \n foi para Y linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'Y'
-					print('leu caracter \t foi para Y')
+					print(f"leu caracter \t foi para Y linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'Y'
-					print('leu caracter   foi para Y')
+					print(f"leu caracter   foi para Y linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'AS'
-					print('leu caracter 0 foi para AS')
+					print(f"leu caracter 0 foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'AS'
-					print('leu caracter 1 foi para AS')
+					print(f"leu caracter 1 foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'AS'
-					print('leu caracter 2 foi para AS')
+					print(f"leu caracter 2 foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'AS'
-					print('leu caracter 3 foi para AS')
+					print(f"leu caracter 3 foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'AS'
-					print('leu caracter 4 foi para AS')
+					print(f"leu caracter 4 foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'AS'
-					print('leu caracter 5 foi para AS')
+					print(f"leu caracter 5 foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'AS'
-					print('leu caracter 6 foi para AS')
+					print(f"leu caracter 6 foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'AS'
-					print('leu caracter 7 foi para AS')
+					print(f"leu caracter 7 foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'AS'
-					print('leu caracter 8 foi para AS')
+					print(f"leu caracter 8 foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'AS'
-					print('leu caracter 9 foi para AS')
+					print(f"leu caracter 9 foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AS'
-					print('leu caracter \' foi para AS')
+					print(f"leu caracter \' foi para AS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -7011,176 +7016,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'AT'
-					print('leu caracter a foi para AT')
+					print(f"leu caracter a foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'AT'
-					print('leu caracter b foi para AT')
+					print(f"leu caracter b foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'AT'
-					print('leu caracter c foi para AT')
+					print(f"leu caracter c foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'AT'
-					print('leu caracter d foi para AT')
+					print(f"leu caracter d foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'AT'
-					print('leu caracter e foi para AT')
+					print(f"leu caracter e foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'AT'
-					print('leu caracter f foi para AT')
+					print(f"leu caracter f foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'AT'
-					print('leu caracter g foi para AT')
+					print(f"leu caracter g foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'AT'
-					print('leu caracter h foi para AT')
+					print(f"leu caracter h foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'AT'
-					print('leu caracter i foi para AT')
+					print(f"leu caracter i foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'AT'
-					print('leu caracter j foi para AT')
+					print(f"leu caracter j foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'AT'
-					print('leu caracter k foi para AT')
+					print(f"leu caracter k foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'AT'
-					print('leu caracter l foi para AT')
+					print(f"leu caracter l foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'AT'
-					print('leu caracter m foi para AT')
+					print(f"leu caracter m foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'AT'
-					print('leu caracter n foi para AT')
+					print(f"leu caracter n foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'AT'
-					print('leu caracter o foi para AT')
+					print(f"leu caracter o foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'AT'
-					print('leu caracter p foi para AT')
+					print(f"leu caracter p foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'AT'
-					print('leu caracter q foi para AT')
+					print(f"leu caracter q foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'AT'
-					print('leu caracter r foi para AT')
+					print(f"leu caracter r foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'AT'
-					print('leu caracter s foi para AT')
+					print(f"leu caracter s foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'AT'
-					print('leu caracter t foi para AT')
+					print(f"leu caracter t foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'AT'
-					print('leu caracter u foi para AT')
+					print(f"leu caracter u foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'AT'
-					print('leu caracter v foi para AT')
+					print(f"leu caracter v foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'AT'
-					print('leu caracter w foi para AT')
+					print(f"leu caracter w foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'AT'
-					print('leu caracter x foi para AT')
+					print(f"leu caracter x foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'AT'
-					print('leu caracter y foi para AT')
+					print(f"leu caracter y foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'AT'
-					print('leu caracter z foi para AT')
+					print(f"leu caracter z foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'AT'
-					print('leu caracter _ foi para AT')
+					print(f"leu caracter _ foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AT'
-					print('leu caracter < foi para AT')
+					print(f"leu caracter < foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AT'
-					print('leu caracter - foi para AT')
+					print(f"leu caracter - foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AT'
-					print('leu caracter + foi para AT')
+					print(f"leu caracter + foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AT'
-					print('leu caracter / foi para AT')
+					print(f"leu caracter / foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AT'
-					print('leu caracter * foi para AT')
+					print(f"leu caracter * foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AT'
-					print('leu caracter ^ foi para AT')
+					print(f"leu caracter ^ foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AT'
-					print('leu caracter > foi para AT')
+					print(f"leu caracter > foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AT'
-					print('leu caracter = foi para AT')
+					print(f"leu caracter = foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AU'
-					print('leu caracter . foi para AU')
+					print(f"leu caracter . foi para AU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AT'
-					print('leu caracter , foi para AT')
+					print(f"leu caracter , foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AT'
-					print('leu caracter ; foi para AT')
+					print(f"leu caracter ; foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AT'
-					print('leu caracter : foi para AT')
+					print(f"leu caracter : foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AT'
-					print('leu caracter ( foi para AT')
+					print(f"leu caracter ( foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AT'
-					print('leu caracter ) foi para AT')
+					print(f"leu caracter ) foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AT'
-					print('leu caracter [ foi para AT')
+					print(f"leu caracter [ foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AT'
-					print('leu caracter ] foi para AT')
+					print(f"leu caracter ] foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AT'
-					print('leu caracter \n foi para AT')
+					print(f"leu caracter \n foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AT'
-					print('leu caracter \t foi para AT')
+					print(f"leu caracter \t foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AT'
-					print('leu caracter   foi para AT')
+					print(f"leu caracter   foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'Z'
-					print('leu caracter 0 foi para Z')
+					print(f"leu caracter 0 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'Z'
-					print('leu caracter 1 foi para Z')
+					print(f"leu caracter 1 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'Z'
-					print('leu caracter 2 foi para Z')
+					print(f"leu caracter 2 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'Z'
-					print('leu caracter 3 foi para Z')
+					print(f"leu caracter 3 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'Z'
-					print('leu caracter 4 foi para Z')
+					print(f"leu caracter 4 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'Z'
-					print('leu caracter 5 foi para Z')
+					print(f"leu caracter 5 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'Z'
-					print('leu caracter 6 foi para Z')
+					print(f"leu caracter 6 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'Z'
-					print('leu caracter 7 foi para Z')
+					print(f"leu caracter 7 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'Z'
-					print('leu caracter 8 foi para Z')
+					print(f"leu caracter 8 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'Z'
-					print('leu caracter 9 foi para Z')
+					print(f"leu caracter 9 foi para Z linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AT'
-					print('leu caracter \' foi para AT')
+					print(f"leu caracter \' foi para AT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -7220,176 +7227,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'AV'
-					print('leu caracter a foi para AV')
+					print(f"leu caracter a foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'AV'
-					print('leu caracter b foi para AV')
+					print(f"leu caracter b foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'AV'
-					print('leu caracter c foi para AV')
+					print(f"leu caracter c foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'AV'
-					print('leu caracter d foi para AV')
+					print(f"leu caracter d foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'AV'
-					print('leu caracter e foi para AV')
+					print(f"leu caracter e foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'AV'
-					print('leu caracter f foi para AV')
+					print(f"leu caracter f foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'AV'
-					print('leu caracter g foi para AV')
+					print(f"leu caracter g foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'AV'
-					print('leu caracter h foi para AV')
+					print(f"leu caracter h foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'AV'
-					print('leu caracter i foi para AV')
+					print(f"leu caracter i foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'AV'
-					print('leu caracter j foi para AV')
+					print(f"leu caracter j foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'AV'
-					print('leu caracter k foi para AV')
+					print(f"leu caracter k foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'AV'
-					print('leu caracter l foi para AV')
+					print(f"leu caracter l foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'AV'
-					print('leu caracter m foi para AV')
+					print(f"leu caracter m foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'AV'
-					print('leu caracter n foi para AV')
+					print(f"leu caracter n foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'AV'
-					print('leu caracter o foi para AV')
+					print(f"leu caracter o foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'AV'
-					print('leu caracter p foi para AV')
+					print(f"leu caracter p foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'AV'
-					print('leu caracter q foi para AV')
+					print(f"leu caracter q foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'AV'
-					print('leu caracter r foi para AV')
+					print(f"leu caracter r foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'AV'
-					print('leu caracter s foi para AV')
+					print(f"leu caracter s foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'AV'
-					print('leu caracter t foi para AV')
+					print(f"leu caracter t foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'AV'
-					print('leu caracter u foi para AV')
+					print(f"leu caracter u foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'AV'
-					print('leu caracter v foi para AV')
+					print(f"leu caracter v foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'AV'
-					print('leu caracter w foi para AV')
+					print(f"leu caracter w foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'AV'
-					print('leu caracter x foi para AV')
+					print(f"leu caracter x foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'AV'
-					print('leu caracter y foi para AV')
+					print(f"leu caracter y foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'AV'
-					print('leu caracter z foi para AV')
+					print(f"leu caracter z foi para AV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'ER'
-					print('leu caracter _ foi para ER')
+					print(f"leu caracter _ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'ER'
-					print('leu caracter < foi para ER')
+					print(f"leu caracter < foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'ER'
-					print('leu caracter - foi para ER')
+					print(f"leu caracter - foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'ER'
-					print('leu caracter + foi para ER')
+					print(f"leu caracter + foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'ER'
-					print('leu caracter / foi para ER')
+					print(f"leu caracter / foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'ER'
-					print('leu caracter * foi para ER')
+					print(f"leu caracter * foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'ER'
-					print('leu caracter ^ foi para ER')
+					print(f"leu caracter ^ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'ER'
-					print('leu caracter > foi para ER')
+					print(f"leu caracter > foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'ER'
-					print('leu caracter = foi para ER')
+					print(f"leu caracter = foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'ER'
-					print('leu caracter . foi para ER')
+					print(f"leu caracter . foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'ER'
-					print('leu caracter , foi para ER')
+					print(f"leu caracter , foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'ER'
-					print('leu caracter ; foi para ER')
+					print(f"leu caracter ; foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'ER'
-					print('leu caracter : foi para ER')
+					print(f"leu caracter : foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'ER'
-					print('leu caracter ( foi para ER')
+					print(f"leu caracter ( foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'ER'
-					print('leu caracter ) foi para ER')
+					print(f"leu caracter ) foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'ER'
-					print('leu caracter [ foi para ER')
+					print(f"leu caracter [ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'ER'
-					print('leu caracter ] foi para ER')
+					print(f"leu caracter ] foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'ER'
-					print('leu caracter \n foi para ER')
+					print(f"leu caracter \n foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'ER'
-					print('leu caracter \t foi para ER')
+					print(f"leu caracter \t foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'ER'
-					print('leu caracter   foi para ER')
+					print(f"leu caracter   foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'ER'
-					print('leu caracter 0 foi para ER')
+					print(f"leu caracter 0 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'ER'
-					print('leu caracter 1 foi para ER')
+					print(f"leu caracter 1 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'ER'
-					print('leu caracter 2 foi para ER')
+					print(f"leu caracter 2 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'ER'
-					print('leu caracter 3 foi para ER')
+					print(f"leu caracter 3 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'ER'
-					print('leu caracter 4 foi para ER')
+					print(f"leu caracter 4 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'ER'
-					print('leu caracter 5 foi para ER')
+					print(f"leu caracter 5 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'ER'
-					print('leu caracter 6 foi para ER')
+					print(f"leu caracter 6 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'ER'
-					print('leu caracter 7 foi para ER')
+					print(f"leu caracter 7 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'ER'
-					print('leu caracter 8 foi para ER')
+					print(f"leu caracter 8 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'ER'
-					print('leu caracter 9 foi para ER')
+					print(f"leu caracter 9 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'ER'
-					print('leu caracter \' foi para ER')
+					print(f"leu caracter \' foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -7399,176 +7408,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'AW'
-					print('leu caracter e foi para AW')
+					print(f"leu caracter e foi para AW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -7578,176 +7589,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'AY'
-					print('leu caracter a foi para AY')
+					print(f"leu caracter a foi para AY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -7757,176 +7770,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'AY'
-					print('leu caracter a foi para AY')
+					print(f"leu caracter a foi para AY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'AX'
-					print('leu caracter q foi para AX')
+					print(f"leu caracter q foi para AX linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'AZ'
-					print('leu caracter t foi para AZ')
+					print(f"leu caracter t foi para AZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -7936,176 +7951,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'BA'
-					print('leu caracter c foi para BA')
+					print(f"leu caracter c foi para BA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -8115,176 +8132,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'BB'
-					print('leu caracter m foi para BB')
+					print(f"leu caracter m foi para BB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -8294,176 +8313,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'BC'
-					print('leu caracter o foi para BC')
+					print(f"leu caracter o foi para BC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -8473,176 +8494,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'BD'
-					print('leu caracter i foi para BD')
+					print(f"leu caracter i foi para BD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'BE'
-					print('leu caracter t foi para BE')
+					print(f"leu caracter t foi para BE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -8652,176 +8675,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'BF'
-					print('leu caracter o foi para BF')
+					print(f"leu caracter o foi para BF linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -8831,176 +8856,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'BG'
-					print('leu caracter p foi para BG')
+					print(f"leu caracter p foi para BG linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -9010,176 +9037,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'BH'
-					print('leu caracter n foi para BH')
+					print(f"leu caracter n foi para BH linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'BI'
-					print('leu caracter < foi para BI')
+					print(f"leu caracter < foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'BI'
-					print('leu caracter - foi para BI')
+					print(f"leu caracter - foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'BI'
-					print('leu caracter + foi para BI')
+					print(f"leu caracter + foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'BI'
-					print('leu caracter / foi para BI')
+					print(f"leu caracter / foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'BI'
-					print('leu caracter * foi para BI')
+					print(f"leu caracter * foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'BI'
-					print('leu caracter ^ foi para BI')
+					print(f"leu caracter ^ foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'BI'
-					print('leu caracter > foi para BI')
+					print(f"leu caracter > foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'BI'
-					print('leu caracter = foi para BI')
+					print(f"leu caracter = foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'BI'
-					print('leu caracter . foi para BI')
+					print(f"leu caracter . foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'BI'
-					print('leu caracter , foi para BI')
+					print(f"leu caracter , foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'BI'
-					print('leu caracter ; foi para BI')
+					print(f"leu caracter ; foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'BI'
-					print('leu caracter : foi para BI')
+					print(f"leu caracter : foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'BI'
-					print('leu caracter ( foi para BI')
+					print(f"leu caracter ( foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'BI'
-					print('leu caracter ) foi para BI')
+					print(f"leu caracter ) foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'BI'
-					print('leu caracter [ foi para BI')
+					print(f"leu caracter [ foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'BI'
-					print('leu caracter ] foi para BI')
+					print(f"leu caracter ] foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'BI'
-					print('leu caracter \n foi para BI')
+					print(f"leu caracter \n foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'BI'
-					print('leu caracter \t foi para BI')
+					print(f"leu caracter \t foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'BI'
-					print('leu caracter   foi para BI')
+					print(f"leu caracter   foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'BI'
-					print('leu caracter \' foi para BI')
+					print(f"leu caracter \' foi para BI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -9219,7 +9248,7 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == '-':
 					state = 'BJ'
-					print('leu caracter - foi para BJ')
+					print(f"leu caracter - foi para BJ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					print('Tratar retorno estado final BI')
 					print(f"Identificador montado {id}")
@@ -9238,176 +9267,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'ER'
-					print('leu caracter a foi para ER')
+					print(f"leu caracter a foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'ER'
-					print('leu caracter b foi para ER')
+					print(f"leu caracter b foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'ER'
-					print('leu caracter c foi para ER')
+					print(f"leu caracter c foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'ER'
-					print('leu caracter d foi para ER')
+					print(f"leu caracter d foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'ER'
-					print('leu caracter e foi para ER')
+					print(f"leu caracter e foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'ER'
-					print('leu caracter f foi para ER')
+					print(f"leu caracter f foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'ER'
-					print('leu caracter g foi para ER')
+					print(f"leu caracter g foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'ER'
-					print('leu caracter h foi para ER')
+					print(f"leu caracter h foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'ER'
-					print('leu caracter i foi para ER')
+					print(f"leu caracter i foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'ER'
-					print('leu caracter j foi para ER')
+					print(f"leu caracter j foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'ER'
-					print('leu caracter k foi para ER')
+					print(f"leu caracter k foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'ER'
-					print('leu caracter l foi para ER')
+					print(f"leu caracter l foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'ER'
-					print('leu caracter m foi para ER')
+					print(f"leu caracter m foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'ER'
-					print('leu caracter n foi para ER')
+					print(f"leu caracter n foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'ER'
-					print('leu caracter o foi para ER')
+					print(f"leu caracter o foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'ER'
-					print('leu caracter p foi para ER')
+					print(f"leu caracter p foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'ER'
-					print('leu caracter q foi para ER')
+					print(f"leu caracter q foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'ER'
-					print('leu caracter r foi para ER')
+					print(f"leu caracter r foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'ER'
-					print('leu caracter s foi para ER')
+					print(f"leu caracter s foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'ER'
-					print('leu caracter t foi para ER')
+					print(f"leu caracter t foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'ER'
-					print('leu caracter u foi para ER')
+					print(f"leu caracter u foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'ER'
-					print('leu caracter v foi para ER')
+					print(f"leu caracter v foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'ER'
-					print('leu caracter w foi para ER')
+					print(f"leu caracter w foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'ER'
-					print('leu caracter x foi para ER')
+					print(f"leu caracter x foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'ER'
-					print('leu caracter y foi para ER')
+					print(f"leu caracter y foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'ER'
-					print('leu caracter z foi para ER')
+					print(f"leu caracter z foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'ER'
-					print('leu caracter _ foi para ER')
+					print(f"leu caracter _ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'ER'
-					print('leu caracter < foi para ER')
+					print(f"leu caracter < foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'ER'
-					print('leu caracter - foi para ER')
+					print(f"leu caracter - foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'ER'
-					print('leu caracter + foi para ER')
+					print(f"leu caracter + foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'ER'
-					print('leu caracter / foi para ER')
+					print(f"leu caracter / foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'ER'
-					print('leu caracter * foi para ER')
+					print(f"leu caracter * foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'ER'
-					print('leu caracter ^ foi para ER')
+					print(f"leu caracter ^ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'ER'
-					print('leu caracter > foi para ER')
+					print(f"leu caracter > foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'ER'
-					print('leu caracter = foi para ER')
+					print(f"leu caracter = foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'ER'
-					print('leu caracter . foi para ER')
+					print(f"leu caracter . foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'ER'
-					print('leu caracter , foi para ER')
+					print(f"leu caracter , foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'ER'
-					print('leu caracter ; foi para ER')
+					print(f"leu caracter ; foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'ER'
-					print('leu caracter : foi para ER')
+					print(f"leu caracter : foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'ER'
-					print('leu caracter ( foi para ER')
+					print(f"leu caracter ( foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'ER'
-					print('leu caracter ) foi para ER')
+					print(f"leu caracter ) foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'ER'
-					print('leu caracter [ foi para ER')
+					print(f"leu caracter [ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'ER'
-					print('leu caracter ] foi para ER')
+					print(f"leu caracter ] foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'ER'
-					print('leu caracter \n foi para ER')
+					print(f"leu caracter \n foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'ER'
-					print('leu caracter \t foi para ER')
+					print(f"leu caracter \t foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'ER'
-					print('leu caracter   foi para ER')
+					print(f"leu caracter   foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'BK'
-					print('leu caracter 0 foi para BK')
+					print(f"leu caracter 0 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'BK'
-					print('leu caracter 1 foi para BK')
+					print(f"leu caracter 1 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'BK'
-					print('leu caracter 2 foi para BK')
+					print(f"leu caracter 2 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'BK'
-					print('leu caracter 3 foi para BK')
+					print(f"leu caracter 3 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'BK'
-					print('leu caracter 4 foi para BK')
+					print(f"leu caracter 4 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'BK'
-					print('leu caracter 5 foi para BK')
+					print(f"leu caracter 5 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'BK'
-					print('leu caracter 6 foi para BK')
+					print(f"leu caracter 6 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'BK'
-					print('leu caracter 7 foi para BK')
+					print(f"leu caracter 7 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'BK'
-					print('leu caracter 8 foi para BK')
+					print(f"leu caracter 8 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'BK'
-					print('leu caracter 9 foi para BK')
+					print(f"leu caracter 9 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'ER'
-					print('leu caracter \' foi para ER')
+					print(f"leu caracter \' foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -9417,176 +9448,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'ER'
-					print('leu caracter a foi para ER')
+					print(f"leu caracter a foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'ER'
-					print('leu caracter b foi para ER')
+					print(f"leu caracter b foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'ER'
-					print('leu caracter c foi para ER')
+					print(f"leu caracter c foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'ER'
-					print('leu caracter d foi para ER')
+					print(f"leu caracter d foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'ER'
-					print('leu caracter e foi para ER')
+					print(f"leu caracter e foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'ER'
-					print('leu caracter f foi para ER')
+					print(f"leu caracter f foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'ER'
-					print('leu caracter g foi para ER')
+					print(f"leu caracter g foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'ER'
-					print('leu caracter h foi para ER')
+					print(f"leu caracter h foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'ER'
-					print('leu caracter i foi para ER')
+					print(f"leu caracter i foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'ER'
-					print('leu caracter j foi para ER')
+					print(f"leu caracter j foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'ER'
-					print('leu caracter k foi para ER')
+					print(f"leu caracter k foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'ER'
-					print('leu caracter l foi para ER')
+					print(f"leu caracter l foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'ER'
-					print('leu caracter m foi para ER')
+					print(f"leu caracter m foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'ER'
-					print('leu caracter n foi para ER')
+					print(f"leu caracter n foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'ER'
-					print('leu caracter o foi para ER')
+					print(f"leu caracter o foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'ER'
-					print('leu caracter p foi para ER')
+					print(f"leu caracter p foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'ER'
-					print('leu caracter q foi para ER')
+					print(f"leu caracter q foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'ER'
-					print('leu caracter r foi para ER')
+					print(f"leu caracter r foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'ER'
-					print('leu caracter s foi para ER')
+					print(f"leu caracter s foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'ER'
-					print('leu caracter t foi para ER')
+					print(f"leu caracter t foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'ER'
-					print('leu caracter u foi para ER')
+					print(f"leu caracter u foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'ER'
-					print('leu caracter v foi para ER')
+					print(f"leu caracter v foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'ER'
-					print('leu caracter w foi para ER')
+					print(f"leu caracter w foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'ER'
-					print('leu caracter x foi para ER')
+					print(f"leu caracter x foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'ER'
-					print('leu caracter y foi para ER')
+					print(f"leu caracter y foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'ER'
-					print('leu caracter z foi para ER')
+					print(f"leu caracter z foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'ER'
-					print('leu caracter _ foi para ER')
+					print(f"leu caracter _ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'ER'
-					print('leu caracter < foi para ER')
+					print(f"leu caracter < foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'ER'
-					print('leu caracter - foi para ER')
+					print(f"leu caracter - foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'ER'
-					print('leu caracter + foi para ER')
+					print(f"leu caracter + foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'ER'
-					print('leu caracter / foi para ER')
+					print(f"leu caracter / foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'ER'
-					print('leu caracter * foi para ER')
+					print(f"leu caracter * foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'ER'
-					print('leu caracter ^ foi para ER')
+					print(f"leu caracter ^ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'ER'
-					print('leu caracter > foi para ER')
+					print(f"leu caracter > foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'ER'
-					print('leu caracter = foi para ER')
+					print(f"leu caracter = foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'ER'
-					print('leu caracter . foi para ER')
+					print(f"leu caracter . foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'ER'
-					print('leu caracter , foi para ER')
+					print(f"leu caracter , foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'ER'
-					print('leu caracter ; foi para ER')
+					print(f"leu caracter ; foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'ER'
-					print('leu caracter : foi para ER')
+					print(f"leu caracter : foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'ER'
-					print('leu caracter ( foi para ER')
+					print(f"leu caracter ( foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'ER'
-					print('leu caracter ) foi para ER')
+					print(f"leu caracter ) foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'ER'
-					print('leu caracter [ foi para ER')
+					print(f"leu caracter [ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'ER'
-					print('leu caracter ] foi para ER')
+					print(f"leu caracter ] foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'ER'
-					print('leu caracter \n foi para ER')
+					print(f"leu caracter \n foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'ER'
-					print('leu caracter \t foi para ER')
+					print(f"leu caracter \t foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'ER'
-					print('leu caracter   foi para ER')
+					print(f"leu caracter   foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'ER'
-					print('leu caracter 0 foi para ER')
+					print(f"leu caracter 0 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'ER'
-					print('leu caracter 1 foi para ER')
+					print(f"leu caracter 1 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'ER'
-					print('leu caracter 2 foi para ER')
+					print(f"leu caracter 2 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'ER'
-					print('leu caracter 3 foi para ER')
+					print(f"leu caracter 3 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'ER'
-					print('leu caracter 4 foi para ER')
+					print(f"leu caracter 4 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'ER'
-					print('leu caracter 5 foi para ER')
+					print(f"leu caracter 5 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'ER'
-					print('leu caracter 6 foi para ER')
+					print(f"leu caracter 6 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'ER'
-					print('leu caracter 7 foi para ER')
+					print(f"leu caracter 7 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'ER'
-					print('leu caracter 8 foi para ER')
+					print(f"leu caracter 8 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'ER'
-					print('leu caracter 9 foi para ER')
+					print(f"leu caracter 9 foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'BL'
-					print('leu caracter \' foi para BL')
+					print(f"leu caracter \' foi para BL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -9626,176 +9659,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'BM'
-					print('leu caracter < foi para BM')
+					print(f"leu caracter < foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'BM'
-					print('leu caracter - foi para BM')
+					print(f"leu caracter - foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'BM'
-					print('leu caracter + foi para BM')
+					print(f"leu caracter + foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'BM'
-					print('leu caracter / foi para BM')
+					print(f"leu caracter / foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'BM'
-					print('leu caracter * foi para BM')
+					print(f"leu caracter * foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'BM'
-					print('leu caracter ^ foi para BM')
+					print(f"leu caracter ^ foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'BM'
-					print('leu caracter > foi para BM')
+					print(f"leu caracter > foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'BM'
-					print('leu caracter = foi para BM')
+					print(f"leu caracter = foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'BM'
-					print('leu caracter . foi para BM')
+					print(f"leu caracter . foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'BM'
-					print('leu caracter , foi para BM')
+					print(f"leu caracter , foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'BM'
-					print('leu caracter ; foi para BM')
+					print(f"leu caracter ; foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'BM'
-					print('leu caracter : foi para BM')
+					print(f"leu caracter : foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'BM'
-					print('leu caracter ( foi para BM')
+					print(f"leu caracter ( foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'BM'
-					print('leu caracter ) foi para BM')
+					print(f"leu caracter ) foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'BM'
-					print('leu caracter [ foi para BM')
+					print(f"leu caracter [ foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'BM'
-					print('leu caracter ] foi para BM')
+					print(f"leu caracter ] foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'BM'
-					print('leu caracter \n foi para BM')
+					print(f"leu caracter \n foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'BM'
-					print('leu caracter \t foi para BM')
+					print(f"leu caracter \t foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'BM'
-					print('leu caracter   foi para BM')
+					print(f"leu caracter   foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'BM'
-					print('leu caracter \' foi para BM')
+					print(f"leu caracter \' foi para BM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -9835,176 +9870,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'BN'
-					print('leu caracter r foi para BN')
+					print(f"leu caracter r foi para BN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -10014,176 +10051,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'BO'
-					print('leu caracter u foi para BO')
+					print(f"leu caracter u foi para BO linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -10193,176 +10232,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'AZZ'
-					print('leu caracter a foi para AZZ')
+					print(f"leu caracter a foi para AZZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -10372,173 +10413,175 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'BP'
-					print('leu caracter o foi para BP')
+					print(f"leu caracter o foi para BP linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'C'
-					print('leu caracter < foi para C')
+					print(f"leu caracter < foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'C'
-					print('leu caracter - foi para C')
+					print(f"leu caracter - foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'C'
-					print('leu caracter + foi para C')
+					print(f"leu caracter + foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'C'
-					print('leu caracter / foi para C')
+					print(f"leu caracter / foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'C'
-					print('leu caracter * foi para C')
+					print(f"leu caracter * foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'C'
-					print('leu caracter ^ foi para C')
+					print(f"leu caracter ^ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'C'
-					print('leu caracter > foi para C')
+					print(f"leu caracter > foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'C'
-					print('leu caracter = foi para C')
+					print(f"leu caracter = foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'C'
-					print('leu caracter . foi para C')
+					print(f"leu caracter . foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'C'
-					print('leu caracter , foi para C')
+					print(f"leu caracter , foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'C'
-					print('leu caracter ; foi para C')
+					print(f"leu caracter ; foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'C'
-					print('leu caracter ( foi para C')
+					print(f"leu caracter ( foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'C'
-					print('leu caracter ) foi para C')
+					print(f"leu caracter ) foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'C'
-					print('leu caracter [ foi para C')
+					print(f"leu caracter [ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'X'
-					print('leu caracter ] foi para X')
+					print(f"leu caracter ] foi para X linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'C'
-					print('leu caracter \n foi para C')
+					print(f"leu caracter \n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'C'
-					print('leu caracter \t foi para C')
+					print(f"leu caracter \t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'C'
-					print('leu caracter   foi para C')
+					print(f"leu caracter   foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'C'
-					print('leu caracter \' foi para C')
+					print(f"leu caracter \' foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -10548,176 +10591,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'BQ'
-					print('leu caracter a foi para BQ')
+					print(f"leu caracter a foi para BQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -10727,176 +10772,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'BR'
-					print('leu caracter < foi para BR')
+					print(f"leu caracter < foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'BR'
-					print('leu caracter - foi para BR')
+					print(f"leu caracter - foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'BR'
-					print('leu caracter + foi para BR')
+					print(f"leu caracter + foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'BR'
-					print('leu caracter / foi para BR')
+					print(f"leu caracter / foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'BR'
-					print('leu caracter * foi para BR')
+					print(f"leu caracter * foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'BR'
-					print('leu caracter ^ foi para BR')
+					print(f"leu caracter ^ foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'BR'
-					print('leu caracter > foi para BR')
+					print(f"leu caracter > foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'BR'
-					print('leu caracter = foi para BR')
+					print(f"leu caracter = foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'BR'
-					print('leu caracter . foi para BR')
+					print(f"leu caracter . foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'BR'
-					print('leu caracter , foi para BR')
+					print(f"leu caracter , foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'BR'
-					print('leu caracter ; foi para BR')
+					print(f"leu caracter ; foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'BR'
-					print('leu caracter : foi para BR')
+					print(f"leu caracter : foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'BR'
-					print('leu caracter ( foi para BR')
+					print(f"leu caracter ( foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'BR'
-					print('leu caracter ) foi para BR')
+					print(f"leu caracter ) foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'BR'
-					print('leu caracter [ foi para BR')
+					print(f"leu caracter [ foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'BR'
-					print('leu caracter ] foi para BR')
+					print(f"leu caracter ] foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'BR'
-					print('leu caracter \n foi para BR')
+					print(f"leu caracter \n foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'BR'
-					print('leu caracter \t foi para BR')
+					print(f"leu caracter \t foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'BR'
-					print('leu caracter   foi para BR')
+					print(f"leu caracter   foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'BR'
-					print('leu caracter \' foi para BR')
+					print(f"leu caracter \' foi para BR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -10936,176 +10983,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'BS'
-					print('leu caracter a foi para BS')
+					print(f"leu caracter a foi para BS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -11115,176 +11164,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'BT'
-					print('leu caracter c foi para BT')
+					print(f"leu caracter c foi para BT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -11294,176 +11345,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'BU'
-					print('leu caracter < foi para BU')
+					print(f"leu caracter < foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'BU'
-					print('leu caracter - foi para BU')
+					print(f"leu caracter - foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'BU'
-					print('leu caracter + foi para BU')
+					print(f"leu caracter + foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'BU'
-					print('leu caracter / foi para BU')
+					print(f"leu caracter / foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'BU'
-					print('leu caracter * foi para BU')
+					print(f"leu caracter * foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'BU'
-					print('leu caracter ^ foi para BU')
+					print(f"leu caracter ^ foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'BU'
-					print('leu caracter > foi para BU')
+					print(f"leu caracter > foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'BU'
-					print('leu caracter = foi para BU')
+					print(f"leu caracter = foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'BU'
-					print('leu caracter . foi para BU')
+					print(f"leu caracter . foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'BU'
-					print('leu caracter , foi para BU')
+					print(f"leu caracter , foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'BU'
-					print('leu caracter ; foi para BU')
+					print(f"leu caracter ; foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'BU'
-					print('leu caracter : foi para BU')
+					print(f"leu caracter : foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'BU'
-					print('leu caracter ( foi para BU')
+					print(f"leu caracter ( foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'BU'
-					print('leu caracter ) foi para BU')
+					print(f"leu caracter ) foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'BU'
-					print('leu caracter [ foi para BU')
+					print(f"leu caracter [ foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'BU'
-					print('leu caracter ] foi para BU')
+					print(f"leu caracter ] foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'BU'
-					print('leu caracter \n foi para BU')
+					print(f"leu caracter \n foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'BU'
-					print('leu caracter \t foi para BU')
+					print(f"leu caracter \t foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'BU'
-					print('leu caracter   foi para BU')
+					print(f"leu caracter   foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'BU'
-					print('leu caracter \' foi para BU')
+					print(f"leu caracter \' foi para BU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -11503,176 +11556,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'BV'
-					print('leu caracter g foi para BV')
+					print(f"leu caracter g foi para BV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -11682,176 +11737,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'BW'
-					print('leu caracter i foi para BW')
+					print(f"leu caracter i foi para BW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -11861,176 +11918,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'BX'
-					print('leu caracter o foi para BX')
+					print(f"leu caracter o foi para BX linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -12040,176 +12099,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'BY'
-					print('leu caracter a foi para BY')
+					print(f"leu caracter a foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'BY'
-					print('leu caracter b foi para BY')
+					print(f"leu caracter b foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'BY'
-					print('leu caracter c foi para BY')
+					print(f"leu caracter c foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'BY'
-					print('leu caracter d foi para BY')
+					print(f"leu caracter d foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'BY'
-					print('leu caracter e foi para BY')
+					print(f"leu caracter e foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'BY'
-					print('leu caracter f foi para BY')
+					print(f"leu caracter f foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'BY'
-					print('leu caracter g foi para BY')
+					print(f"leu caracter g foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'BY'
-					print('leu caracter h foi para BY')
+					print(f"leu caracter h foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'BY'
-					print('leu caracter i foi para BY')
+					print(f"leu caracter i foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'BY'
-					print('leu caracter j foi para BY')
+					print(f"leu caracter j foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'BY'
-					print('leu caracter k foi para BY')
+					print(f"leu caracter k foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'BY'
-					print('leu caracter l foi para BY')
+					print(f"leu caracter l foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'BY'
-					print('leu caracter m foi para BY')
+					print(f"leu caracter m foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'BY'
-					print('leu caracter n foi para BY')
+					print(f"leu caracter n foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'BY'
-					print('leu caracter o foi para BY')
+					print(f"leu caracter o foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'BY'
-					print('leu caracter p foi para BY')
+					print(f"leu caracter p foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'BY'
-					print('leu caracter q foi para BY')
+					print(f"leu caracter q foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'BY'
-					print('leu caracter r foi para BY')
+					print(f"leu caracter r foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'BY'
-					print('leu caracter s foi para BY')
+					print(f"leu caracter s foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'BY'
-					print('leu caracter t foi para BY')
+					print(f"leu caracter t foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'BY'
-					print('leu caracter u foi para BY')
+					print(f"leu caracter u foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'BY'
-					print('leu caracter v foi para BY')
+					print(f"leu caracter v foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'BY'
-					print('leu caracter w foi para BY')
+					print(f"leu caracter w foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'BY'
-					print('leu caracter x foi para BY')
+					print(f"leu caracter x foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'BY'
-					print('leu caracter y foi para BY')
+					print(f"leu caracter y foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'BY'
-					print('leu caracter z foi para BY')
+					print(f"leu caracter z foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'BY'
-					print('leu caracter _ foi para BY')
+					print(f"leu caracter _ foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'BY'
-					print('leu caracter < foi para BY')
+					print(f"leu caracter < foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'BY'
-					print('leu caracter - foi para BY')
+					print(f"leu caracter - foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'BY'
-					print('leu caracter + foi para BY')
+					print(f"leu caracter + foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'BY'
-					print('leu caracter / foi para BY')
+					print(f"leu caracter / foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'BY'
-					print('leu caracter * foi para BY')
+					print(f"leu caracter * foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'BY'
-					print('leu caracter ^ foi para BY')
+					print(f"leu caracter ^ foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'BY'
-					print('leu caracter > foi para BY')
+					print(f"leu caracter > foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'BY'
-					print('leu caracter = foi para BY')
+					print(f"leu caracter = foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'BY'
-					print('leu caracter . foi para BY')
+					print(f"leu caracter . foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'BY'
-					print('leu caracter , foi para BY')
+					print(f"leu caracter , foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'BY'
-					print('leu caracter ; foi para BY')
+					print(f"leu caracter ; foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'BY'
-					print('leu caracter : foi para BY')
+					print(f"leu caracter : foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'BY'
-					print('leu caracter ( foi para BY')
+					print(f"leu caracter ( foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'BY'
-					print('leu caracter ) foi para BY')
+					print(f"leu caracter ) foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'BY'
-					print('leu caracter [ foi para BY')
+					print(f"leu caracter [ foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'BY'
-					print('leu caracter ] foi para BY')
+					print(f"leu caracter ] foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'BY'
-					print('leu caracter \n foi para BY')
+					print(f"leu caracter \n foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'BY'
-					print('leu caracter \t foi para BY')
+					print(f"leu caracter \t foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'BY'
-					print('leu caracter   foi para BY')
+					print(f"leu caracter   foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'BY'
-					print('leu caracter 0 foi para BY')
+					print(f"leu caracter 0 foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'BY'
-					print('leu caracter 1 foi para BY')
+					print(f"leu caracter 1 foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'BY'
-					print('leu caracter 2 foi para BY')
+					print(f"leu caracter 2 foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'BY'
-					print('leu caracter 3 foi para BY')
+					print(f"leu caracter 3 foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'BY'
-					print('leu caracter 4 foi para BY')
+					print(f"leu caracter 4 foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'BY'
-					print('leu caracter 5 foi para BY')
+					print(f"leu caracter 5 foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'BY'
-					print('leu caracter 6 foi para BY')
+					print(f"leu caracter 6 foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'BY'
-					print('leu caracter 7 foi para BY')
+					print(f"leu caracter 7 foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'BY'
-					print('leu caracter 8 foi para BY')
+					print(f"leu caracter 8 foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'BY'
-					print('leu caracter 9 foi para BY')
+					print(f"leu caracter 9 foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'BY'
-					print('leu caracter \' foi para BY')
+					print(f"leu caracter \' foi para BY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -12249,176 +12310,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'CA'
-					print('leu caracter a foi para CA')
+					print(f"leu caracter a foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'CA'
-					print('leu caracter b foi para CA')
+					print(f"leu caracter b foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'CA'
-					print('leu caracter c foi para CA')
+					print(f"leu caracter c foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'CA'
-					print('leu caracter d foi para CA')
+					print(f"leu caracter d foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'BZ'
-					print('leu caracter e foi para BZ')
+					print(f"leu caracter e foi para BZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'CA'
-					print('leu caracter f foi para CA')
+					print(f"leu caracter f foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'CA'
-					print('leu caracter g foi para CA')
+					print(f"leu caracter g foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'CA'
-					print('leu caracter h foi para CA')
+					print(f"leu caracter h foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'CA'
-					print('leu caracter i foi para CA')
+					print(f"leu caracter i foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'CA'
-					print('leu caracter j foi para CA')
+					print(f"leu caracter j foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'CA'
-					print('leu caracter k foi para CA')
+					print(f"leu caracter k foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'CA'
-					print('leu caracter l foi para CA')
+					print(f"leu caracter l foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'CA'
-					print('leu caracter m foi para CA')
+					print(f"leu caracter m foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'CA'
-					print('leu caracter n foi para CA')
+					print(f"leu caracter n foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'CA'
-					print('leu caracter o foi para CA')
+					print(f"leu caracter o foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'CA'
-					print('leu caracter p foi para CA')
+					print(f"leu caracter p foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'CA'
-					print('leu caracter q foi para CA')
+					print(f"leu caracter q foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'CA'
-					print('leu caracter r foi para CA')
+					print(f"leu caracter r foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'CA'
-					print('leu caracter s foi para CA')
+					print(f"leu caracter s foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'CA'
-					print('leu caracter t foi para CA')
+					print(f"leu caracter t foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'CA'
-					print('leu caracter u foi para CA')
+					print(f"leu caracter u foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'CA'
-					print('leu caracter v foi para CA')
+					print(f"leu caracter v foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'CA'
-					print('leu caracter w foi para CA')
+					print(f"leu caracter w foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'CA'
-					print('leu caracter x foi para CA')
+					print(f"leu caracter x foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'CA'
-					print('leu caracter y foi para CA')
+					print(f"leu caracter y foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'CA'
-					print('leu caracter z foi para CA')
+					print(f"leu caracter z foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'CA'
-					print('leu caracter _ foi para CA')
+					print(f"leu caracter _ foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'CA'
-					print('leu caracter < foi para CA')
+					print(f"leu caracter < foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CA'
-					print('leu caracter - foi para CA')
+					print(f"leu caracter - foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CA'
-					print('leu caracter + foi para CA')
+					print(f"leu caracter + foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'CA'
-					print('leu caracter / foi para CA')
+					print(f"leu caracter / foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'CA'
-					print('leu caracter * foi para CA')
+					print(f"leu caracter * foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'CA'
-					print('leu caracter ^ foi para CA')
+					print(f"leu caracter ^ foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'CA'
-					print('leu caracter > foi para CA')
+					print(f"leu caracter > foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'CA'
-					print('leu caracter = foi para CA')
+					print(f"leu caracter = foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'CA'
-					print('leu caracter . foi para CA')
+					print(f"leu caracter . foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'CA'
-					print('leu caracter , foi para CA')
+					print(f"leu caracter , foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'CA'
-					print('leu caracter ; foi para CA')
+					print(f"leu caracter ; foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'CA'
-					print('leu caracter : foi para CA')
+					print(f"leu caracter : foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'CA'
-					print('leu caracter ( foi para CA')
+					print(f"leu caracter ( foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'CA'
-					print('leu caracter ) foi para CA')
+					print(f"leu caracter ) foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'CA'
-					print('leu caracter [ foi para CA')
+					print(f"leu caracter [ foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'CA'
-					print('leu caracter ] foi para CA')
+					print(f"leu caracter ] foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'CA'
-					print('leu caracter \n foi para CA')
+					print(f"leu caracter \n foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'CA'
-					print('leu caracter \t foi para CA')
+					print(f"leu caracter \t foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'CA'
-					print('leu caracter   foi para CA')
+					print(f"leu caracter   foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'BK'
-					print('leu caracter 0 foi para BK')
+					print(f"leu caracter 0 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'BK'
-					print('leu caracter 1 foi para BK')
+					print(f"leu caracter 1 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'BK'
-					print('leu caracter 2 foi para BK')
+					print(f"leu caracter 2 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'BK'
-					print('leu caracter 3 foi para BK')
+					print(f"leu caracter 3 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'BK'
-					print('leu caracter 4 foi para BK')
+					print(f"leu caracter 4 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'BK'
-					print('leu caracter 5 foi para BK')
+					print(f"leu caracter 5 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'BK'
-					print('leu caracter 6 foi para BK')
+					print(f"leu caracter 6 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'BK'
-					print('leu caracter 7 foi para BK')
+					print(f"leu caracter 7 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'BK'
-					print('leu caracter 8 foi para BK')
+					print(f"leu caracter 8 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'BK'
-					print('leu caracter 9 foi para BK')
+					print(f"leu caracter 9 foi para BK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'CA'
-					print('leu caracter \' foi para CA')
+					print(f"leu caracter \' foi para CA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -12458,176 +12521,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -12637,176 +12702,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'CB'
-					print('leu caracter < foi para CB')
+					print(f"leu caracter < foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CB'
-					print('leu caracter - foi para CB')
+					print(f"leu caracter - foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CB'
-					print('leu caracter + foi para CB')
+					print(f"leu caracter + foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'CB'
-					print('leu caracter / foi para CB')
+					print(f"leu caracter / foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'CB'
-					print('leu caracter * foi para CB')
+					print(f"leu caracter * foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'CB'
-					print('leu caracter ^ foi para CB')
+					print(f"leu caracter ^ foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'CB'
-					print('leu caracter > foi para CB')
+					print(f"leu caracter > foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'CB'
-					print('leu caracter = foi para CB')
+					print(f"leu caracter = foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'CB'
-					print('leu caracter . foi para CB')
+					print(f"leu caracter . foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'CB'
-					print('leu caracter , foi para CB')
+					print(f"leu caracter , foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'CB'
-					print('leu caracter ; foi para CB')
+					print(f"leu caracter ; foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'CB'
-					print('leu caracter : foi para CB')
+					print(f"leu caracter : foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'CB'
-					print('leu caracter ( foi para CB')
+					print(f"leu caracter ( foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'CB'
-					print('leu caracter ) foi para CB')
+					print(f"leu caracter ) foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'CB'
-					print('leu caracter [ foi para CB')
+					print(f"leu caracter [ foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'CB'
-					print('leu caracter ] foi para CB')
+					print(f"leu caracter ] foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'CB'
-					print('leu caracter \n foi para CB')
+					print(f"leu caracter \n foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'CB'
-					print('leu caracter \t foi para CB')
+					print(f"leu caracter \t foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'CB'
-					print('leu caracter   foi para CB')
+					print(f"leu caracter   foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'CB'
-					print('leu caracter \' foi para CB')
+					print(f"leu caracter \' foi para CB linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -12846,176 +12913,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -13025,176 +13094,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'CD'
-					print('leu caracter < foi para CD')
+					print(f"leu caracter < foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CD'
-					print('leu caracter - foi para CD')
+					print(f"leu caracter - foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CD'
-					print('leu caracter + foi para CD')
+					print(f"leu caracter + foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'CD'
-					print('leu caracter / foi para CD')
+					print(f"leu caracter / foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'CD'
-					print('leu caracter * foi para CD')
+					print(f"leu caracter * foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'CD'
-					print('leu caracter ^ foi para CD')
+					print(f"leu caracter ^ foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'CD'
-					print('leu caracter > foi para CD')
+					print(f"leu caracter > foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'CD'
-					print('leu caracter = foi para CD')
+					print(f"leu caracter = foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'CD'
-					print('leu caracter . foi para CD')
+					print(f"leu caracter . foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'CD'
-					print('leu caracter , foi para CD')
+					print(f"leu caracter , foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'CD'
-					print('leu caracter ; foi para CD')
+					print(f"leu caracter ; foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'CD'
-					print('leu caracter : foi para CD')
+					print(f"leu caracter : foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'CD'
-					print('leu caracter ( foi para CD')
+					print(f"leu caracter ( foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'CD'
-					print('leu caracter ) foi para CD')
+					print(f"leu caracter ) foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'CD'
-					print('leu caracter [ foi para CD')
+					print(f"leu caracter [ foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'CD'
-					print('leu caracter ] foi para CD')
+					print(f"leu caracter ] foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'CD'
-					print('leu caracter \n foi para CD')
+					print(f"leu caracter \n foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'CD'
-					print('leu caracter \t foi para CD')
+					print(f"leu caracter \t foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'CD'
-					print('leu caracter   foi para CD')
+					print(f"leu caracter   foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'CD'
-					print('leu caracter \' foi para CD')
+					print(f"leu caracter \' foi para CD linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -13234,176 +13305,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'CE'
-					print('leu caracter < foi para CE')
+					print(f"leu caracter < foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CE'
-					print('leu caracter - foi para CE')
+					print(f"leu caracter - foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CE'
-					print('leu caracter + foi para CE')
+					print(f"leu caracter + foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'CE'
-					print('leu caracter / foi para CE')
+					print(f"leu caracter / foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'CE'
-					print('leu caracter * foi para CE')
+					print(f"leu caracter * foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'CE'
-					print('leu caracter ^ foi para CE')
+					print(f"leu caracter ^ foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'CE'
-					print('leu caracter > foi para CE')
+					print(f"leu caracter > foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'CE'
-					print('leu caracter = foi para CE')
+					print(f"leu caracter = foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'CE'
-					print('leu caracter . foi para CE')
+					print(f"leu caracter . foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'CE'
-					print('leu caracter , foi para CE')
+					print(f"leu caracter , foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'CE'
-					print('leu caracter ; foi para CE')
+					print(f"leu caracter ; foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'CE'
-					print('leu caracter : foi para CE')
+					print(f"leu caracter : foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'CE'
-					print('leu caracter ( foi para CE')
+					print(f"leu caracter ( foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'CE'
-					print('leu caracter ) foi para CE')
+					print(f"leu caracter ) foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'CE'
-					print('leu caracter [ foi para CE')
+					print(f"leu caracter [ foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'CE'
-					print('leu caracter ] foi para CE')
+					print(f"leu caracter ] foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'CE'
-					print('leu caracter \n foi para CE')
+					print(f"leu caracter \n foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'CE'
-					print('leu caracter \t foi para CE')
+					print(f"leu caracter \t foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'CE'
-					print('leu caracter   foi para CE')
+					print(f"leu caracter   foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'CE'
-					print('leu caracter \' foi para CE')
+					print(f"leu caracter \' foi para CE linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -13443,176 +13516,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'CF'
-					print('leu caracter t foi para CF')
+					print(f"leu caracter t foi para CF linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -13622,176 +13697,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'CG'
-					print('leu caracter i foi para CG')
+					print(f"leu caracter i foi para CG linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -13801,176 +13878,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'CH'
-					print('leu caracter r foi para CH')
+					print(f"leu caracter r foi para CH linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -13980,176 +14059,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'CI'
-					print('leu caracter t foi para CI')
+					print(f"leu caracter t foi para CI linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -14159,176 +14240,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'CJ'
-					print('leu caracter o foi para CJ')
+					print(f"leu caracter o foi para CJ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -14338,176 +14421,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'ER'
-					print('leu caracter a foi para ER')
+					print(f"leu caracter a foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'ER'
-					print('leu caracter b foi para ER')
+					print(f"leu caracter b foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'ER'
-					print('leu caracter c foi para ER')
+					print(f"leu caracter c foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'ER'
-					print('leu caracter d foi para ER')
+					print(f"leu caracter d foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'ER'
-					print('leu caracter e foi para ER')
+					print(f"leu caracter e foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'ER'
-					print('leu caracter f foi para ER')
+					print(f"leu caracter f foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'ER'
-					print('leu caracter g foi para ER')
+					print(f"leu caracter g foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'ER'
-					print('leu caracter h foi para ER')
+					print(f"leu caracter h foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'ER'
-					print('leu caracter i foi para ER')
+					print(f"leu caracter i foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'ER'
-					print('leu caracter j foi para ER')
+					print(f"leu caracter j foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'ER'
-					print('leu caracter k foi para ER')
+					print(f"leu caracter k foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'ER'
-					print('leu caracter l foi para ER')
+					print(f"leu caracter l foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'ER'
-					print('leu caracter m foi para ER')
+					print(f"leu caracter m foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'ER'
-					print('leu caracter n foi para ER')
+					print(f"leu caracter n foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'ER'
-					print('leu caracter o foi para ER')
+					print(f"leu caracter o foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'ER'
-					print('leu caracter p foi para ER')
+					print(f"leu caracter p foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'ER'
-					print('leu caracter q foi para ER')
+					print(f"leu caracter q foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'ER'
-					print('leu caracter r foi para ER')
+					print(f"leu caracter r foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'ER'
-					print('leu caracter s foi para ER')
+					print(f"leu caracter s foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'ER'
-					print('leu caracter t foi para ER')
+					print(f"leu caracter t foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'ER'
-					print('leu caracter u foi para ER')
+					print(f"leu caracter u foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'ER'
-					print('leu caracter v foi para ER')
+					print(f"leu caracter v foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'ER'
-					print('leu caracter w foi para ER')
+					print(f"leu caracter w foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'ER'
-					print('leu caracter x foi para ER')
+					print(f"leu caracter x foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'ER'
-					print('leu caracter y foi para ER')
+					print(f"leu caracter y foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'ER'
-					print('leu caracter z foi para ER')
+					print(f"leu caracter z foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'ER'
-					print('leu caracter _ foi para ER')
+					print(f"leu caracter _ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'ER'
-					print('leu caracter < foi para ER')
+					print(f"leu caracter < foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CK'
-					print('leu caracter - foi para CK')
+					print(f"leu caracter - foi para CK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CK'
-					print('leu caracter + foi para CK')
+					print(f"leu caracter + foi para CK linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'ER'
-					print('leu caracter / foi para ER')
+					print(f"leu caracter / foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'ER'
-					print('leu caracter * foi para ER')
+					print(f"leu caracter * foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'ER'
-					print('leu caracter ^ foi para ER')
+					print(f"leu caracter ^ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'ER'
-					print('leu caracter > foi para ER')
+					print(f"leu caracter > foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'ER'
-					print('leu caracter = foi para ER')
+					print(f"leu caracter = foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'ER'
-					print('leu caracter . foi para ER')
+					print(f"leu caracter . foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'ER'
-					print('leu caracter , foi para ER')
+					print(f"leu caracter , foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'ER'
-					print('leu caracter ; foi para ER')
+					print(f"leu caracter ; foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'ER'
-					print('leu caracter : foi para ER')
+					print(f"leu caracter : foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'ER'
-					print('leu caracter ( foi para ER')
+					print(f"leu caracter ( foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'ER'
-					print('leu caracter ) foi para ER')
+					print(f"leu caracter ) foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'ER'
-					print('leu caracter [ foi para ER')
+					print(f"leu caracter [ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'ER'
-					print('leu caracter ] foi para ER')
+					print(f"leu caracter ] foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'ER'
-					print('leu caracter \n foi para ER')
+					print(f"leu caracter \n foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'ER'
-					print('leu caracter \t foi para ER')
+					print(f"leu caracter \t foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'ER'
-					print('leu caracter   foi para ER')
+					print(f"leu caracter   foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'CL'
-					print('leu caracter 0 foi para CL')
+					print(f"leu caracter 0 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'CL'
-					print('leu caracter 1 foi para CL')
+					print(f"leu caracter 1 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'CL'
-					print('leu caracter 2 foi para CL')
+					print(f"leu caracter 2 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'CL'
-					print('leu caracter 3 foi para CL')
+					print(f"leu caracter 3 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'CL'
-					print('leu caracter 4 foi para CL')
+					print(f"leu caracter 4 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'CL'
-					print('leu caracter 5 foi para CL')
+					print(f"leu caracter 5 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'CL'
-					print('leu caracter 6 foi para CL')
+					print(f"leu caracter 6 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'CL'
-					print('leu caracter 7 foi para CL')
+					print(f"leu caracter 7 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'CL'
-					print('leu caracter 8 foi para CL')
+					print(f"leu caracter 8 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'CL'
-					print('leu caracter 9 foi para CL')
+					print(f"leu caracter 9 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'ER'
-					print('leu caracter \' foi para ER')
+					print(f"leu caracter \' foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -14517,176 +14602,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'CM'
-					print('leu caracter n foi para CM')
+					print(f"leu caracter n foi para CM linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -14696,176 +14783,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'CN'
-					print('leu caracter < foi para CN')
+					print(f"leu caracter < foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CN'
-					print('leu caracter - foi para CN')
+					print(f"leu caracter - foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CN'
-					print('leu caracter + foi para CN')
+					print(f"leu caracter + foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'CN'
-					print('leu caracter / foi para CN')
+					print(f"leu caracter / foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'CN'
-					print('leu caracter * foi para CN')
+					print(f"leu caracter * foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'CN'
-					print('leu caracter ^ foi para CN')
+					print(f"leu caracter ^ foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'CN'
-					print('leu caracter > foi para CN')
+					print(f"leu caracter > foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'CN'
-					print('leu caracter = foi para CN')
+					print(f"leu caracter = foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'CN'
-					print('leu caracter . foi para CN')
+					print(f"leu caracter . foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'CN'
-					print('leu caracter , foi para CN')
+					print(f"leu caracter , foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'CN'
-					print('leu caracter ; foi para CN')
+					print(f"leu caracter ; foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'CN'
-					print('leu caracter : foi para CN')
+					print(f"leu caracter : foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'CN'
-					print('leu caracter ( foi para CN')
+					print(f"leu caracter ( foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'CN'
-					print('leu caracter ) foi para CN')
+					print(f"leu caracter ) foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'CN'
-					print('leu caracter [ foi para CN')
+					print(f"leu caracter [ foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'CN'
-					print('leu caracter ] foi para CN')
+					print(f"leu caracter ] foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'CN'
-					print('leu caracter \n foi para CN')
+					print(f"leu caracter \n foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'CN'
-					print('leu caracter \t foi para CN')
+					print(f"leu caracter \t foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'CN'
-					print('leu caracter   foi para CN')
+					print(f"leu caracter   foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'CN'
-					print('leu caracter \' foi para CN')
+					print(f"leu caracter \' foi para CN linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -14905,176 +14994,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'CO'
-					print('leu caracter o foi para CO')
+					print(f"leu caracter o foi para CO linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -15084,176 +15175,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'CP'
-					print('leu caracter a foi para CP')
+					print(f"leu caracter a foi para CP linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -15263,176 +15356,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'CQ'
-					print('leu caracter a foi para CQ')
+					print(f"leu caracter a foi para CQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -15442,176 +15537,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'CR'
-					print('leu caracter < foi para CR')
+					print(f"leu caracter < foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CR'
-					print('leu caracter - foi para CR')
+					print(f"leu caracter - foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CR'
-					print('leu caracter + foi para CR')
+					print(f"leu caracter + foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'CR'
-					print('leu caracter / foi para CR')
+					print(f"leu caracter / foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'CR'
-					print('leu caracter * foi para CR')
+					print(f"leu caracter * foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'CR'
-					print('leu caracter ^ foi para CR')
+					print(f"leu caracter ^ foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'CR'
-					print('leu caracter > foi para CR')
+					print(f"leu caracter > foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'CR'
-					print('leu caracter = foi para CR')
+					print(f"leu caracter = foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'CR'
-					print('leu caracter . foi para CR')
+					print(f"leu caracter . foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'CR'
-					print('leu caracter , foi para CR')
+					print(f"leu caracter , foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'CR'
-					print('leu caracter ; foi para CR')
+					print(f"leu caracter ; foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'CR'
-					print('leu caracter : foi para CR')
+					print(f"leu caracter : foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'CR'
-					print('leu caracter ( foi para CR')
+					print(f"leu caracter ( foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'CR'
-					print('leu caracter ) foi para CR')
+					print(f"leu caracter ) foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'CR'
-					print('leu caracter [ foi para CR')
+					print(f"leu caracter [ foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'CR'
-					print('leu caracter ] foi para CR')
+					print(f"leu caracter ] foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'CR'
-					print('leu caracter \n foi para CR')
+					print(f"leu caracter \n foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'CR'
-					print('leu caracter \t foi para CR')
+					print(f"leu caracter \t foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'CR'
-					print('leu caracter   foi para CR')
+					print(f"leu caracter   foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'CR'
-					print('leu caracter \' foi para CR')
+					print(f"leu caracter \' foi para CR linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -15651,176 +15748,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'ER'
-					print('leu caracter a foi para ER')
+					print(f"leu caracter a foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'ER'
-					print('leu caracter b foi para ER')
+					print(f"leu caracter b foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'ER'
-					print('leu caracter c foi para ER')
+					print(f"leu caracter c foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'ER'
-					print('leu caracter d foi para ER')
+					print(f"leu caracter d foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'ER'
-					print('leu caracter e foi para ER')
+					print(f"leu caracter e foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'ER'
-					print('leu caracter f foi para ER')
+					print(f"leu caracter f foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'ER'
-					print('leu caracter g foi para ER')
+					print(f"leu caracter g foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'ER'
-					print('leu caracter h foi para ER')
+					print(f"leu caracter h foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'ER'
-					print('leu caracter i foi para ER')
+					print(f"leu caracter i foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'ER'
-					print('leu caracter j foi para ER')
+					print(f"leu caracter j foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'ER'
-					print('leu caracter k foi para ER')
+					print(f"leu caracter k foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'ER'
-					print('leu caracter l foi para ER')
+					print(f"leu caracter l foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'ER'
-					print('leu caracter m foi para ER')
+					print(f"leu caracter m foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'ER'
-					print('leu caracter n foi para ER')
+					print(f"leu caracter n foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'ER'
-					print('leu caracter o foi para ER')
+					print(f"leu caracter o foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'ER'
-					print('leu caracter p foi para ER')
+					print(f"leu caracter p foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'ER'
-					print('leu caracter q foi para ER')
+					print(f"leu caracter q foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'ER'
-					print('leu caracter r foi para ER')
+					print(f"leu caracter r foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'ER'
-					print('leu caracter s foi para ER')
+					print(f"leu caracter s foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'ER'
-					print('leu caracter t foi para ER')
+					print(f"leu caracter t foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'ER'
-					print('leu caracter u foi para ER')
+					print(f"leu caracter u foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'ER'
-					print('leu caracter v foi para ER')
+					print(f"leu caracter v foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'ER'
-					print('leu caracter w foi para ER')
+					print(f"leu caracter w foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'ER'
-					print('leu caracter x foi para ER')
+					print(f"leu caracter x foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'ER'
-					print('leu caracter y foi para ER')
+					print(f"leu caracter y foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'ER'
-					print('leu caracter z foi para ER')
+					print(f"leu caracter z foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'ER'
-					print('leu caracter _ foi para ER')
+					print(f"leu caracter _ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'ER'
-					print('leu caracter < foi para ER')
+					print(f"leu caracter < foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'ER'
-					print('leu caracter - foi para ER')
+					print(f"leu caracter - foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'ER'
-					print('leu caracter + foi para ER')
+					print(f"leu caracter + foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'ER'
-					print('leu caracter / foi para ER')
+					print(f"leu caracter / foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'ER'
-					print('leu caracter * foi para ER')
+					print(f"leu caracter * foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'ER'
-					print('leu caracter ^ foi para ER')
+					print(f"leu caracter ^ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'ER'
-					print('leu caracter > foi para ER')
+					print(f"leu caracter > foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'ER'
-					print('leu caracter = foi para ER')
+					print(f"leu caracter = foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'ER'
-					print('leu caracter . foi para ER')
+					print(f"leu caracter . foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'ER'
-					print('leu caracter , foi para ER')
+					print(f"leu caracter , foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'ER'
-					print('leu caracter ; foi para ER')
+					print(f"leu caracter ; foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'ER'
-					print('leu caracter : foi para ER')
+					print(f"leu caracter : foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'ER'
-					print('leu caracter ( foi para ER')
+					print(f"leu caracter ( foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'ER'
-					print('leu caracter ) foi para ER')
+					print(f"leu caracter ) foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'ER'
-					print('leu caracter [ foi para ER')
+					print(f"leu caracter [ foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'ER'
-					print('leu caracter ] foi para ER')
+					print(f"leu caracter ] foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'ER'
-					print('leu caracter \n foi para ER')
+					print(f"leu caracter \n foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'ER'
-					print('leu caracter \t foi para ER')
+					print(f"leu caracter \t foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'ER'
-					print('leu caracter   foi para ER')
+					print(f"leu caracter   foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'CL'
-					print('leu caracter 0 foi para CL')
+					print(f"leu caracter 0 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'CL'
-					print('leu caracter 1 foi para CL')
+					print(f"leu caracter 1 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'CL'
-					print('leu caracter 2 foi para CL')
+					print(f"leu caracter 2 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'CL'
-					print('leu caracter 3 foi para CL')
+					print(f"leu caracter 3 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'CL'
-					print('leu caracter 4 foi para CL')
+					print(f"leu caracter 4 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'CL'
-					print('leu caracter 5 foi para CL')
+					print(f"leu caracter 5 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'CL'
-					print('leu caracter 6 foi para CL')
+					print(f"leu caracter 6 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'CL'
-					print('leu caracter 7 foi para CL')
+					print(f"leu caracter 7 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'CL'
-					print('leu caracter 8 foi para CL')
+					print(f"leu caracter 8 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'CL'
-					print('leu caracter 9 foi para CL')
+					print(f"leu caracter 9 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'ER'
-					print('leu caracter \' foi para ER')
+					print(f"leu caracter \' foi para ER linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -15830,176 +15929,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'CS'
-					print('leu caracter a foi para CS')
+					print(f"leu caracter a foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'CS'
-					print('leu caracter b foi para CS')
+					print(f"leu caracter b foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'CS'
-					print('leu caracter c foi para CS')
+					print(f"leu caracter c foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'CS'
-					print('leu caracter d foi para CS')
+					print(f"leu caracter d foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'CS'
-					print('leu caracter e foi para CS')
+					print(f"leu caracter e foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'CS'
-					print('leu caracter f foi para CS')
+					print(f"leu caracter f foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'CS'
-					print('leu caracter g foi para CS')
+					print(f"leu caracter g foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'CS'
-					print('leu caracter h foi para CS')
+					print(f"leu caracter h foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'CS'
-					print('leu caracter i foi para CS')
+					print(f"leu caracter i foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'CS'
-					print('leu caracter j foi para CS')
+					print(f"leu caracter j foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'CS'
-					print('leu caracter k foi para CS')
+					print(f"leu caracter k foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'CS'
-					print('leu caracter l foi para CS')
+					print(f"leu caracter l foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'CS'
-					print('leu caracter m foi para CS')
+					print(f"leu caracter m foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'CS'
-					print('leu caracter n foi para CS')
+					print(f"leu caracter n foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'CS'
-					print('leu caracter o foi para CS')
+					print(f"leu caracter o foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'CS'
-					print('leu caracter p foi para CS')
+					print(f"leu caracter p foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'CS'
-					print('leu caracter q foi para CS')
+					print(f"leu caracter q foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'CS'
-					print('leu caracter r foi para CS')
+					print(f"leu caracter r foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'CS'
-					print('leu caracter s foi para CS')
+					print(f"leu caracter s foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'CS'
-					print('leu caracter t foi para CS')
+					print(f"leu caracter t foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'CS'
-					print('leu caracter u foi para CS')
+					print(f"leu caracter u foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'CS'
-					print('leu caracter v foi para CS')
+					print(f"leu caracter v foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'CS'
-					print('leu caracter w foi para CS')
+					print(f"leu caracter w foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'CS'
-					print('leu caracter x foi para CS')
+					print(f"leu caracter x foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'CS'
-					print('leu caracter y foi para CS')
+					print(f"leu caracter y foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'CS'
-					print('leu caracter z foi para CS')
+					print(f"leu caracter z foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'CS'
-					print('leu caracter _ foi para CS')
+					print(f"leu caracter _ foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'CS'
-					print('leu caracter < foi para CS')
+					print(f"leu caracter < foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CS'
-					print('leu caracter - foi para CS')
+					print(f"leu caracter - foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CS'
-					print('leu caracter + foi para CS')
+					print(f"leu caracter + foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'CS'
-					print('leu caracter / foi para CS')
+					print(f"leu caracter / foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'CS'
-					print('leu caracter * foi para CS')
+					print(f"leu caracter * foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'CS'
-					print('leu caracter ^ foi para CS')
+					print(f"leu caracter ^ foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'CS'
-					print('leu caracter > foi para CS')
+					print(f"leu caracter > foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'CS'
-					print('leu caracter = foi para CS')
+					print(f"leu caracter = foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'CS'
-					print('leu caracter . foi para CS')
+					print(f"leu caracter . foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'CS'
-					print('leu caracter , foi para CS')
+					print(f"leu caracter , foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'CS'
-					print('leu caracter ; foi para CS')
+					print(f"leu caracter ; foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'CS'
-					print('leu caracter : foi para CS')
+					print(f"leu caracter : foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'CS'
-					print('leu caracter ( foi para CS')
+					print(f"leu caracter ( foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'CS'
-					print('leu caracter ) foi para CS')
+					print(f"leu caracter ) foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'CS'
-					print('leu caracter [ foi para CS')
+					print(f"leu caracter [ foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'CS'
-					print('leu caracter ] foi para CS')
+					print(f"leu caracter ] foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'CS'
-					print('leu caracter \n foi para CS')
+					print(f"leu caracter \n foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'CS'
-					print('leu caracter \t foi para CS')
+					print(f"leu caracter \t foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'CS'
-					print('leu caracter   foi para CS')
+					print(f"leu caracter   foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'CL'
-					print('leu caracter 0 foi para CL')
+					print(f"leu caracter 0 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'CL'
-					print('leu caracter 1 foi para CL')
+					print(f"leu caracter 1 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'CL'
-					print('leu caracter 2 foi para CL')
+					print(f"leu caracter 2 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'CL'
-					print('leu caracter 3 foi para CL')
+					print(f"leu caracter 3 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'CL'
-					print('leu caracter 4 foi para CL')
+					print(f"leu caracter 4 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'CL'
-					print('leu caracter 5 foi para CL')
+					print(f"leu caracter 5 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'CL'
-					print('leu caracter 6 foi para CL')
+					print(f"leu caracter 6 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'CL'
-					print('leu caracter 7 foi para CL')
+					print(f"leu caracter 7 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'CL'
-					print('leu caracter 8 foi para CL')
+					print(f"leu caracter 8 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'CL'
-					print('leu caracter 9 foi para CL')
+					print(f"leu caracter 9 foi para CL linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'CS'
-					print('leu caracter \' foi para CS')
+					print(f"leu caracter \' foi para CS linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -16039,176 +16140,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'CV'
-					print('leu caracter m foi para CV')
+					print(f"leu caracter m foi para CV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'CT'
-					print('leu caracter t foi para CT')
+					print(f"leu caracter t foi para CT linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -16218,176 +16321,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'CU'
-					print('leu caracter < foi para CU')
+					print(f"leu caracter < foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CU'
-					print('leu caracter - foi para CU')
+					print(f"leu caracter - foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CU'
-					print('leu caracter + foi para CU')
+					print(f"leu caracter + foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'CU'
-					print('leu caracter / foi para CU')
+					print(f"leu caracter / foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'CU'
-					print('leu caracter * foi para CU')
+					print(f"leu caracter * foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'CU'
-					print('leu caracter ^ foi para CU')
+					print(f"leu caracter ^ foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'CU'
-					print('leu caracter > foi para CU')
+					print(f"leu caracter > foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'CU'
-					print('leu caracter = foi para CU')
+					print(f"leu caracter = foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'CU'
-					print('leu caracter . foi para CU')
+					print(f"leu caracter . foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'CU'
-					print('leu caracter , foi para CU')
+					print(f"leu caracter , foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'CU'
-					print('leu caracter ; foi para CU')
+					print(f"leu caracter ; foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'CU'
-					print('leu caracter : foi para CU')
+					print(f"leu caracter : foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'CU'
-					print('leu caracter ( foi para CU')
+					print(f"leu caracter ( foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'CU'
-					print('leu caracter ) foi para CU')
+					print(f"leu caracter ) foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'CU'
-					print('leu caracter [ foi para CU')
+					print(f"leu caracter [ foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'CU'
-					print('leu caracter ] foi para CU')
+					print(f"leu caracter ] foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'CU'
-					print('leu caracter \n foi para CU')
+					print(f"leu caracter \n foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'CU'
-					print('leu caracter \t foi para CU')
+					print(f"leu caracter \t foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'CU'
-					print('leu caracter   foi para CU')
+					print(f"leu caracter   foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'CU'
-					print('leu caracter \' foi para CU')
+					print(f"leu caracter \' foi para CU linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -16427,176 +16532,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'CV'
-					print('leu caracter m foi para CV')
+					print(f"leu caracter m foi para CV linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -16606,176 +16713,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'CW'
-					print('leu caracter < foi para CW')
+					print(f"leu caracter < foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CW'
-					print('leu caracter - foi para CW')
+					print(f"leu caracter - foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CW'
-					print('leu caracter + foi para CW')
+					print(f"leu caracter + foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'CW'
-					print('leu caracter / foi para CW')
+					print(f"leu caracter / foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'CW'
-					print('leu caracter * foi para CW')
+					print(f"leu caracter * foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'CW'
-					print('leu caracter ^ foi para CW')
+					print(f"leu caracter ^ foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'CW'
-					print('leu caracter > foi para CW')
+					print(f"leu caracter > foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'CW'
-					print('leu caracter = foi para CW')
+					print(f"leu caracter = foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'CW'
-					print('leu caracter . foi para CW')
+					print(f"leu caracter . foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'CW'
-					print('leu caracter , foi para CW')
+					print(f"leu caracter , foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'CW'
-					print('leu caracter ; foi para CW')
+					print(f"leu caracter ; foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'CW'
-					print('leu caracter : foi para CW')
+					print(f"leu caracter : foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'CW'
-					print('leu caracter ( foi para CW')
+					print(f"leu caracter ( foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'CW'
-					print('leu caracter ) foi para CW')
+					print(f"leu caracter ) foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'CW'
-					print('leu caracter [ foi para CW')
+					print(f"leu caracter [ foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'CW'
-					print('leu caracter ] foi para CW')
+					print(f"leu caracter ] foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'CW'
-					print('leu caracter \n foi para CW')
+					print(f"leu caracter \n foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'CW'
-					print('leu caracter \t foi para CW')
+					print(f"leu caracter \t foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'CW'
-					print('leu caracter   foi para CW')
+					print(f"leu caracter   foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'CW'
-					print('leu caracter \' foi para CW')
+					print(f"leu caracter \' foi para CW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -16815,176 +16924,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'CX'
-					print('leu caracter o foi para CX')
+					print(f"leu caracter o foi para CX linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -16994,176 +17105,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'CY'
-					print('leu caracter a foi para CY')
+					print(f"leu caracter a foi para CY linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'AC'
-					print('leu caracter < foi para AC')
+					print(f"leu caracter < foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'AC'
-					print('leu caracter - foi para AC')
+					print(f"leu caracter - foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'AC'
-					print('leu caracter + foi para AC')
+					print(f"leu caracter + foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'AC'
-					print('leu caracter / foi para AC')
+					print(f"leu caracter / foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'AC'
-					print('leu caracter * foi para AC')
+					print(f"leu caracter * foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'AC'
-					print('leu caracter ^ foi para AC')
+					print(f"leu caracter ^ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'AC'
-					print('leu caracter > foi para AC')
+					print(f"leu caracter > foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'AC'
-					print('leu caracter = foi para AC')
+					print(f"leu caracter = foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'AC'
-					print('leu caracter . foi para AC')
+					print(f"leu caracter . foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'AC'
-					print('leu caracter , foi para AC')
+					print(f"leu caracter , foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'AC'
-					print('leu caracter ; foi para AC')
+					print(f"leu caracter ; foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'AC'
-					print('leu caracter : foi para AC')
+					print(f"leu caracter : foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'AC'
-					print('leu caracter ( foi para AC')
+					print(f"leu caracter ( foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'AC'
-					print('leu caracter ) foi para AC')
+					print(f"leu caracter ) foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'AC'
-					print('leu caracter [ foi para AC')
+					print(f"leu caracter [ foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'AC'
-					print('leu caracter ] foi para AC')
+					print(f"leu caracter ] foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'AC'
-					print('leu caracter \n foi para AC')
+					print(f"leu caracter \n foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'AC'
-					print('leu caracter \t foi para AC')
+					print(f"leu caracter \t foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'AC'
-					print('leu caracter   foi para AC')
+					print(f"leu caracter   foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'AC'
-					print('leu caracter \' foi para AC')
+					print(f"leu caracter \' foi para AC linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -17173,176 +17286,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'CZ'
-					print('leu caracter < foi para CZ')
+					print(f"leu caracter < foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'CZ'
-					print('leu caracter - foi para CZ')
+					print(f"leu caracter - foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'CZ'
-					print('leu caracter + foi para CZ')
+					print(f"leu caracter + foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'CZ'
-					print('leu caracter / foi para CZ')
+					print(f"leu caracter / foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'CZ'
-					print('leu caracter * foi para CZ')
+					print(f"leu caracter * foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'CZ'
-					print('leu caracter ^ foi para CZ')
+					print(f"leu caracter ^ foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'CZ'
-					print('leu caracter > foi para CZ')
+					print(f"leu caracter > foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'CZ'
-					print('leu caracter = foi para CZ')
+					print(f"leu caracter = foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'CZ'
-					print('leu caracter . foi para CZ')
+					print(f"leu caracter . foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'CZ'
-					print('leu caracter , foi para CZ')
+					print(f"leu caracter , foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'CZ'
-					print('leu caracter ; foi para CZ')
+					print(f"leu caracter ; foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'CZ'
-					print('leu caracter : foi para CZ')
+					print(f"leu caracter : foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'CZ'
-					print('leu caracter ( foi para CZ')
+					print(f"leu caracter ( foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'CZ'
-					print('leu caracter ) foi para CZ')
+					print(f"leu caracter ) foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'CZ'
-					print('leu caracter [ foi para CZ')
+					print(f"leu caracter [ foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'CZ'
-					print('leu caracter ] foi para CZ')
+					print(f"leu caracter ] foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'CZ'
-					print('leu caracter \n foi para CZ')
+					print(f"leu caracter \n foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'CZ'
-					print('leu caracter \t foi para CZ')
+					print(f"leu caracter \t foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'CZ'
-					print('leu caracter   foi para CZ')
+					print(f"leu caracter   foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'CZ'
-					print('leu caracter \' foi para CZ')
+					print(f"leu caracter \' foi para CZ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -17382,176 +17497,178 @@ def cod_direta():
 				colunaGlobal += 1
 				if c.lower() == 'a':
 					state = 'C'
-					print('leu caracter a foi para C')
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
-					print('leu caracter b foi para C')
+					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'c':
 					state = 'C'
-					print('leu caracter c foi para C')
+					print(f"leu caracter c foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'd':
 					state = 'C'
-					print('leu caracter d foi para C')
+					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
 					state = 'C'
-					print('leu caracter e foi para C')
+					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
-					print('leu caracter f foi para C')
+					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'g':
 					state = 'C'
-					print('leu caracter g foi para C')
+					print(f"leu caracter g foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'h':
 					state = 'C'
-					print('leu caracter h foi para C')
+					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
 					state = 'C'
-					print('leu caracter i foi para C')
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
-					print('leu caracter j foi para C')
+					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'k':
 					state = 'C'
-					print('leu caracter k foi para C')
+					print(f"leu caracter k foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'l':
 					state = 'C'
-					print('leu caracter l foi para C')
+					print(f"leu caracter l foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'm':
 					state = 'C'
-					print('leu caracter m foi para C')
+					print(f"leu caracter m foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'n':
 					state = 'C'
-					print('leu caracter n foi para C')
+					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
 					state = 'C'
-					print('leu caracter o foi para C')
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
-					print('leu caracter p foi para C')
+					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'q':
 					state = 'C'
-					print('leu caracter q foi para C')
+					print(f"leu caracter q foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'r':
 					state = 'C'
-					print('leu caracter r foi para C')
+					print(f"leu caracter r foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 's':
 					state = 'C'
-					print('leu caracter s foi para C')
+					print(f"leu caracter s foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 't':
 					state = 'C'
-					print('leu caracter t foi para C')
+					print(f"leu caracter t foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'u':
 					state = 'C'
-					print('leu caracter u foi para C')
+					print(f"leu caracter u foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'v':
 					state = 'C'
-					print('leu caracter v foi para C')
+					print(f"leu caracter v foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'w':
 					state = 'C'
-					print('leu caracter w foi para C')
+					print(f"leu caracter w foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'x':
 					state = 'C'
-					print('leu caracter x foi para C')
+					print(f"leu caracter x foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'y':
 					state = 'C'
-					print('leu caracter y foi para C')
+					print(f"leu caracter y foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'z':
 					state = 'C'
-					print('leu caracter z foi para C')
+					print(f"leu caracter z foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '_':
 					state = 'C'
-					print('leu caracter _ foi para C')
+					print(f"leu caracter _ foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '<':
 					state = 'DA'
-					print('leu caracter < foi para DA')
+					print(f"leu caracter < foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '-':
 					state = 'DA'
-					print('leu caracter - foi para DA')
+					print(f"leu caracter - foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '+':
 					state = 'DA'
-					print('leu caracter + foi para DA')
+					print(f"leu caracter + foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '/':
 					state = 'DA'
-					print('leu caracter / foi para DA')
+					print(f"leu caracter / foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '*':
 					state = 'DA'
-					print('leu caracter * foi para DA')
+					print(f"leu caracter * foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '^':
 					state = 'DA'
-					print('leu caracter ^ foi para DA')
+					print(f"leu caracter ^ foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '>':
 					state = 'DA'
-					print('leu caracter > foi para DA')
+					print(f"leu caracter > foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '=':
 					state = 'DA'
-					print('leu caracter = foi para DA')
+					print(f"leu caracter = foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '.':
 					state = 'DA'
-					print('leu caracter . foi para DA')
+					print(f"leu caracter . foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ',':
 					state = 'DA'
-					print('leu caracter , foi para DA')
+					print(f"leu caracter , foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ';':
 					state = 'DA'
-					print('leu caracter ; foi para DA')
+					print(f"leu caracter ; foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ':':
 					state = 'DA'
-					print('leu caracter : foi para DA')
+					print(f"leu caracter : foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '(':
 					state = 'DA'
-					print('leu caracter ( foi para DA')
+					print(f"leu caracter ( foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ')':
 					state = 'DA'
-					print('leu caracter ) foi para DA')
+					print(f"leu caracter ) foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '[':
 					state = 'DA'
-					print('leu caracter [ foi para DA')
+					print(f"leu caracter [ foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ']':
 					state = 'DA'
-					print('leu caracter ] foi para DA')
+					print(f"leu caracter ] foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\n':
 					linhaGlobal += 1
+					colunaGlobal = 0
+					coluna = 0
 					state = 'DA'
-					print('leu caracter \n foi para DA')
+					print(f"leu caracter \n foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\t':
 					state = 'DA'
-					print('leu caracter \t foi para DA')
+					print(f"leu caracter \t foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == ' ':
 					state = 'DA'
-					print('leu caracter   foi para DA')
+					print(f"leu caracter   foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '0':
 					state = 'C'
-					print('leu caracter 0 foi para C')
+					print(f"leu caracter 0 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '1':
 					state = 'C'
-					print('leu caracter 1 foi para C')
+					print(f"leu caracter 1 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '2':
 					state = 'C'
-					print('leu caracter 2 foi para C')
+					print(f"leu caracter 2 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '3':
 					state = 'C'
-					print('leu caracter 3 foi para C')
+					print(f"leu caracter 3 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '4':
 					state = 'C'
-					print('leu caracter 4 foi para C')
+					print(f"leu caracter 4 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '5':
 					state = 'C'
-					print('leu caracter 5 foi para C')
+					print(f"leu caracter 5 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '6':
 					state = 'C'
-					print('leu caracter 6 foi para C')
+					print(f"leu caracter 6 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '7':
 					state = 'C'
-					print('leu caracter 7 foi para C')
+					print(f"leu caracter 7 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '8':
 					state = 'C'
-					print('leu caracter 8 foi para C')
+					print(f"leu caracter 8 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '9':
 					state = 'C'
-					print('leu caracter 9 foi para C')
+					print(f"leu caracter 9 foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == '\'':
 					state = 'DA'
-					print('leu caracter \' foi para DA')
+					print(f"leu caracter \' foi para DA linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				else:
 					state = 'ER'
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,coluna)
@@ -17571,7 +17688,7 @@ def cod_direta():
 
 while True:
 	try:
-		token = cod_direta()
+		token = lex()
 		print(f"<{token.tipo}, {token.atributo}, {token.linha}, {token.coluna}>")
 		if token.tipo == 'Erro':
 			break

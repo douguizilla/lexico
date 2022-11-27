@@ -4,7 +4,7 @@ inicio
 
     x <--0;
 
-    repita
+    .repita
     inicio
         x <-- 6.32e-3;
     fim
