@@ -1,1 +1,16 @@
-x - 10.2e-3
+programa prog2 [ Programa com erro sintatico ]
+inicio
+    int : x; float: y;
+
+    x <-- 0;
+
+    enquanto (x<>10) faca
+    inicio
+        x <-- x+1;
+    fim
+
+    se (x = 5.0E-3) senao
+    inicio
+        y<--1 [erro aqui]
+    fim
+fim
