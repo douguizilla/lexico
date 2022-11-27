@@ -4092,7 +4092,7 @@ def criar_cases():
 		if final != 'AS':
 			file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ']:\n")
 			file.write(f"\t\t\t\t\tf.seek(f.tell()-1)\n")
-			file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(id.strip(),'')\n")
+			file.write(f"\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(id.strip(),'')\n")
 			file.write(f"\t\t\t\treturn Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)\n")
 		finalTratado.append(final)
 		finalApareceu = []
@@ -4103,7 +4103,7 @@ def criar_cases():
 	file.write(f"\twhile True:\n")
 	file.write(f"\t\ttry:\n")
 	file.write(f"\t\t\ttoken = lex()\n")
-	file.write(f"\t\t\tfor key, value in tabelaSimbolos:\n")
+	file.write(f"\t\t\tfor key, value in tabelaSimbolos.items():\n")
 	file.write(f"\t\t\t\tprint(f\"key {{key}} nome {{value.nome}} valor {{value.valor}}\")\n")
 	file.write(f"\t\t\tprint(f\"<{{token.tipo}}, {{token.atributo}}, {{token.linha}}, {{token.coluna}}>\")\n")
 	file.write(f"\t\t\tif token.tipo == 'Erro':\n")

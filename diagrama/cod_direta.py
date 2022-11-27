@@ -13812,7 +13812,7 @@ def lex():
 				lerProx = False
 				if c not in ['\n', '\t', ' ']:
 					f.seek(f.tell()-1)
-						tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
+				tabelaSimbolos[id.strip()] = Atributo(id.strip(),'')
 				return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 
 def simuladorSintatico():
@@ -13820,7 +13820,7 @@ def simuladorSintatico():
 	while True:
 		try:
 			token = lex()
-			for key, value in tabelaSimbolos:
+			for key, value in tabelaSimbolos.items():
 				print(f"key {key} nome {value.nome} valor {value.valor}")
 			print(f"<{token.tipo}, {token.atributo}, {token.linha}, {token.coluna}>")
 			if token.tipo == 'Erro':
