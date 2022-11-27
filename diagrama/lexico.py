@@ -1,3 +1,9 @@
+'''
+Analisador lexico
+Alunos: Douglas Gomes de Paula - Matricula: 11621BCC013
+		Miguel Sanches Rocha - Matricula: 11811BCC001
+'''
+
 import re
 
 f = open("prog.txt", "r")
@@ -9581,7 +9587,7 @@ def lex():
 				tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
 				return Token(id.strip(),id.strip(),linhaGlobal,coluna)
 
-def simuladorSintatico():
+def analisadorSintatico():
 	global tabelaSimbolos
 	print('Tokens: ')
 	while True:
@@ -9596,4 +9602,4 @@ def simuladorSintatico():
 	for key, value in tabelaSimbolos.items():
 		print(f"key {key} nome {value.nome} valor {value.valor}")
 
-simuladorSintatico()
+analisadorSintatico()
