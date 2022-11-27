@@ -202,7 +202,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -226,7 +232,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -250,7 +262,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -274,7 +292,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -298,7 +322,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -322,7 +352,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -346,7 +382,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -370,7 +412,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -394,7 +442,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -418,7 +472,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -442,7 +502,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -466,7 +532,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -674,7 +746,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -2309,7 +2387,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -2333,7 +2417,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -2357,7 +2447,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -2560,7 +2656,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -2584,7 +2686,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -2896,8 +3004,8 @@ def cod_direta():
 					state = 'AT'
 					print('leu caracter = foi para AT')
 				elif c.lower() == '.':
-					state = 'AT'
-					print('leu caracter . foi para AT')
+					state = 'AU'
+					print('leu caracter . foi para AU')
 				elif c.lower() == ',':
 					state = 'AT'
 					print('leu caracter , foi para AT')
@@ -2971,7 +3079,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -4964,7 +5078,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -5365,7 +5485,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -5568,7 +5694,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -6663,7 +6795,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -7224,7 +7362,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -7964,7 +8108,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -8167,7 +8317,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -8549,7 +8705,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -8931,7 +9093,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -9134,7 +9302,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -10590,7 +10764,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -11330,7 +11510,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -11712,7 +11898,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -12094,7 +12286,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -12476,7 +12674,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)
@@ -13037,7 +13241,13 @@ def cod_direta():
 				state = 'A'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					f.seek(f.tell()-1)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
 				elif c in [' ',';',')','+']:
 					print(id)

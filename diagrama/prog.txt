@@ -6,7 +6,7 @@ inicio
 
     repita
     inicio
-        x <-- x+1;
+        x <-- 6.32e-3;
     fim
     ate (x < 10)
 
