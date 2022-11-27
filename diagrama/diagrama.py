@@ -3971,8 +3971,14 @@ def criar_cases():
 					file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
 					file.write(f"\t\t\t\t\tf.seek(f.tell()-1)\n")
 					file.write(f"\t\t\t\t\treturn Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)\n")
-					file.write(f"\t\t\t\telif c in ['\\n', '\\t', ' ',';',')']:\n")
-					file.write(f"\t\t\t\t\treturn Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)\n")
+					file.write(f"\t\t\t\telif c in [' ',';',')','+']:\n")
+					file.write(f"\t\t\t\t\tprint(id)\n")
+					file.write(f"\t\t\t\t\tprint(c)\n")
+					file.write(f"\t\t\t\t\tif id != c:\n")
+					file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
+					file.write(f"\t\t\t\t\t\treturn Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)\n")
+					file.write(f"\t\t\t\t\telse:\n")
+					file.write(f"\t\t\t\t\t\treturn Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)\n")
 					file.write(f"\t\t\t\telse:\n")
 					file.write(f"\t\t\t\t\treturn Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)\n")
 				elif final == 'X':
@@ -4023,8 +4029,8 @@ def criar_cases():
 			file.write(f"\t\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
 			file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
 			file.write(f"\t\t\t\t\t\treturn Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)\n")
-			file.write(f"\t\t\t\t\telif c in ['\\n', '\\t', ' ',';',')']:\n")
-			file.write(f"\t\t\t\t\t\treturn Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)\n")
+			file.write(f"\t\t\t\t\telif c in ['\\n', '\\t', ' ',';',')','+']:\n")
+			file.write(f"\t\t\t\t\t\treturn Token(id,'ATRIBUTO',linhaGlobal,coluna)\n")
 			file.write(f"\t\t\t\t\telse:\n")
 			file.write(f"\t\t\t\t\t\treturn Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)\n")
 
@@ -4297,8 +4303,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'M':
@@ -4309,8 +4321,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'N':
@@ -4321,8 +4339,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'O':
@@ -4333,8 +4357,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'P':
@@ -4345,8 +4375,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'R':
@@ -4357,8 +4393,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'ER':
@@ -4369,8 +4411,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'S':
@@ -4381,8 +4429,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'T':
@@ -4393,8 +4447,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'RA':
@@ -4405,8 +4465,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'U':
@@ -4417,8 +4483,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'V':
@@ -4429,8 +4501,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'X':
@@ -4625,8 +4703,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'C':
@@ -6248,8 +6332,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AO':
@@ -6260,8 +6350,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AP':
@@ -6272,8 +6368,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'Q':
@@ -6463,8 +6565,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AR':
@@ -6475,8 +6583,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'Y':
@@ -6850,8 +6964,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AA':
@@ -8831,8 +8951,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AN':
@@ -8850,8 +8976,8 @@ def cod_direta():
 					if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 						f.seek(f.tell()-1)
 						return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-					elif c in ['\n', '\t', ' ',';',')']:
-						return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
+					elif c in ['\n', '\t', ' ',';',')','+']:
+						return Token(id,'ATRIBUTO',linhaGlobal,coluna)
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AU':
@@ -9220,8 +9346,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AW':
@@ -9411,8 +9543,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AY':
@@ -10494,8 +10632,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BC':
@@ -11043,8 +11187,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BF':
@@ -11771,8 +11921,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BK':
@@ -11962,8 +12118,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BM':
@@ -12332,8 +12494,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BO':
@@ -12702,8 +12870,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BQ':
@@ -12893,8 +13067,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BS':
@@ -14337,8 +14517,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CG':
@@ -15065,8 +15251,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CK':
@@ -15435,8 +15627,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CM':
@@ -15805,8 +16003,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CP':
@@ -16175,8 +16379,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CT':
@@ -16724,8 +16934,14 @@ def cod_direta():
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					f.seek(f.tell()-1)
 					return Token(id[:-1],'ATRIBUTO',linhaGlobal,coluna)
-				elif c in ['\n', '\t', ' ',';',')']:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+				elif c in [' ',';',')','+']:
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
 					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CY':
