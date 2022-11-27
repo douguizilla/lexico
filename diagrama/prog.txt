@@ -1,11 +1,1 @@
-se x<=10.2e-8 senao
-inicio
-inicioo
-fim
-enquanto
-ate
-faca
-repita
-programa
-x+1
-x
+x - 10.2e-3
