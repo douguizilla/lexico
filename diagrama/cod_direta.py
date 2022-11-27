@@ -213,7 +213,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'M':
 				print('Tratar retorno estado final M')
 				print(f"Identificador montado {id}")
@@ -231,7 +237,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'N':
 				print('Tratar retorno estado final N')
 				print(f"Identificador montado {id}")
@@ -249,7 +261,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'O':
 				print('Tratar retorno estado final O')
 				print(f"Identificador montado {id}")
@@ -267,7 +285,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'P':
 				print('Tratar retorno estado final P')
 				print(f"Identificador montado {id}")
@@ -285,7 +309,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'R':
 				print('Tratar retorno estado final R')
 				print(f"Identificador montado {id}")
@@ -303,7 +333,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'ER':
 				print('Tratar retorno estado final ER')
 				print(f"Identificador montado {id}")
@@ -321,7 +357,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'S':
 				print('Tratar retorno estado final S')
 				print(f"Identificador montado {id}")
@@ -339,7 +381,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'T':
 				print('Tratar retorno estado final T')
 				print(f"Identificador montado {id}")
@@ -357,7 +405,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'RA':
 				print('Tratar retorno estado final RA')
 				print(f"Identificador montado {id}")
@@ -375,7 +429,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'U':
 				print('Tratar retorno estado final U')
 				print(f"Identificador montado {id}")
@@ -393,7 +453,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'V':
 				print('Tratar retorno estado final V')
 				print(f"Identificador montado {id}")
@@ -411,7 +477,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'X':
 				print('Tratar retorno estado final X')
 				print(f"Identificador montado {id}")
@@ -613,7 +685,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'C':
 				c = nextChar()
 				id += c
@@ -2242,7 +2320,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AO':
 				print('Tratar retorno estado final AO')
 				print(f"Identificador montado {id}")
@@ -2260,7 +2344,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AP':
 				print('Tratar retorno estado final AP')
 				print(f"Identificador montado {id}")
@@ -2278,7 +2368,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'Q':
 				c = nextChar()
 				id += c
@@ -2475,7 +2571,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AR':
 				print('Tratar retorno estado final AR')
 				print(f"Identificador montado {id}")
@@ -2493,7 +2595,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'Y':
 				c = nextChar()
 				id += c
@@ -2874,7 +2982,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AA':
 				c = nextChar()
 				id += c
@@ -4861,7 +4975,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AN':
 				c = nextChar()
 				id += c
@@ -5256,7 +5376,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AW':
 				c = nextChar()
 				id += c
@@ -5453,7 +5579,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'AY':
 				c = nextChar()
 				id += c
@@ -6542,7 +6674,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BC':
 				c = nextChar()
 				id += c
@@ -7097,7 +7235,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BF':
 				c = nextChar()
 				id += c
@@ -7831,7 +7975,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BK':
 				c = nextChar()
 				id += c
@@ -8028,7 +8178,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BM':
 				c = nextChar()
 				id += c
@@ -8404,7 +8560,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BO':
 				c = nextChar()
 				id += c
@@ -8780,7 +8942,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BQ':
 				c = nextChar()
 				id += c
@@ -8977,7 +9145,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'BS':
 				c = nextChar()
 				id += c
@@ -10427,7 +10601,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CG':
 				c = nextChar()
 				id += c
@@ -11161,7 +11341,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CK':
 				c = nextChar()
 				id += c
@@ -11537,7 +11723,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CM':
 				c = nextChar()
 				id += c
@@ -11913,7 +12105,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CP':
 				c = nextChar()
 				id += c
@@ -12289,7 +12487,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CT':
 				c = nextChar()
 				id += c
@@ -12844,7 +13048,13 @@ def cod_direta():
 					else:
 						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 				else:
-					return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
+					print(id)
+					print(c)
+					if id != c:
+						f.seek(f.tell()-1)
+						return Token(id[:-1].strip(),'ATRIBUTO',linhaGlobal,coluna)
+					else:
+						return Token(id.strip(),'ATRIBUTO',linhaGlobal,coluna)
 			case 'CY':
 				c = nextChar()
 				id += c
