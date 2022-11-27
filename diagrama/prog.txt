@@ -1,3 +1,10 @@
-x<=10
+se x<=10 senao
+inicio
+fim
+enquanto
+ate
+faca
+repita
+programa
 x+1
 x

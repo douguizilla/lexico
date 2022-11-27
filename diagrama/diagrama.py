@@ -2222,7 +2222,7 @@ diagrama = {
     'BG&8': 'C',
     'BG&9': 'C',
     'BG&\'': 'AC',
-    'BH&a': 'C',
+    'BH&a': 'BX',
     'BH&b': 'C',
     'BH&c': 'C',
     'BH&d': 'C',
@@ -2236,7 +2236,7 @@ diagrama = {
     'BH&l': 'C',
     'BH&m': 'C',
     'BH&n': 'C',
-    'BH&o': 'BX',
+    'BH&o': 'C',
     'BH&p': 'C',
     'BH&q': 'C',
     'BH&r': 'C',
@@ -3971,7 +3971,7 @@ def criar_cases():
 				if final != 'AS' and final != 'X' and final != 'ER':
 					if final not in ['AP', 'AO', 'AR']:
 						file.write(
-							f"\t\t\t\ttipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '') \n")
+							f"\t\t\t\ttipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else '')) \n")
 						file.write(f"\t\t\t\tlerProx = False\n")
 						file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
 						file.write(f"\t\t\t\t\tprint(id)\n")
@@ -4060,7 +4060,7 @@ def criar_cases():
 			file.write(f"\t\t\t\t\tstate = 'A'\n")
 			file.write(f"\t\t\t\t\tlerProx = False\n")
 			file.write(
-				f"\t\t\t\t\ttipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '') \n")
+				f"\t\t\t\t\ttipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else '')) \n")
 
 			file.write(f"\t\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
 			file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
@@ -4353,7 +4353,7 @@ def lex():
 				print('Tratar retorno estado final L')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4391,7 +4391,7 @@ def lex():
 				print('Tratar retorno estado final M')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4429,7 +4429,7 @@ def lex():
 				print('Tratar retorno estado final N')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4467,7 +4467,7 @@ def lex():
 				print('Tratar retorno estado final O')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4505,7 +4505,7 @@ def lex():
 				print('Tratar retorno estado final P')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4543,7 +4543,7 @@ def lex():
 				print('Tratar retorno estado final R')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4586,7 +4586,7 @@ def lex():
 				print('Tratar retorno estado final S')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4624,7 +4624,7 @@ def lex():
 				print('Tratar retorno estado final T')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4662,7 +4662,7 @@ def lex():
 				print('Tratar retorno estado final RA')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4700,7 +4700,7 @@ def lex():
 				print('Tratar retorno estado final U')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4738,7 +4738,7 @@ def lex():
 				print('Tratar retorno estado final V')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -4962,7 +4962,7 @@ def lex():
 				print('Tratar retorno estado final AC')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -6629,7 +6629,7 @@ def lex():
 				print('Tratar retorno estado final AM')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -6864,7 +6864,7 @@ def lex():
 				print('Tratar retorno estado final AQ')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -7277,7 +7277,7 @@ def lex():
 				print('Tratar retorno estado final AT')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -9306,7 +9306,7 @@ def lex():
 				print('Tratar retorno estado final BI')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -9352,7 +9352,7 @@ def lex():
 					print(f"Identificador montado {id}")
 					state = 'A'
 					lerProx = False
-					tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+					tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id if id in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 					if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 						f.seek(f.tell()-1)
 						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
@@ -9729,7 +9729,7 @@ def lex():
 				print('Tratar retorno estado final BL')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -9948,7 +9948,7 @@ def lex():
 				print('Tratar retorno estado final BM')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -11069,7 +11069,7 @@ def lex():
 				print('Tratar retorno estado final BR')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -11650,7 +11650,7 @@ def lex():
 				print('Tratar retorno estado final BU')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -12051,8 +12051,8 @@ def lex():
 				id += c
 				colunaGlobal += 1
 				if c.lower() == 'a':
-					state = 'C'
-					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'BX'
+					print(f"leu caracter a foi para BX linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
 					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
@@ -12093,8 +12093,8 @@ def lex():
 					state = 'C'
 					print(f"leu caracter n foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'o':
-					state = 'BX'
-					print(f"leu caracter o foi para BX linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'C'
+					print(f"leu caracter o foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'p':
 					state = 'C'
 					print(f"leu caracter p foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
@@ -12412,7 +12412,7 @@ def lex():
 				print('Tratar retorno estado final BY')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -12631,7 +12631,7 @@ def lex():
 				print('Tratar retorno estado final CA')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -13031,7 +13031,7 @@ def lex():
 				print('Tratar retorno estado final CB')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -13431,7 +13431,7 @@ def lex():
 				print('Tratar retorno estado final CD')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -13650,7 +13650,7 @@ def lex():
 				print('Tratar retorno estado final CE')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -15136,7 +15136,7 @@ def lex():
 				print('Tratar retorno estado final CN')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -15898,7 +15898,7 @@ def lex():
 				print('Tratar retorno estado final CR')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -16298,7 +16298,7 @@ def lex():
 				print('Tratar retorno estado final CS')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -16698,7 +16698,7 @@ def lex():
 				print('Tratar retorno estado final CU')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -17098,7 +17098,7 @@ def lex():
 				print('Tratar retorno estado final CW')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -17679,7 +17679,7 @@ def lex():
 				print('Tratar retorno estado final CZ')
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else '')
+				tipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ''))
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					print(id)
@@ -17922,6 +17922,3 @@ def simuladorSintatico():
 		except EOFError:
 			break
 simuladorSintatico()
-
-
-
