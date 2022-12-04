@@ -3969,7 +3969,7 @@ def criar_cases():
 				if final != 'AS' and final != 'X' and final != 'ER':
 					if final not in ['AP', 'AO', 'AR']:
 						file.write(
-							f"\t\t\t\ttipo = 'op_rela' if id in ['<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else '')))) \n")
+							f"\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else '')))) \n")
 						file.write(f"\t\t\t\tlerProx = False\n")
 						file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
 						#file.write(f"\t\t\t\t\tprint(id)\n")
@@ -4058,7 +4058,7 @@ def criar_cases():
 			file.write(f"\t\t\t\t\tstate = 'A'\n")
 			file.write(f"\t\t\t\t\tlerProx = False\n")
 			file.write(
-				f"\t\t\t\t\ttipo = 'op_rela' if id in ['<','>','<>','<=','>=','='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ('numero' if re.search('[0-9]([0-9]?)(.[0-9]([0-9]*)?)?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else ('identificador' if re.search('([a-zA-Z_]+)([a-zA-Z0-9_])*',id.strip()) else ''))))\n")
+				f"\t\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>=','='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ('numero' if re.search('[0-9]([0-9]?)(.[0-9]([0-9]*)?)?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else ('identificador' if re.search('([a-zA-Z_]+)([a-zA-Z0-9_])*',id.strip()) else ''))))\n")
 
 			file.write(f"\t\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
 			file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
@@ -4099,7 +4099,7 @@ def criar_cases():
 		file.write(f"\t\t\t\tstate = 'A'\n")
 		file.write(f"\t\t\t\tlerProx = False\n")
 		if final != 'AS':
-			file.write(f"\t\t\t\ttipo = 'op_rela' if id in ['<','>','<>','<=','>=','='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ('numero' if re.search('[0-9]([0-9]?)(.[0-9]([0-9]*)?)?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else ('identificador' if re.search('([a-zA-Z_]+)([a-zA-Z0-9_])*',id.strip()) else ''))))\n")
+			file.write(f"\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>=','='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ('numero' if re.search('[0-9]([0-9]?)(.[0-9]([0-9]*)?)?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else ('identificador' if re.search('([a-zA-Z_]+)([a-zA-Z0-9_])*',id.strip()) else ''))))\n")
 			file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ']:\n")
 			file.write(f"\t\t\t\t\tf.seek(f.tell()-1)\n")
 			file.write(f"\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
