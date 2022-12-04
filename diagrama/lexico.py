@@ -7621,8 +7621,8 @@ def lex():
 					state = 'C'
 					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
-					state = 'C'
-					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'BW'
+					print(f"leu caracter e foi para BW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
 					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
@@ -7633,8 +7633,8 @@ def lex():
 					state = 'C'
 					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
-					state = 'BW'
-					print(f"leu caracter i foi para BW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'C'
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
 					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
@@ -11243,8 +11243,8 @@ def lex():
 				id += c
 				colunaGlobal += 1
 				if c.lower() == 'a':
-					state = 'CQ'
-					print(f"leu caracter a foi para CQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'C'
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
 					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
@@ -11255,8 +11255,8 @@ def lex():
 					state = 'C'
 					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
-					state = 'C'
-					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'CQ'
+					print(f"leu caracter e foi para CQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
 					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
