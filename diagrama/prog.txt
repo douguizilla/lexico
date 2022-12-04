@@ -2,13 +2,15 @@ programa prog2
 inicio
     int x; float y; char z;
     x <-- 1;
-    float <-- 1.0;
+    y <-- 1.0;
+    z <-- 'a';
 
     repete
         x <-- x+1;
     ate x = 10;
 
-    se char = 1
-    entao char <-- 10
-    senao char <-- 10e20
+    se z = 'a'
+    entao z <-- 'a'
+    senao z <-- 'A'
 fim
+

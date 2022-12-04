@@ -3965,16 +3965,16 @@ def criar_cases():
             for final in finalApareceu:
                 file.write(f"\t\t\tcase '{final}':\n")
                 #file.write(f"\t\t\t\tprint('Tratar retorno estado final {final}')\n")
-                #file.write(f"\t\t\t\tprint(f\"Identificador montado {{id}}\")\n")
+                file.write(f"\t\t\t\tprint(f\"Identificador montado {{id}}\")\n")
                 file.write(f"\t\t\t\tstate = 'A'\n")
                 if final != 'AS' and final != 'X' and final != 'ER':
-                    if final not in ['AP', 'AO', 'AR','AT','CA','CS','BU', 'CN', 'CB']:
+                    if final not in ['AP', 'AO', 'AR','AT','CA','CS','BU', 'CN', 'CB','BL']:
                         file.write(
                             f"\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else id.strip())))) \n")
                         file.write(f"\t\t\t\tlerProx = False\n")
                         file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
-                        #file.write(f"\t\t\t\t\tprint(id)\n")
-                        #file.write(f"\t\t\t\t\tprint(c)\n")
+                        file.write(f"\t\t\t\t\tprint(id)\n")
+                        file.write(f"\t\t\t\t\tprint(c)\n")
                         file.write(f"\t\t\t\t\tif id != c:\n")
                         file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
                         file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
@@ -4084,6 +4084,12 @@ def criar_cases():
                         file.write(f"\t\t\t\t\t\tprint('nao voltei uma casa')\n")
                         file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
                         file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
+                    elif final in ['BL']:
+                        file.write(
+                            f"\t\t\t\ttipo = 'caracter'\n")
+                        file.write(f"\t\t\t\tlerProx = False\n")
+                        file.write(f"\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
+                        file.write(f"\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
                     elif final in ['BU', 'CN', 'CB']:
                         file.write(
                             f"\t\t\t\ttipo = id.strip()\n")
@@ -4167,7 +4173,7 @@ def criar_cases():
                 file.write('\t\t\t\t\tcoluna = 0\n')
 
         file.write(f"\t\t\t\t\tstate = '{value}'\n")
-        #file.write(f"\t\t\t\t\tprint(f\"leu caracter {caracter} foi para {value} linha {{linhaGlobal}} colunaG {{colunaGlobal}} coluna {{coluna}}\")\n")
+        file.write(f"\t\t\t\t\tprint(f\"leu caracter {caracter} foi para {value} linha {{linhaGlobal}} colunaG {{colunaGlobal}} coluna {{coluna}}\")\n")
 
         if key_[0] == 'AN':
             file.write(f"\t\t\t\telse:\n")
