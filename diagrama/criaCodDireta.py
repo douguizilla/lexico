@@ -1767,7 +1767,7 @@ diagrama = {
     'AZ&8': 'C',
     'AZ&9': 'C',
     'AZ&\'': 'AC',
-	'AZZ&a':'C',
+    'AZZ&a':'C',
     'AZZ&b':'C',
     'AZZ&c':'C',
     'AZZ&d':'C',
@@ -3534,476 +3534,476 @@ diagrama = {
     'CM&9': 'C',
     'CM&\'': 'AC',
 
-	'CO&a': 'C',
-	'CO&b': 'C',
-	'CO&c': 'C',
-	'CO&d': 'C',
-	'CO&e': 'C',
-	'CO&f': 'C',
-	'CO&g': 'C',
-	'CO&h': 'C',
-	'CO&i': 'C',
-	'CO&j': 'C',
-	'CO&k': 'C',
-	'CO&l': 'C',
-	'CO&m': 'C',
-	'CO&n': 'C',
-	'CO&o': 'C',
-	'CO&p': 'C',
-	'CO&q': 'C',
-	'CO&r': 'C',
-	'CO&s': 'C',
-	'CO&t': 'C',
-	'CO&u': 'C',
-	'CO&v': 'C',
-	'CO&w': 'C',
-	'CO&x': 'C',
-	'CO&y': 'C',
-	'CO&z': 'C',
-	'CO&_': 'C',
-	'CO&<': 'CU',
-	'CO&-': 'CU',
-	'CO&+': 'CU',
-	'CO&/': 'CU',
-	'CO&*': 'CU',
-	'CO&^': 'CU',
-	'CO&>': 'CU',
-	'CO&=': 'CU',
-	'CO&.': 'CU',
-	'CO&,': 'CU',
-	'CO&;': 'CU',
-	'CO&:': 'CU',
-	'CO&(': 'CU',
-	'CO&)': 'CU',
-	'CO&[': 'CU',
-	'CO&]': 'CU',
-	'CO&\n': 'CU',
-	'CO&\t': 'CU',
-	'CO& ': 'CU',
-	'CO&0': 'C',
-	'CO&1': 'C',
-	'CO&2': 'C',
-	'CO&3': 'C',
-	'CO&4': 'C',
-	'CO&5': 'C',
-	'CO&6': 'C',
-	'CO&7': 'C',
-	'CO&8': 'C',
-	'CO&9': 'C',
-	'CO&\'': 'CU',
-	'CP&a': 'C',
-	'CP&b': 'C',
-	'CP&c': 'C',
-	'CP&d': 'C',
-	'CP&e': 'C',
-	'CP&f': 'C',
-	'CP&g': 'C',
-	'CP&h': 'C',
-	'CP&i': 'C',
-	'CP&j': 'C',
-	'CP&k': 'C',
-	'CP&l': 'C',
-	'CP&m': 'CV',
-	'CP&n': 'C',
-	'CP&o': 'C',
-	'CP&p': 'C',
-	'CP&q': 'C',
-	'CP&r': 'C',
-	'CP&s': 'C',
-	'CP&t': 'C',
-	'CP&u': 'C',
-	'CP&v': 'C',
-	'CP&w': 'C',
-	'CP&x': 'C',
-	'CP&y': 'C',
-	'CP&z': 'C',
-	'CP&_': 'C',
-	'CP&<': 'AC',
-	'CP&-': 'AC',
-	'CP&+': 'AC',
-	'CP&/': 'AC',
-	'CP&*': 'AC',
-	'CP&^': 'AC',
-	'CP&>': 'AC',
-	'CP&=': 'AC',
-	'CP&.': 'AC',
-	'CP&,': 'AC',
-	'CP&;': 'AC',
-	'CP&:': 'AC',
-	'CP&(': 'AC',
-	'CP&)': 'AC',
-	'CP&[': 'AC',
-	'CP&]': 'AC',
-	'CP&\n': 'AC',
-	'CP&\t': 'AC',
-	'CP& ': 'AC',
-	'CP&0': 'C',
-	'CP&1': 'C',
-	'CP&2': 'C',
-	'CP&3': 'C',
-	'CP&4': 'C',
-	'CP&5': 'C',
-	'CP&6': 'C',
-	'CP&7': 'C',
-	'CP&8': 'C',
-	'CP&9': 'C',
-	'CP&\'': 'AC',
-	'CQ&a': 'C',
-	'CQ&b': 'C',
-	'CQ&c': 'C',
-	'CQ&d': 'C',
-	'CQ&e': 'C',
-	'CQ&f': 'C',
-	'CQ&g': 'C',
-	'CQ&h': 'C',
-	'CQ&i': 'C',
-	'CQ&j': 'C',
-	'CQ&k': 'C',
-	'CQ&l': 'C',
-	'CQ&m': 'C',
-	'CQ&n': 'C',
-	'CQ&o': 'C',
-	'CQ&p': 'C',
-	'CQ&q': 'C',
-	'CQ&r': 'C',
-	'CQ&s': 'C',
-	'CQ&t': 'C',
-	'CQ&u': 'C',
-	'CQ&v': 'C',
-	'CQ&w': 'C',
-	'CQ&x': 'C',
-	'CQ&y': 'C',
-	'CQ&z': 'C',
-	'CQ&_': 'C',
-	'CQ&<': 'CW',
-	'CQ&-': 'CW',
-	'CQ&+': 'CW',
-	'CQ&/': 'CW',
-	'CQ&*': 'CW',
-	'CQ&^': 'CW',
-	'CQ&>': 'CW',
-	'CQ&=': 'CW',
-	'CQ&.': 'CW',
-	'CQ&,': 'CW',
-	'CQ&;': 'CW',
-	'CQ&:': 'CW',
-	'CQ&(': 'CW',
-	'CQ&)': 'CW',
-	'CQ&[': 'CW',
-	'CQ&]': 'CW',
-	'CQ&\n': 'CW',
-	'CQ&\t': 'CW',
-	'CQ& ': 'CW',
-	'CQ&0': 'C',
-	'CQ&1': 'C',
-	'CQ&2': 'C',
-	'CQ&3': 'C',
-	'CQ&4': 'C',
-	'CQ&5': 'C',
-	'CQ&6': 'C',
-	'CQ&7': 'C',
-	'CQ&8': 'C',
-	'CQ&9': 'C',
-	'CQ&\'': 'CW',
-	'CT&a': 'C',
-	'CT&b': 'C',
-	'CT&c': 'C',
-	'CT&d': 'C',
-	'CT&e': 'C',
-	'CT&f': 'C',
-	'CT&g': 'C',
-	'CT&h': 'C',
-	'CT&i': 'C',
-	'CT&j': 'C',
-	'CT&k': 'C',
-	'CT&l': 'C',
-	'CT&m': 'C',
-	'CT&n': 'C',
-	'CT&o': 'CX',
-	'CT&p': 'C',
-	'CT&q': 'C',
-	'CT&r': 'C',
-	'CT&s': 'C',
-	'CT&t': 'C',
-	'CT&u': 'C',
-	'CT&v': 'C',
-	'CT&w': 'C',
-	'CT&x': 'C',
-	'CT&y': 'C',
-	'CT&z': 'C',
-	'CT&_': 'C',
-	'CT&<': 'AC',
-	'CT&-': 'AC',
-	'CT&+': 'AC',
-	'CT&/': 'AC',
-	'CT&*': 'AC',
-	'CT&^': 'AC',
-	'CT&>': 'AC',
-	'CT&=': 'AC',
-	'CT&.': 'AC',
-	'CT&,': 'AC',
-	'CT&;': 'AC',
-	'CT&:': 'AC',
-	'CT&(': 'AC',
-	'CT&)': 'AC',
-	'CT&[': 'AC',
-	'CT&]': 'AC',
-	'CT&\n': 'AC',
-	'CT&\t': 'AC',
-	'CT& ': 'AC',
-	'CT&0': 'C',
-	'CT&1': 'C',
-	'CT&2': 'C',
-	'CT&3': 'C',
-	'CT&4': 'C',
-	'CT&5': 'C',
-	'CT&6': 'C',
-	'CT&7': 'C',
-	'CT&8': 'C',
-	'CT&9': 'C',
-	'CT&\'': 'AC',
-	'CV&a': 'CY',
-	'CV&b': 'C',
-	'CV&c': 'C',
-	'CV&d': 'C',
-	'CV&e': 'C',
-	'CV&f': 'C',
-	'CV&g': 'C',
-	'CV&h': 'C',
-	'CV&i': 'C',
-	'CV&j': 'C',
-	'CV&k': 'C',
-	'CV&l': 'C',
-	'CV&m': 'C',
-	'CV&n': 'C',
-	'CV&o': 'C',
-	'CV&p': 'C',
-	'CV&q': 'C',
-	'CV&r': 'C',
-	'CV&s': 'C',
-	'CV&t': 'C',
-	'CV&u': 'C',
-	'CV&v': 'C',
-	'CV&w': 'C',
-	'CV&x': 'C',
-	'CV&y': 'C',
-	'CV&z': 'C',
-	'CV&_': 'C',
-	'CV&<': 'AC',
-	'CV&-': 'AC',
-	'CV&+': 'AC',
-	'CV&/': 'AC',
-	'CV&*': 'AC',
-	'CV&^': 'AC',
-	'CV&>': 'AC',
-	'CV&=': 'AC',
-	'CV&.': 'AC',
-	'CV&,': 'AC',
-	'CV&;': 'AC',
-	'CV&:': 'AC',
-	'CV&(': 'AC',
-	'CV&)': 'AC',
-	'CV&[': 'AC',
-	'CV&]': 'AC',
-	'CV&\n': 'AC',
-	'CV&\t': 'AC',
-	'CV& ': 'AC',
-	'CV&0': 'C',
-	'CV&1': 'C',
-	'CV&2': 'C',
-	'CV&3': 'C',
-	'CV&4': 'C',
-	'CV&5': 'C',
-	'CV&6': 'C',
-	'CV&7': 'C',
-	'CV&8': 'C',
-	'CV&9': 'C',
-	'CV&\'': 'AC',
-	'CX&a': 'C',
-	'CX&b': 'C',
-	'CX&c': 'C',
-	'CX&d': 'C',
-	'CX&e': 'C',
-	'CX&f': 'C',
-	'CX&g': 'C',
-	'CX&h': 'C',
-	'CX&i': 'C',
-	'CX&j': 'C',
-	'CX&k': 'C',
-	'CX&l': 'C',
-	'CX&m': 'C',
-	'CX&n': 'C',
-	'CX&o': 'C',
-	'CX&p': 'C',
-	'CX&q': 'C',
-	'CX&r': 'C',
-	'CX&s': 'C',
-	'CX&t': 'C',
-	'CX&u': 'C',
-	'CX&v': 'C',
-	'CX&w': 'C',
-	'CX&x': 'C',
-	'CX&y': 'C',
-	'CX&z': 'C',
-	'CX&_': 'C',
-	'CX&<': 'CZ',
-	'CX&-': 'CZ',
-	'CX&+': 'CZ',
-	'CX&/': 'CZ',
-	'CX&*': 'CZ',
-	'CX&^': 'CZ',
-	'CX&>': 'CZ',
-	'CX&=': 'CZ',
-	'CX&.': 'CZ',
-	'CX&,': 'CZ',
-	'CX&;': 'CZ',
-	'CX&:': 'CZ',
-	'CX&(': 'CZ',
-	'CX&)': 'CZ',
-	'CX&[': 'CZ',
-	'CX&]': 'CZ',
-	'CX&\n': 'CZ',
-	'CX&\t': 'CZ',
-	'CX& ': 'CZ',
-	'CX&0': 'C',
-	'CX&1': 'C',
-	'CX&2': 'C',
-	'CX&3': 'C',
-	'CX&4': 'C',
-	'CX&5': 'C',
-	'CX&6': 'C',
-	'CX&7': 'C',
-	'CX&8': 'C',
-	'CX&9': 'C',
-	'CX&\'': 'CZ',
-	'CY&a': 'C',
-	'CY&b': 'C',
-	'CY&c': 'C',
-	'CY&d': 'C',
-	'CY&e': 'C',
-	'CY&f': 'C',
-	'CY&g': 'C',
-	'CY&h': 'C',
-	'CY&i': 'C',
-	'CY&j': 'C',
-	'CY&k': 'C',
-	'CY&l': 'C',
-	'CY&m': 'C',
-	'CY&n': 'C',
-	'CY&o': 'C',
-	'CY&p': 'C',
-	'CY&q': 'C',
-	'CY&r': 'C',
-	'CY&s': 'C',
-	'CY&t': 'C',
-	'CY&u': 'C',
-	'CY&v': 'C',
-	'CY&w': 'C',
-	'CY&x': 'C',
-	'CY&y': 'C',
-	'CY&z': 'C',
-	'CY&_': 'C',
-	'CY&<': 'DA',
-	'CY&-': 'DA',
-	'CY&+': 'DA',
-	'CY&/': 'DA',
-	'CY&*': 'DA',
-	'CY&^': 'DA',
-	'CY&>': 'DA',
-	'CY&=': 'DA',
-	'CY&.': 'DA',
-	'CY&,': 'DA',
-	'CY&;': 'DA',
-	'CY&:': 'DA',
-	'CY&(': 'DA',
-	'CY&)': 'DA',
-	'CY&[': 'DA',
-	'CY&]': 'DA',
-	'CY&\n': 'DA',
-	'CY&\t': 'DA',
-	'CY& ': 'DA',
-	'CY&0': 'C',
-	'CY&1': 'C',
-	'CY&2': 'C',
-	'CY&3': 'C',
-	'CY&4': 'C',
-	'CY&5': 'C',
-	'CY&6': 'C',
-	'CY&7': 'C',
-	'CY&8': 'C',
-	'CY&9': 'C',
-	'CY&\'': 'DA'
+    'CO&a': 'C',
+    'CO&b': 'C',
+    'CO&c': 'C',
+    'CO&d': 'C',
+    'CO&e': 'C',
+    'CO&f': 'C',
+    'CO&g': 'C',
+    'CO&h': 'C',
+    'CO&i': 'C',
+    'CO&j': 'C',
+    'CO&k': 'C',
+    'CO&l': 'C',
+    'CO&m': 'C',
+    'CO&n': 'C',
+    'CO&o': 'C',
+    'CO&p': 'C',
+    'CO&q': 'C',
+    'CO&r': 'C',
+    'CO&s': 'C',
+    'CO&t': 'C',
+    'CO&u': 'C',
+    'CO&v': 'C',
+    'CO&w': 'C',
+    'CO&x': 'C',
+    'CO&y': 'C',
+    'CO&z': 'C',
+    'CO&_': 'C',
+    'CO&<': 'CU',
+    'CO&-': 'CU',
+    'CO&+': 'CU',
+    'CO&/': 'CU',
+    'CO&*': 'CU',
+    'CO&^': 'CU',
+    'CO&>': 'CU',
+    'CO&=': 'CU',
+    'CO&.': 'CU',
+    'CO&,': 'CU',
+    'CO&;': 'CU',
+    'CO&:': 'CU',
+    'CO&(': 'CU',
+    'CO&)': 'CU',
+    'CO&[': 'CU',
+    'CO&]': 'CU',
+    'CO&\n': 'CU',
+    'CO&\t': 'CU',
+    'CO& ': 'CU',
+    'CO&0': 'C',
+    'CO&1': 'C',
+    'CO&2': 'C',
+    'CO&3': 'C',
+    'CO&4': 'C',
+    'CO&5': 'C',
+    'CO&6': 'C',
+    'CO&7': 'C',
+    'CO&8': 'C',
+    'CO&9': 'C',
+    'CO&\'': 'CU',
+    'CP&a': 'C',
+    'CP&b': 'C',
+    'CP&c': 'C',
+    'CP&d': 'C',
+    'CP&e': 'C',
+    'CP&f': 'C',
+    'CP&g': 'C',
+    'CP&h': 'C',
+    'CP&i': 'C',
+    'CP&j': 'C',
+    'CP&k': 'C',
+    'CP&l': 'C',
+    'CP&m': 'CV',
+    'CP&n': 'C',
+    'CP&o': 'C',
+    'CP&p': 'C',
+    'CP&q': 'C',
+    'CP&r': 'C',
+    'CP&s': 'C',
+    'CP&t': 'C',
+    'CP&u': 'C',
+    'CP&v': 'C',
+    'CP&w': 'C',
+    'CP&x': 'C',
+    'CP&y': 'C',
+    'CP&z': 'C',
+    'CP&_': 'C',
+    'CP&<': 'AC',
+    'CP&-': 'AC',
+    'CP&+': 'AC',
+    'CP&/': 'AC',
+    'CP&*': 'AC',
+    'CP&^': 'AC',
+    'CP&>': 'AC',
+    'CP&=': 'AC',
+    'CP&.': 'AC',
+    'CP&,': 'AC',
+    'CP&;': 'AC',
+    'CP&:': 'AC',
+    'CP&(': 'AC',
+    'CP&)': 'AC',
+    'CP&[': 'AC',
+    'CP&]': 'AC',
+    'CP&\n': 'AC',
+    'CP&\t': 'AC',
+    'CP& ': 'AC',
+    'CP&0': 'C',
+    'CP&1': 'C',
+    'CP&2': 'C',
+    'CP&3': 'C',
+    'CP&4': 'C',
+    'CP&5': 'C',
+    'CP&6': 'C',
+    'CP&7': 'C',
+    'CP&8': 'C',
+    'CP&9': 'C',
+    'CP&\'': 'AC',
+    'CQ&a': 'C',
+    'CQ&b': 'C',
+    'CQ&c': 'C',
+    'CQ&d': 'C',
+    'CQ&e': 'C',
+    'CQ&f': 'C',
+    'CQ&g': 'C',
+    'CQ&h': 'C',
+    'CQ&i': 'C',
+    'CQ&j': 'C',
+    'CQ&k': 'C',
+    'CQ&l': 'C',
+    'CQ&m': 'C',
+    'CQ&n': 'C',
+    'CQ&o': 'C',
+    'CQ&p': 'C',
+    'CQ&q': 'C',
+    'CQ&r': 'C',
+    'CQ&s': 'C',
+    'CQ&t': 'C',
+    'CQ&u': 'C',
+    'CQ&v': 'C',
+    'CQ&w': 'C',
+    'CQ&x': 'C',
+    'CQ&y': 'C',
+    'CQ&z': 'C',
+    'CQ&_': 'C',
+    'CQ&<': 'CW',
+    'CQ&-': 'CW',
+    'CQ&+': 'CW',
+    'CQ&/': 'CW',
+    'CQ&*': 'CW',
+    'CQ&^': 'CW',
+    'CQ&>': 'CW',
+    'CQ&=': 'CW',
+    'CQ&.': 'CW',
+    'CQ&,': 'CW',
+    'CQ&;': 'CW',
+    'CQ&:': 'CW',
+    'CQ&(': 'CW',
+    'CQ&)': 'CW',
+    'CQ&[': 'CW',
+    'CQ&]': 'CW',
+    'CQ&\n': 'CW',
+    'CQ&\t': 'CW',
+    'CQ& ': 'CW',
+    'CQ&0': 'C',
+    'CQ&1': 'C',
+    'CQ&2': 'C',
+    'CQ&3': 'C',
+    'CQ&4': 'C',
+    'CQ&5': 'C',
+    'CQ&6': 'C',
+    'CQ&7': 'C',
+    'CQ&8': 'C',
+    'CQ&9': 'C',
+    'CQ&\'': 'CW',
+    'CT&a': 'C',
+    'CT&b': 'C',
+    'CT&c': 'C',
+    'CT&d': 'C',
+    'CT&e': 'C',
+    'CT&f': 'C',
+    'CT&g': 'C',
+    'CT&h': 'C',
+    'CT&i': 'C',
+    'CT&j': 'C',
+    'CT&k': 'C',
+    'CT&l': 'C',
+    'CT&m': 'C',
+    'CT&n': 'C',
+    'CT&o': 'CX',
+    'CT&p': 'C',
+    'CT&q': 'C',
+    'CT&r': 'C',
+    'CT&s': 'C',
+    'CT&t': 'C',
+    'CT&u': 'C',
+    'CT&v': 'C',
+    'CT&w': 'C',
+    'CT&x': 'C',
+    'CT&y': 'C',
+    'CT&z': 'C',
+    'CT&_': 'C',
+    'CT&<': 'AC',
+    'CT&-': 'AC',
+    'CT&+': 'AC',
+    'CT&/': 'AC',
+    'CT&*': 'AC',
+    'CT&^': 'AC',
+    'CT&>': 'AC',
+    'CT&=': 'AC',
+    'CT&.': 'AC',
+    'CT&,': 'AC',
+    'CT&;': 'AC',
+    'CT&:': 'AC',
+    'CT&(': 'AC',
+    'CT&)': 'AC',
+    'CT&[': 'AC',
+    'CT&]': 'AC',
+    'CT&\n': 'AC',
+    'CT&\t': 'AC',
+    'CT& ': 'AC',
+    'CT&0': 'C',
+    'CT&1': 'C',
+    'CT&2': 'C',
+    'CT&3': 'C',
+    'CT&4': 'C',
+    'CT&5': 'C',
+    'CT&6': 'C',
+    'CT&7': 'C',
+    'CT&8': 'C',
+    'CT&9': 'C',
+    'CT&\'': 'AC',
+    'CV&a': 'CY',
+    'CV&b': 'C',
+    'CV&c': 'C',
+    'CV&d': 'C',
+    'CV&e': 'C',
+    'CV&f': 'C',
+    'CV&g': 'C',
+    'CV&h': 'C',
+    'CV&i': 'C',
+    'CV&j': 'C',
+    'CV&k': 'C',
+    'CV&l': 'C',
+    'CV&m': 'C',
+    'CV&n': 'C',
+    'CV&o': 'C',
+    'CV&p': 'C',
+    'CV&q': 'C',
+    'CV&r': 'C',
+    'CV&s': 'C',
+    'CV&t': 'C',
+    'CV&u': 'C',
+    'CV&v': 'C',
+    'CV&w': 'C',
+    'CV&x': 'C',
+    'CV&y': 'C',
+    'CV&z': 'C',
+    'CV&_': 'C',
+    'CV&<': 'AC',
+    'CV&-': 'AC',
+    'CV&+': 'AC',
+    'CV&/': 'AC',
+    'CV&*': 'AC',
+    'CV&^': 'AC',
+    'CV&>': 'AC',
+    'CV&=': 'AC',
+    'CV&.': 'AC',
+    'CV&,': 'AC',
+    'CV&;': 'AC',
+    'CV&:': 'AC',
+    'CV&(': 'AC',
+    'CV&)': 'AC',
+    'CV&[': 'AC',
+    'CV&]': 'AC',
+    'CV&\n': 'AC',
+    'CV&\t': 'AC',
+    'CV& ': 'AC',
+    'CV&0': 'C',
+    'CV&1': 'C',
+    'CV&2': 'C',
+    'CV&3': 'C',
+    'CV&4': 'C',
+    'CV&5': 'C',
+    'CV&6': 'C',
+    'CV&7': 'C',
+    'CV&8': 'C',
+    'CV&9': 'C',
+    'CV&\'': 'AC',
+    'CX&a': 'C',
+    'CX&b': 'C',
+    'CX&c': 'C',
+    'CX&d': 'C',
+    'CX&e': 'C',
+    'CX&f': 'C',
+    'CX&g': 'C',
+    'CX&h': 'C',
+    'CX&i': 'C',
+    'CX&j': 'C',
+    'CX&k': 'C',
+    'CX&l': 'C',
+    'CX&m': 'C',
+    'CX&n': 'C',
+    'CX&o': 'C',
+    'CX&p': 'C',
+    'CX&q': 'C',
+    'CX&r': 'C',
+    'CX&s': 'C',
+    'CX&t': 'C',
+    'CX&u': 'C',
+    'CX&v': 'C',
+    'CX&w': 'C',
+    'CX&x': 'C',
+    'CX&y': 'C',
+    'CX&z': 'C',
+    'CX&_': 'C',
+    'CX&<': 'CZ',
+    'CX&-': 'CZ',
+    'CX&+': 'CZ',
+    'CX&/': 'CZ',
+    'CX&*': 'CZ',
+    'CX&^': 'CZ',
+    'CX&>': 'CZ',
+    'CX&=': 'CZ',
+    'CX&.': 'CZ',
+    'CX&,': 'CZ',
+    'CX&;': 'CZ',
+    'CX&:': 'CZ',
+    'CX&(': 'CZ',
+    'CX&)': 'CZ',
+    'CX&[': 'CZ',
+    'CX&]': 'CZ',
+    'CX&\n': 'CZ',
+    'CX&\t': 'CZ',
+    'CX& ': 'CZ',
+    'CX&0': 'C',
+    'CX&1': 'C',
+    'CX&2': 'C',
+    'CX&3': 'C',
+    'CX&4': 'C',
+    'CX&5': 'C',
+    'CX&6': 'C',
+    'CX&7': 'C',
+    'CX&8': 'C',
+    'CX&9': 'C',
+    'CX&\'': 'CZ',
+    'CY&a': 'C',
+    'CY&b': 'C',
+    'CY&c': 'C',
+    'CY&d': 'C',
+    'CY&e': 'C',
+    'CY&f': 'C',
+    'CY&g': 'C',
+    'CY&h': 'C',
+    'CY&i': 'C',
+    'CY&j': 'C',
+    'CY&k': 'C',
+    'CY&l': 'C',
+    'CY&m': 'C',
+    'CY&n': 'C',
+    'CY&o': 'C',
+    'CY&p': 'C',
+    'CY&q': 'C',
+    'CY&r': 'C',
+    'CY&s': 'C',
+    'CY&t': 'C',
+    'CY&u': 'C',
+    'CY&v': 'C',
+    'CY&w': 'C',
+    'CY&x': 'C',
+    'CY&y': 'C',
+    'CY&z': 'C',
+    'CY&_': 'C',
+    'CY&<': 'DA',
+    'CY&-': 'DA',
+    'CY&+': 'DA',
+    'CY&/': 'DA',
+    'CY&*': 'DA',
+    'CY&^': 'DA',
+    'CY&>': 'DA',
+    'CY&=': 'DA',
+    'CY&.': 'DA',
+    'CY&,': 'DA',
+    'CY&;': 'DA',
+    'CY&:': 'DA',
+    'CY&(': 'DA',
+    'CY&)': 'DA',
+    'CY&[': 'DA',
+    'CY&]': 'DA',
+    'CY&\n': 'DA',
+    'CY&\t': 'DA',
+    'CY& ': 'DA',
+    'CY&0': 'C',
+    'CY&1': 'C',
+    'CY&2': 'C',
+    'CY&3': 'C',
+    'CY&4': 'C',
+    'CY&5': 'C',
+    'CY&6': 'C',
+    'CY&7': 'C',
+    'CY&8': 'C',
+    'CY&9': 'C',
+    'CY&\'': 'DA'
 }
 
 def criar_cases():
-	finais = ['L', 'M', 'N', 'O', 'P', 'R','RA', 'S', 'T', 'U', 'V', 'X', 'AC', 'AN', 'AM', 'AO', 'AP', 'AQ', 'AR', 'AS',
-	  'AT', 'BI', 'BL', 'BM', 'BR', 'BU', 'BY', 'CA', 'CB', 'CD', 'CE', 'CN', 'CR', 'CS', 'CU', 'CW', 'CZ', 'DA',
-	  'ER']
-	file = open('cod_direta.py', 'w+')
-	file.write(f"linhaGlobal = 0\n")
-	file.write(f"colunaGlobal = 0\n")
-	file.write(f"tabelaSimbolos = {{}}\n")
-	file.write(f"def lex():\n")
-	file.write(f"\tstate = 'A'\n")
-	file.write(f"\tc = ''\n")
-	file.write(f"\tid = ''\n")
-	file.write(f"\tglobal linhaGlobal\n")
-	file.write(f"\tglobal colunaGlobal\n")
-	file.write(f"\tglobal tabelaSimbolos\n")
-	file.write(f"\tcoluna = colunaGlobal\n")
-	file.write(f"\tlinha = linhaGlobal\n")
-	file.write(f"\tlerProx = True\n")
-	file.write(f"\twhile True:\n")
-	file.write(f"\t\tmatch state:\n")
-	estadoAnterior = ''
-	finalApareceu = []
-	finalTratado = []
-	for key, value in diagrama.items():
-		key_ = key.split('&')
+    finais = ['L', 'M', 'N', 'O', 'P', 'R','RA', 'S', 'T', 'U', 'V', 'X', 'AC', 'AN', 'AM', 'AO', 'AP', 'AQ', 'AR', 'AS',
+      'AT', 'BI', 'BL', 'BM', 'BR', 'BU', 'BY', 'CA', 'CB', 'CD', 'CE', 'CN', 'CR', 'CS', 'CU', 'CW', 'CZ', 'DA',
+      'ER']
+    file = open('cod_direta.py', 'w+')
+    file.write(f"linhaGlobal = 0\n")
+    file.write(f"colunaGlobal = 0\n")
+    file.write(f"tabelaSimbolos = {{}}\n")
+    file.write(f"def lex():\n")
+    file.write(f"\tstate = 'A'\n")
+    file.write(f"\tc = ''\n")
+    file.write(f"\tid = ''\n")
+    file.write(f"\tglobal linhaGlobal\n")
+    file.write(f"\tglobal colunaGlobal\n")
+    file.write(f"\tglobal tabelaSimbolos\n")
+    file.write(f"\tcoluna = colunaGlobal\n")
+    file.write(f"\tlinha = linhaGlobal\n")
+    file.write(f"\tlerProx = True\n")
+    file.write(f"\twhile True:\n")
+    file.write(f"\t\tmatch state:\n")
+    estadoAnterior = ''
+    finalApareceu = []
+    finalTratado = []
+    for key, value in diagrama.items():
+        key_ = key.split('&')
 
-		if key_[0] != estadoAnterior:
-			for final in finalApareceu:
-				file.write(f"\t\t\tcase '{final}':\n")
-				#file.write(f"\t\t\t\tprint('Tratar retorno estado final {final}')\n")
-				#file.write(f"\t\t\t\tprint(f\"Identificador montado {{id}}\")\n")
-				file.write(f"\t\t\t\tstate = 'A'\n")
-				if final != 'AS' and final != 'X' and final != 'ER':
-					if final not in ['AP', 'AO', 'AR']:
-						file.write(
-							f"\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else '')))) \n")
-						file.write(f"\t\t\t\tlerProx = False\n")
-						file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
-						#file.write(f"\t\t\t\t\tprint(id)\n")
-						#file.write(f"\t\t\t\t\tprint(c)\n")
-						file.write(f"\t\t\t\t\tif id != c:\n")
-						file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
-						file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
-						file.write(f"\t\t\t\t\t\treturn Token(tipo ,id[:-1].strip(),linha,coluna)\n")
-						file.write(f"\t\t\t\t\telse:\n")
-						file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
-						file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
-						file.write(f"\t\t\t\t\ttabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])\n")
-						file.write(f"\t\t\t\t\treturn Token(tipo,id[:-1],linha,coluna)\n")
-						file.write(f"\t\t\t\telif c in [' ',';',')','+']:\n")
-						#file.write(f"\t\t\t\t\tprint(id)\n")
-						#file.write(f"\t\t\t\t\tprint(c)\n")
-						file.write(f"\t\t\t\t\tif id != c:\n")
-						file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
-						file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
-						file.write(f"\t\t\t\t\t\treturn Token(tipo,id[:-1].strip(),linha,coluna)\n")
-						file.write(f"\t\t\t\t\telse:\n")
-						file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
-						file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
-						file.write(f"\t\t\t\telse:\n")
-						#file.write(f"\t\t\t\t\tprint(id)\n")
-						#file.write(f"\t\t\t\t\tprint(c)\n")
-						file.write(f"\t\t\t\t\tif id != c:\n")
-						file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
-						file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
-						file.write(f"\t\t\t\t\t\treturn Token(tipo,id[:-1].strip(),linha,coluna)\n")
-						file.write(f"\t\t\t\t\telse:\n")
-						file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
-						file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
+        if key_[0] != estadoAnterior:
+            for final in finalApareceu:
+                file.write(f"\t\t\tcase '{final}':\n")
+                #file.write(f"\t\t\t\tprint('Tratar retorno estado final {final}')\n")
+                #file.write(f"\t\t\t\tprint(f\"Identificador montado {{id}}\")\n")
+                file.write(f"\t\t\t\tstate = 'A'\n")
+                if final != 'AS' and final != 'X' and final != 'ER':
+                    if final not in ['AP', 'AO', 'AR','AT','CA','CS']:
+                        file.write(
+                            f"\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else '')))) \n")
+                        file.write(f"\t\t\t\tlerProx = False\n")
+                        file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
+                        #file.write(f"\t\t\t\t\tprint(id)\n")
+                        #file.write(f"\t\t\t\t\tprint(c)\n")
+                        file.write(f"\t\t\t\t\tif id != c:\n")
+                        file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
+                        file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
+                        file.write(f"\t\t\t\t\t\treturn Token(tipo ,id[:-1].strip(),linha,coluna)\n")
+                        file.write(f"\t\t\t\t\telse:\n")
+                        file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
+                        file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
+                        file.write(f"\t\t\t\t\ttabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])\n")
+                        file.write(f"\t\t\t\t\treturn Token(tipo,id[:-1],linha,coluna)\n")
+                        file.write(f"\t\t\t\telif c in [' ',';',')','+']:\n")
+                        #file.write(f"\t\t\t\t\tprint(id)\n")
+                        #file.write(f"\t\t\t\t\tprint(c)\n")
+                        file.write(f"\t\t\t\t\tif id != c:\n")
+                        file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
+                        file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
+                        file.write(f"\t\t\t\t\t\treturn Token(tipo,id[:-1].strip(),linha,coluna)\n")
+                        file.write(f"\t\t\t\t\telse:\n")
+                        file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
+                        file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
+                        file.write(f"\t\t\t\telse:\n")
+                        #file.write(f"\t\t\t\t\tprint(id)\n")
+                        #file.write(f"\t\t\t\t\tprint(c)\n")
+                        file.write(f"\t\t\t\t\tif id != c:\n")
+                        file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
+                        file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
+                        file.write(f"\t\t\t\t\t\treturn Token(tipo,id[:-1].strip(),linha,coluna)\n")
+                        file.write(f"\t\t\t\t\telse:\n")
+                        file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
+                        file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
                     elif final in ['AT','CA','CS']:
                         file.write(
                             f"\t\t\t\ttipo = 'numero'\n")
@@ -4041,124 +4041,124 @@ def criar_cases():
                         file.write(f"\t\t\t\t\telse:\n")
                         file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
                         file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
-					else:
-						#file.write(f"\t\t\t\tprint(id)\n")
-						#file.write(f"\t\t\t\tprint(c)\n")
-						file.write(f"\t\t\t\ttabelaSimbolos[id.strip()] = Atributo('op_rela',id.strip())\n")
-						file.write(f"\t\t\t\treturn Token('op_rela',id.strip(),linha,coluna)\n")
-				elif final == 'X':
-					file.write(f"\t\t\t\tlerProx = True\n")
-				elif final == 'ER':
-					file.write(f"\t\t\t\treturn Token('Erro','',linha,colunaGlobal)\n")
-				else:
-					file.write(f"\t\t\t\tlerProx = False\n")
-				finalTratado.append(final)
-				finalApareceu = []
+                    else:
+                        #file.write(f"\t\t\t\tprint(id)\n")
+                        #file.write(f"\t\t\t\tprint(c)\n")
+                        file.write(f"\t\t\t\ttabelaSimbolos[id.strip()] = Atributo('op_rela',id.strip())\n")
+                        file.write(f"\t\t\t\treturn Token('op_rela',id.strip(),linha,coluna)\n")
+                elif final == 'X':
+                    file.write(f"\t\t\t\tlerProx = True\n")
+                elif final == 'ER':
+                    file.write(f"\t\t\t\treturn Token('Erro','',linha,colunaGlobal)\n")
+                else:
+                    file.write(f"\t\t\t\tlerProx = False\n")
+                finalTratado.append(final)
+                finalApareceu = []
 
-			if key_[0] == 'A':
-				file.write(f"\t\t\tcase '{key_[0]}':\n")
-				file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ']:\n")
-				file.write(f"\t\t\t\t\tid = c \n")
-				file.write(f"\t\t\t\telse:\n")
-				file.write(f"\t\t\t\t\tid = ''\n")
-				file.write('\t\t\t\tif lerProx:\n')
-				file.write('\t\t\t\t\tc = nextChar()\n')
-				file.write('\t\t\t\t\tid += c\n')
-				file.write('\t\t\t\t\tcolunaGlobal += 1\n')
-				file.write('\t\t\t\telse:\n')
-				file.write('\t\t\t\t\tlerProx = True\n')
-			else:
-				file.write(f"\t\t\tcase '{key_[0]}':\n")
-				file.write('\t\t\t\tc = nextChar()\n')
-				file.write('\t\t\t\tid += c\n')
-				file.write('\t\t\t\tcolunaGlobal += 1\n')
-			estadoAnterior = key_[0]
+            if key_[0] == 'A':
+                file.write(f"\t\t\tcase '{key_[0]}':\n")
+                file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ']:\n")
+                file.write(f"\t\t\t\t\tid = c \n")
+                file.write(f"\t\t\t\telse:\n")
+                file.write(f"\t\t\t\t\tid = ''\n")
+                file.write('\t\t\t\tif lerProx:\n')
+                file.write('\t\t\t\t\tc = nextChar()\n')
+                file.write('\t\t\t\t\tid += c\n')
+                file.write('\t\t\t\t\tcolunaGlobal += 1\n')
+                file.write('\t\t\t\telse:\n')
+                file.write('\t\t\t\t\tlerProx = True\n')
+            else:
+                file.write(f"\t\t\tcase '{key_[0]}':\n")
+                file.write('\t\t\t\tc = nextChar()\n')
+                file.write('\t\t\t\tid += c\n')
+                file.write('\t\t\t\tcolunaGlobal += 1\n')
+            estadoAnterior = key_[0]
 
-		#print(key)
-		caracter = "\\n" if key_[1] == '\n' else ("\\t" if key_[1] == '\t' else ("\\'" if key_[1] == '\'' else key_[1]))
+        #print(key)
+        caracter = "\\n" if key_[1] == '\n' else ("\\t" if key_[1] == '\t' else ("\\'" if key_[1] == '\'' else key_[1]))
 
-		if key_[1] == 'a' or (key_[0] == 'AN' and key_[1] == '-'):
-			file.write(f"\t\t\t\tif c.lower() == '{caracter}':\n")
-		else:
-			file.write(f"\t\t\t\telif c.lower() == '{caracter}':\n")
-			if key_[1] == '\n':
-				file.write('\t\t\t\t\tlinhaGlobal += 1\n')
-				file.write('\t\t\t\t\tcolunaGlobal = 0\n')
-				file.write('\t\t\t\t\tcoluna = 0\n')
+        if key_[1] == 'a' or (key_[0] == 'AN' and key_[1] == '-'):
+            file.write(f"\t\t\t\tif c.lower() == '{caracter}':\n")
+        else:
+            file.write(f"\t\t\t\telif c.lower() == '{caracter}':\n")
+            if key_[1] == '\n':
+                file.write('\t\t\t\t\tlinhaGlobal += 1\n')
+                file.write('\t\t\t\t\tcolunaGlobal = 0\n')
+                file.write('\t\t\t\t\tcoluna = 0\n')
 
-		file.write(f"\t\t\t\t\tstate = '{value}'\n")
-		#file.write(f"\t\t\t\t\tprint(f\"leu caracter {caracter} foi para {value} linha {{linhaGlobal}} colunaG {{colunaGlobal}} coluna {{coluna}}\")\n")
+        file.write(f"\t\t\t\t\tstate = '{value}'\n")
+        #file.write(f"\t\t\t\t\tprint(f\"leu caracter {caracter} foi para {value} linha {{linhaGlobal}} colunaG {{colunaGlobal}} coluna {{coluna}}\")\n")
 
-		if key_[0] == 'AN':
-			file.write(f"\t\t\t\telse:\n")
-			#file.write(f"\t\t\t\t\tprint('Tratar retorno estado final {final}')\n")
-			#file.write(f"\t\t\t\t\tprint(f\"Identificador montado {{id}}\")\n")
-			file.write(f"\t\t\t\t\tstate = 'A'\n")
-			file.write(f"\t\t\t\t\tlerProx = False\n")
-			file.write(
-				f"\t\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>=','='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ('numero' if re.search('[0-9]([0-9]?)(.[0-9]([0-9]*)?)?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else ('identificador' if re.search('([a-zA-Z_]+)([a-zA-Z0-9_])*',id.strip()) else ''))))\n")
+        if key_[0] == 'AN':
+            file.write(f"\t\t\t\telse:\n")
+            #file.write(f"\t\t\t\t\tprint('Tratar retorno estado final {final}')\n")
+            #file.write(f"\t\t\t\t\tprint(f\"Identificador montado {{id}}\")\n")
+            file.write(f"\t\t\t\t\tstate = 'A'\n")
+            file.write(f"\t\t\t\t\tlerProx = False\n")
+            file.write(
+                f"\t\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>=','='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ('numero' if re.search('[0-9]([0-9]?)(.[0-9]([0-9]*)?)?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else ('identificador' if re.search('([a-zA-Z_]+)([a-zA-Z0-9_])*',id.strip()) else ''))))\n")
 
-			file.write(f"\t\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
-			file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
-			file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
-			file.write(f"\t\t\t\t\t\treturn Token(tipo,id[:-1].strip(),linha,coluna)\n")
-			file.write(f"\t\t\t\t\telif c in ['\\n', '\\t', ' ',';',')','+']:\n")
-			file.write(f"\t\t\t\t\t\ttabelaSimbolos[id] = Atributo(tipo,id)\n")
-			file.write(f"\t\t\t\t\t\treturn Token(tipo,id,linha,coluna)\n")
-			file.write(f"\t\t\t\t\telse:\n")
-			file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
-			file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
+            file.write(f"\t\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
+            file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
+            file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
+            file.write(f"\t\t\t\t\t\treturn Token(tipo,id[:-1].strip(),linha,coluna)\n")
+            file.write(f"\t\t\t\t\telif c in ['\\n', '\\t', ' ',';',')','+']:\n")
+            file.write(f"\t\t\t\t\t\ttabelaSimbolos[id] = Atributo(tipo,id)\n")
+            file.write(f"\t\t\t\t\t\treturn Token(tipo,id,linha,coluna)\n")
+            file.write(f"\t\t\t\t\telse:\n")
+            file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
+            file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
 
-		if value in finais and value not in finalTratado and value not in finalApareceu and value != 'AN':
-			finalApareceu.append(value)
+        if value in finais and value not in finalTratado and value not in finalApareceu and value != 'AN':
+            finalApareceu.append(value)
 
-		if key_[1] == '\'':
-			file.write(f"\t\t\t\telse:\n")
-			file.write(f"\t\t\t\t\tstate = 'ER'\n")
-			file.write(
-				f"\t\t\t\t\treturn Token('Erro',f\"Erro - caracter {{c}} nao e reconhecido\",linha,coluna)\n")
+        if key_[1] == '\'':
+            file.write(f"\t\t\t\telse:\n")
+            file.write(f"\t\t\t\t\tstate = 'ER'\n")
+            file.write(
+                f"\t\t\t\t\treturn Token('Erro',f\"Erro - caracter {{c}} nao e reconhecido\",linha,coluna)\n")
 
-	file.write(f"\t\t\tcase 'W':\n")
-	file.write(f"\t\t\t\tc = nextChar()\n")
-	file.write(f"\t\t\t\tif c == ']':\n")
-	file.write(f"\t\t\t\t\tstate = 'X'\n")
-	file.write(f"\t\t\t\telse:\n")
-	file.write(f"\t\t\t\t\tstate = 'W'\n")
+    file.write(f"\t\t\tcase 'W':\n")
+    file.write(f"\t\t\t\tc = nextChar()\n")
+    file.write(f"\t\t\t\tif c == ']':\n")
+    file.write(f"\t\t\t\t\tstate = 'X'\n")
+    file.write(f"\t\t\t\telse:\n")
+    file.write(f"\t\t\t\t\tstate = 'W'\n")
 
 
 
-	for final in finalApareceu:
-		if final == 'AN':
-			file.write(f"\t\t\telse:\n")
-		else:
-			file.write(f"\t\t\tcase '{final}':\n")
+    for final in finalApareceu:
+        if final == 'AN':
+            file.write(f"\t\t\telse:\n")
+        else:
+            file.write(f"\t\t\tcase '{final}':\n")
 
-		#file.write(f"\t\t\t\tprint('Tratar retorno estado final {final}')\n")
-		file.write(f"\t\t\t\tstate = 'A'\n")
-		file.write(f"\t\t\t\tlerProx = False\n")
-		if final != 'AS':
-			file.write(f"\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>=','='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ('numero' if re.search('[0-9]([0-9]?)(.[0-9]([0-9]*)?)?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else ('identificador' if re.search('([a-zA-Z_]+)([a-zA-Z0-9_])*',id.strip()) else ''))))\n")
-			file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ']:\n")
-			file.write(f"\t\t\t\t\tf.seek(f.tell()-1)\n")
-			file.write(f"\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
-			file.write(f"\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
-		finalTratado.append(final)
-		finalApareceu = []
+        #file.write(f"\t\t\t\tprint('Tratar retorno estado final {final}')\n")
+        file.write(f"\t\t\t\tstate = 'A'\n")
+        file.write(f"\t\t\t\tlerProx = False\n")
+        if final != 'AS':
+            file.write(f"\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>=','='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ('numero' if re.search('[0-9]([0-9]?)(.[0-9]([0-9]*)?)?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else ('identificador' if re.search('([a-zA-Z_]+)([a-zA-Z0-9_])*',id.strip()) else ''))))\n")
+            file.write(f"\t\t\t\tif c not in ['\\n', '\\t', ' ']:\n")
+            file.write(f"\t\t\t\t\tf.seek(f.tell()-1)\n")
+            file.write(f"\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
+            file.write(f"\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
+        finalTratado.append(final)
+        finalApareceu = []
 
-	file.write(f"\n")
-	file.write(f"def simuladorSintatico():\n")
-	file.write(f"\tglobal tabelaSimbolos\n")
-	file.write(f"\twhile True:\n")
-	file.write(f"\t\ttry:\n")
-	file.write(f"\t\t\ttoken = lex()\n")
-	file.write(f"\t\t\tprint(f\"<{{token.tipo}}, {{token.atributo}}, {{token.linha}}, {{token.coluna}}>\")\n")
-	file.write(f"\t\t\tif token.tipo == 'Erro':\n")
-	file.write(f"\t\t\t\tbreak\n")
-	file.write(f"\t\texcept EOFError:\n")
-	file.write(f"\t\t\tbreak\n")
-	file.write(f"\tprint('Tabela de simbolos')\n")
-	file.write(f"\tfor key, value in tabelaSimbolos.items():\n")
-	file.write(f"\t\tprint(f\"key {{key}} nome {{value.nome}} valor {{value.valor}}\")\n")
-	file.write(f"simuladorSintatico()\n")
+    file.write(f"\n")
+    file.write(f"def simuladorSintatico():\n")
+    file.write(f"\tglobal tabelaSimbolos\n")
+    file.write(f"\twhile True:\n")
+    file.write(f"\t\ttry:\n")
+    file.write(f"\t\t\ttoken = lex()\n")
+    file.write(f"\t\t\tprint(f\"<{{token.tipo}}, {{token.atributo}}, {{token.linha}}, {{token.coluna}}>\")\n")
+    file.write(f"\t\t\tif token.tipo == 'Erro':\n")
+    file.write(f"\t\t\t\tbreak\n")
+    file.write(f"\t\texcept EOFError:\n")
+    file.write(f"\t\t\tbreak\n")
+    file.write(f"\tprint('Tabela de simbolos')\n")
+    file.write(f"\tfor key, value in tabelaSimbolos.items():\n")
+    file.write(f"\t\tprint(f\"key {{key}} nome {{value.nome}} valor {{value.valor}}\")\n")
+    file.write(f"simuladorSintatico()\n")
 
 criar_cases()
