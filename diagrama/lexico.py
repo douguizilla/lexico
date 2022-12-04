@@ -7621,7 +7621,7 @@ def lex():
 					state = 'C'
 					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
-					state = 'C'
+					state = 'BW'
 					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
@@ -7633,7 +7633,7 @@ def lex():
 					state = 'C'
 					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
-					state = 'BW'
+					state = 'C'
 					print(f"leu caracter i foi para BW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
@@ -11243,7 +11243,7 @@ def lex():
 				id += c
 				colunaGlobal += 1
 				if c.lower() == 'a':
-					state = 'CQ'
+					state = 'C'
 					print(f"leu caracter a foi para CQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
@@ -11255,7 +11255,7 @@ def lex():
 					state = 'C'
 					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
-					state = 'C'
+					state = 'CQ'
 					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
