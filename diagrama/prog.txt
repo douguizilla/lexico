@@ -1,4 +1,2 @@
-programa prog2
-inicio
-    x <-- 60.0e2
+(60.0e2)
 fim
