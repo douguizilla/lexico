@@ -744,7 +744,7 @@ diagrama = {
     'Z&b': 'AT',
     'Z&c': 'AT',
     'Z&d': 'AT',
-    'Z&e': 'AT',
+    'Z&e': 'BZ',
     'Z&f': 'AT',
     'Z&g': 'AT',
     'Z&h': 'AT',
@@ -3965,7 +3965,7 @@ def criar_cases():
             for final in finalApareceu:
                 file.write(f"\t\t\tcase '{final}':\n")
                 #file.write(f"\t\t\t\tprint('Tratar retorno estado final {final}')\n")
-                file.write(f"\t\t\t\tprint(f\"Identificador montado {{id}}\")\n")
+                #file.write(f"\t\t\t\tprint(f\"Identificador montado {{id}}\")\n")
                 file.write(f"\t\t\t\tstate = 'A'\n")
                 if final != 'AS' and final != 'X' and final != 'ER':
                     if final not in ['AP', 'AO', 'AR','AT','CA','CS','BU', 'CN', 'CB']:
@@ -4010,8 +4010,8 @@ def criar_cases():
                         file.write(f"\t\t\t\tlerProx = False\n")
                         file.write(
                             f"\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
-                        file.write(f"\t\t\t\t\tprint(id)\n")
-                        file.write(f"\t\t\t\t\tprint(c)\n")
+                        #file.write(f"\t\t\t\t\tprint(id)\n")
+                        #file.write(f"\t\t\t\t\tprint(c)\n")
                         file.write(f"\t\t\t\t\tif id != c:\n")
                         file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
                         file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
@@ -4021,9 +4021,9 @@ def criar_cases():
                         file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
                         file.write(f"\t\t\t\t\ttabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])\n")
                         file.write(f"\t\t\t\t\treturn Token(tipo,id[:-1],linha,coluna)\n")
-                        file.write(f"\t\t\t\telif c in [' ',';',')','+']:\n")
-                        file.write(f"\t\t\t\t\tprint(id)\n")
-                        file.write(f"\t\t\t\t\tprint(c)\n")
+                        file.write(f"\t\t\t\telif c in [' ',')','+']:\n")
+                        #file.write(f"\t\t\t\t\tprint(id)\n")
+                        #file.write(f"\t\t\t\t\tprint(c)\n")
                         file.write(f"\t\t\t\t\tif id != c:\n")
                         file.write(f"\t\t\t\t\t\tlerProx = False\n")
                         file.write(f"\t\t\t\t\t\tf.seek(f.tell()-2)\n")
@@ -4033,8 +4033,8 @@ def criar_cases():
                         file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
                         file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
                         file.write(f"\t\t\t\telse:\n")
-                        file.write(f"\t\t\t\t\tprint(id)\n")
-                        file.write(f"\t\t\t\t\tprint(c)\n")
+                        #file.write(f"\t\t\t\t\tprint(id)\n")
+                        #file.write(f"\t\t\t\t\tprint(c)\n")
                         file.write(f"\t\t\t\t\tif id != c:\n")
                         file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
                         file.write(f"\t\t\t\t\t\tprint('voltei uma casa')\n")
@@ -4050,8 +4050,8 @@ def criar_cases():
                         file.write(f"\t\t\t\tlerProx = False\n")
                         file.write(
                             f"\t\t\t\tif c not in ['\\n', '\\t', ' ','+','-','/',',','*',':',';','(',')','=']:\n")
-                        file.write(f"\t\t\t\t\tprint(id)\n")
-                        file.write(f"\t\t\t\t\tprint(c)\n")
+                        #file.write(f"\t\t\t\t\tprint(id)\n")
+                        #file.write(f"\t\t\t\t\tprint(c)\n")
                         file.write(f"\t\t\t\t\tif id != c:\n")
                         file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
                         file.write(f"\t\t\t\t\t\ttabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())\n")
@@ -4062,8 +4062,8 @@ def criar_cases():
                         file.write(f"\t\t\t\t\ttabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])\n")
                         file.write(f"\t\t\t\t\treturn Token(tipo,id[:-1],linha,coluna)\n")
                         file.write(f"\t\t\t\telif c in [' ',';',')','+']:\n")
-                        file.write(f"\t\t\t\t\tprint(id)\n")
-                        file.write(f"\t\t\t\t\tprint(c)\n")
+                        #file.write(f"\t\t\t\t\tprint(id)\n")
+                        #file.write(f"\t\t\t\t\tprint(c)\n")
                         file.write(f"\t\t\t\t\tif id != c:\n")
                         file.write(f"\t\t\t\t\t\tlerProx = False\n")
                         file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
@@ -4073,8 +4073,8 @@ def criar_cases():
                         file.write(f"\t\t\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
                         file.write(f"\t\t\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
                         file.write(f"\t\t\t\telse:\n")
-                        file.write(f"\t\t\t\t\tprint(id)\n")
-                        file.write(f"\t\t\t\t\tprint(c)\n")
+                        #file.write(f"\t\t\t\t\tprint(id)\n")
+                        #file.write(f"\t\t\t\t\tprint(c)\n")
                         file.write(f"\t\t\t\t\tif id != c:\n")
                         file.write(f"\t\t\t\t\t\tf.seek(f.tell()-1)\n")
                         file.write(f"\t\t\t\t\t\tprint('voltei uma casa')\n")
@@ -4167,7 +4167,7 @@ def criar_cases():
                 file.write('\t\t\t\t\tcoluna = 0\n')
 
         file.write(f"\t\t\t\t\tstate = '{value}'\n")
-        file.write(f"\t\t\t\t\tprint(f\"leu caracter {caracter} foi para {value} linha {{linhaGlobal}} colunaG {{colunaGlobal}} coluna {{coluna}}\")\n")
+        #file.write(f"\t\t\t\t\tprint(f\"leu caracter {caracter} foi para {value} linha {{linhaGlobal}} colunaG {{colunaGlobal}} coluna {{coluna}}\")\n")
 
         if key_[0] == 'AN':
             file.write(f"\t\t\t\telse:\n")
