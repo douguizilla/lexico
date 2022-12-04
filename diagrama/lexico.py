@@ -26,7 +26,7 @@ class Atributo:
 		self.nome = nome
 		self.valor = valor
 
-linhaGlobal = 0
+linhaGlobal = 1
 colunaGlobal = 0
 tabelaSimbolos = {}
 def lex():
@@ -37,6 +37,7 @@ def lex():
 	global colunaGlobal
 	global tabelaSimbolos
 	coluna = colunaGlobal
+	linha = linhaGlobal
 	lerProx = True
 	while True:
 		match state:
@@ -639,28 +640,28 @@ def lex():
 					if id != c:
 						f.seek(f.tell()-1)
 						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-						return Token(tipo ,id[:-1].strip(),linhaGlobal,coluna)
+						return Token(tipo ,id[:-1].strip(),linha,coluna)
 					else:
 						tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-						return Token(tipo,id.strip(),linhaGlobal,coluna)
+						return Token(tipo,id.strip(),linha,coluna)
 					tabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])
-					return Token(tipo,id[:-1],linhaGlobal,coluna)
+					return Token(tipo,id[:-1],linha,coluna)
 				elif c in [' ',';',')','+']:
 					if id != c:
 						f.seek(f.tell()-1)
 						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-						return Token(tipo,id[:-1].strip(),linhaGlobal,coluna)
+						return Token(tipo,id[:-1].strip(),linha,coluna)
 					else:
 						tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-						return Token(tipo,id.strip(),linhaGlobal,coluna)
+						return Token(tipo,id.strip(),linha,coluna)
 				else:
 					if id != c:
 						f.seek(f.tell()-1)
 						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-						return Token(tipo,id[:-1].strip(),linhaGlobal,coluna)
+						return Token(tipo,id[:-1].strip(),linha,coluna)
 					else:
 						tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-						return Token(tipo,id.strip(),linhaGlobal,coluna)
+						return Token(tipo,id.strip(),linha,coluna)
 			case 'C':
 				c = nextChar()
 				id += c
