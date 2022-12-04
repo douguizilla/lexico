@@ -2169,11 +2169,11 @@ diagrama = {
     'BG&b': 'C',
     'BG&c': 'C',
     'BG&d': 'C',
-    'BG&e': 'C',
+    'BG&e': 'BW',
     'BG&f': 'C',
     'BG&g': 'C',
     'BG&h': 'C',
-    'BG&i': 'BW',
+    'BG&i': 'C',
     'BG&j': 'C',
     'BG&k': 'C',
     'BG&l': 'C',
@@ -3248,11 +3248,11 @@ diagrama = {
     'CH&8': 'C',
     'CH&9': 'C',
     'CH&\'': 'AC',
-    'CI&a': 'CQ',
+    'CI&a': 'C',
     'CI&b': 'C',
     'CI&c': 'C',
     'CI&d': 'C',
-    'CI&e': 'C',
+    'CI&e': 'CQ',
     'CI&f': 'C',
     'CI&g': 'C',
     'CI&h': 'C',
@@ -3968,7 +3968,7 @@ def criar_cases():
                 file.write(f"\t\t\t\tprint(f\"Identificador montado {{id}}\")\n")
                 file.write(f"\t\t\t\tstate = 'A'\n")
                 if final != 'AS' and final != 'X' and final != 'ER':
-                    if final not in ['AP', 'AO', 'AR','AT','CA','CS','BU', 'CN', 'CB','BL']:
+                    if final not in ['AP', 'AO', 'AR','AT','CA','CS','BU', 'CN', 'CB','BL','CW']:
                         file.write(
                             f"\t\t\t\ttipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else id.strip())))) \n")
                         file.write(f"\t\t\t\tlerProx = False\n")
@@ -4090,7 +4090,7 @@ def criar_cases():
                         file.write(f"\t\t\t\tlerProx = False\n")
                         file.write(f"\t\t\t\ttabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())\n")
                         file.write(f"\t\t\t\treturn Token(tipo,id.strip(),linha,coluna)\n")
-                    elif final in ['BU', 'CN', 'CB']:
+                    elif final in ['BU', 'CN', 'CB', 'CW']:
                         file.write(
                             f"\t\t\t\ttipo = id.strip()\n")
                         file.write(f"\t\t\t\tlerProx = False\n")

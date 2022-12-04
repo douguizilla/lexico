@@ -7593,8 +7593,8 @@ def lex():
 					state = 'C'
 					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
-					state = 'C'
-					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'BW'
+					print(f"leu caracter e foi para BW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
 					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
@@ -7605,8 +7605,8 @@ def lex():
 					state = 'C'
 					print(f"leu caracter h foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'i':
-					state = 'BW'
-					print(f"leu caracter i foi para BW linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'C'
+					print(f"leu caracter i foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'j':
 					state = 'C'
 					print(f"leu caracter j foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
@@ -11215,8 +11215,8 @@ def lex():
 				id += c
 				colunaGlobal += 1
 				if c.lower() == 'a':
-					state = 'CQ'
-					print(f"leu caracter a foi para CQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'C'
+					print(f"leu caracter a foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'b':
 					state = 'C'
 					print(f"leu caracter b foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
@@ -11227,8 +11227,8 @@ def lex():
 					state = 'C'
 					print(f"leu caracter d foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'e':
-					state = 'C'
-					print(f"leu caracter e foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
+					state = 'CQ'
+					print(f"leu caracter e foi para CQ linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
 				elif c.lower() == 'f':
 					state = 'C'
 					print(f"leu caracter f foi para C linha {linhaGlobal} colunaG {colunaGlobal} coluna {coluna}")
@@ -12761,11 +12761,9 @@ def lex():
 			case 'CW':
 				print(f"Identificador montado {id}")
 				state = 'A'
-				tipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else id.strip())))) 
+				tipo = id.strip()
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-					print(id)
-					print(c)
 					if id != c:
 						f.seek(f.tell()-1)
 						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
