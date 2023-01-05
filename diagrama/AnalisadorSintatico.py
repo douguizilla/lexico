@@ -23,7 +23,7 @@ numero_colunasVet = df2.shape[1]
 
 
 
-#Função para pegar a tupla(linhas,coluna) de determinado Não Terminal. Ex: pegaLinhaColunaNaoTerminal("S")
+#Função para pegar a tupla(linhas,coluna) de determinado simbolo. Ex: pegaLinhaColunaNaoTerminal("S")
 def pega_linha_coluna(simbolo):
     for i in range(0,numero_linhasTab):
         for j in range(0,numero_colunasTab):
@@ -45,7 +45,6 @@ def pega_vetor_producoes(NTerminal, Terminal):
     valor = tabela_preditiva[linhaNTerminal][colunaTerminal]
     producao = vetor_producoes[valor-1][1]
 
-    print("O valor da produção é: " ,valor, " com resultado: ",producao)
     return producao.split()
 
 
@@ -68,6 +67,7 @@ class Pilha:
 
     def __init__(self):
         self.topo = None
+        self.lista = []
         self.tamanho = 0
 
     def __repr__(self):
@@ -77,6 +77,8 @@ class Pilha:
 
         # Cria um novo nodo com o dado a ser armazenado.
         novo_nodo = Nodo(novo_dado)
+
+        self.lista.append(novo_dado)
 
         # Faz com que o novo nodo seja o topo da pilha.
         novo_nodo.anterior = self.topo
@@ -95,39 +97,111 @@ class Pilha:
 
         self.tamanho = self.tamanho - 1
 
+        self.lista.pop()
+
     def pilha_vazia(self):
         if self.topo == None:
             return True
         else:
             return False
 
+    def pega_topo(self):
+        if self.pilha_vazia():
+            return None
+        else:
+            return self.lista[len(self.lista)-1]
 
-def main():
+#Teste Apenas
+def lex():
+    return
+
+
+
+def algoritmo_analise_preditiva():
+    terminal = ["programa", "identificador", "inicio", "fim", "tipo", ";", ":", "se", "(", ")", "entao", "senao", "enquanto", "faca", "repita", "<--", "op_rela", "+", "-", "*", "/", "^", "numero", "letra", ",", "$"]
     pilha = Pilha()
-    print("Pilha vazia: ", pilha)
+    pilha.push("S")
+    proxToken = lex()
+    while pilha.pilha_vazia() == False:
+        x = pilha.pega_topo()
+        if x in terminal:
+            if x == proxToken:
+                pilha.pop()
+                proxToken = lex()
+            else:
+                print("Erro. Token inesperado.")
+                exit()
+        else:
+            valor = pegaValorTabela(x, proxToken)
+            if pegaValorTabela(x,proxToken) == -1:
+                print("Erro. Token inesperado.")
+                exit()
+            else:
+                #Trata Produção : Construi a Arovore
+                #Retira o topo da pilha
+                pilha.pop()
+                #Pega vetor de producao correspondente
+                producao = pega_vetor_producoes(x,proxToken)
+                #Empilha todos os simbolos na ordem inversa
+                for i in range (0, len(producao)):
+                    pilha.push(producao[i])
+    if proxToken != "$":
+        print("Erro. Token inesperado.")
+        exit()
 
-    # Insere elementos na pilha.
-
-    pilha.push("sadas")
-    pilha.push(20)
-    pilha.push(30)
-    pilha.push(40)
-
-    pilha.pop()
-    pilha.pop()
-
-    print(pilha)
-
-    if pilha.pilha_vazia():
-        print("A pilha está vazia")
     else:
-        print("A pilha não esta vazia")
+        #Retorna Arvore construida
+        return
 
-    print("O tamanho da pilha é: ", pilha.tamanho)
 
+
+def algoritmo_analise_preditiva_demonstrativo():
+    terminal = ["programa", "identificador", "inicio", "fim", "tipo", ";", ":", "se", "(", ")", "entao", "senao", "enquanto", "faca", "repita", "<--", "op_rela", "+", "-", "*", "/", "^", "numero", "letra", ",", "$"]
+    pilha = Pilha()
+    pilha.push("S")
+    proxToken = "programa"
+    while pilha.pilha_vazia() == False:
+        x = pilha.pega_topo()
+        if x in terminal:
+            if x == proxToken:
+                pilha.pop()
+                proxToken = lex()
+            else:
+                print("Erro. Token inesperado.")
+        else:
+            valor = pegaValorTabela(x, proxToken)
+            if pegaValorTabela(x,proxToken) == -1:
+                print("Erro. Token inesperado.")
+            else:
+                #Trata Produção : Construi a Arovore
+                pilha.pop()
+                producao = pega_vetor_producoes(x,proxToken)
+                for i in range (0, len(producao)):
+                    pilha.push(producao[i])
+                print("A pilha ficou assim: ", pilha)
+                pilha.pop()
+                pilha.pop()
+                pilha.pop()
+
+
+
+def pilha_demonstrativo():
+    p = Pilha()
+    p.push("S")
+    p.push(20)
+    p.push(30)
+    p.push(50)
+    p.pop()
+    p.pop()
+    p.pop()
+
+    x = p.pega_topo()
+    print(p)
+    print(x)
+    print(p.pilha_vazia())
 
 if __name__ == '__main__':
-    main()
+    pilha_demonstrativo()
 
 
 
