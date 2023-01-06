@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+from diagrama.lexico import lex
 
 #************************** TABELA DE ANALISE PREDITIVA E VETOR DE PRODUÇÕES ************************************
 
@@ -111,27 +112,24 @@ class Pilha:
         else:
             return self.lista[len(self.lista)-1]
 
-#Teste Apenas
-def lex():
-    return
-
-
-
 def algoritmo_analise_preditiva():
     terminal = ["programa", "identificador", "inicio", "fim", "tipo", ";", ":", "se", "(", ")", "entao", "senao", "enquanto", "faca", "repita", "<--", "op_rela", "+", "-", "*", "/", "^", "numero", "letra", ",", "$"]
     pilha = Pilha()
     pilha.push("S")
-    proxToken = lex()
+    token = lex()
+    proxToken = token.tipo
     while pilha.pilha_vazia() == False:
         x = pilha.pega_topo()
         if x in terminal:
             if x == proxToken:
                 pilha.pop()
-                proxToken = lex()
+                token = lex()
+                proxToken = token.tipo
             else:
                 print("Erro. Token inesperado.")
                 exit()
         else:
+            print(proxToken)
             valor = pegaValorTabela(x, proxToken)
             if pegaValorTabela(x,proxToken) == -1:
                 print("Erro. Token inesperado.")
@@ -201,7 +199,7 @@ def pilha_demonstrativo():
     print(p.pilha_vazia())
 
 if __name__ == '__main__':
-    pilha_demonstrativo()
+    algoritmo_analise_preditiva()
 
 
 

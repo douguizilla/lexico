@@ -5353,11 +5353,11 @@ def lex():
 				else:
 					if id != c:
 						f.seek(f.tell()-1)
-						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-						return Token(tipo,id[:-1].strip(),linha,coluna)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo[:-1],id[:-1].strip())
+						return Token(tipo[:-1],id[:-1].strip(),linha,coluna)
 					else:
-						tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-						return Token(tipo,id.strip(),linha,coluna)
+						tabelaSimbolos[id.strip()] = Atributo(tipo[:-1],id.strip())
+						return Token(tipo[:-1],id.strip(),linha,coluna)
 			case 'BF':
 				c = nextChar()
 				id += c
@@ -6325,12 +6325,12 @@ def lex():
 						return Token(tipo,id.strip(),linha,coluna)
 				else:
 					if id != c:
-						f.seek(f.tell()-1)
-						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-						return Token(tipo,id[:-1].strip(),linha,coluna)
+						f.seek(f.tell() - 1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo[:-1], id[:-1].strip())
+						return Token(tipo[:-1], id[:-1].strip(), linha, coluna)
 					else:
-						tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-						return Token(tipo,id.strip(),linha,coluna)
+						tabelaSimbolos[id.strip()] = Atributo(tipo[:-1], id.strip())
+						return Token(tipo[:-1], id.strip(), linha, coluna)
 			case 'BO':
 				c = nextChar()
 				id += c
@@ -7801,12 +7801,12 @@ def lex():
 						return Token(tipo,id.strip(),linha,coluna)
 				else:
 					if id != c:
-						f.seek(f.tell()-1)
-						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-						return Token(tipo,id[:-1].strip(),linha,coluna)
+						f.seek(f.tell() - 1)
+						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo[:-1], id[:-1].strip())
+						return Token(tipo[:-1], id[:-1].strip(), linha, coluna)
 					else:
-						tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-						return Token(tipo,id.strip(),linha,coluna)
+						tabelaSimbolos[id.strip()] = Atributo(tipo[:-1], id.strip())
+						return Token(tipo[:-1], id.strip(), linha, coluna)
 			case 'CG':
 				c = nextChar()
 				id += c
@@ -9743,7 +9743,7 @@ def simuladorSintatico():
 		try:
 			token = lex()
 			print(f"<{token.tipo}, {token.atributo}, {token.linha}, {token.coluna}>")
-			if token.tipo == 'Erro':
+			if token.tipo == 'Erro' or token.tipo == '$':
 				break
 		except EOFError:
 			break
