@@ -184,35 +184,10 @@ def lex():
                 tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
                 return Token(tipo, id.strip(), linha, coluna)
             case 'M':
-                state = 'A'
                 tipo = '+'
-                lerProxGlobal = False
-                if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-                    if id != c:
-                        f.seek(f.tell()-1)
-                        tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-                        return Token(tipo ,id[:-1].strip(),linha,coluna)
-                    else:
-                        tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                        return Token(tipo,id.strip(),linha,coluna)
-                    tabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])
-                    return Token(tipo,id[:-1],linha,coluna)
-                elif c in [' ',';',')','+']:
-                    if id != c:
-                        f.seek(f.tell()-1)
-                        tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-                        return Token(tipo,id[:-1].strip(),linha,coluna)
-                    else:
-                        tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                        return Token(tipo,id.strip(),linha,coluna)
-                else:
-                    if id != c:
-                        f.seek(f.tell()-1)
-                        tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-                        return Token(tipo,id[:-1].strip(),linha,coluna)
-                    else:
-                        tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                        return Token(tipo,id.strip(),linha,coluna)
+                lerProxGlobal = True
+                tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
+                return Token(tipo, id.strip(), linha, coluna)
             case 'N':
                 state = 'A'
                 tipo = '/'
