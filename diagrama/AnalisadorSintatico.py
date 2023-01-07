@@ -164,12 +164,12 @@ def algoritmo_analise_preditiva():
                 token = lexico.lex()
                 proxToken = token.tipo
             else:
-                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
+                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nErro presente na Linha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
                 exit()
         else:
             valor = pegaValorTabela(x, proxToken)
             if valor == -1:
-                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
+                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nErro presente na Linha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
                 exit()
             else:
                 #Trata Produção : Construi a sub_arvore
@@ -196,7 +196,7 @@ def algoritmo_analise_preditiva():
 
     #Ao sair do while, se o proxToken não for "$", erro!
     if proxToken != "$":
-        print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
+        print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nErro presente na Linha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
         exit()
 
     #Se o proxToken for "$", sucesso!
