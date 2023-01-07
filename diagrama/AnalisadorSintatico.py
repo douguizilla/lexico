@@ -130,21 +130,13 @@ def algoritmo_analise_preditiva():
                 proxToken = token.tipo
                 #print(proxToken)
             else:
-                print(f"ERRO. TOKEN INESPERADO RECEBIDO! \nTOKEN: {token.atributo}".format(token.atributo))
+                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
                 exit()
         else:
             valor = pegaValorTabela(x, proxToken)
-            #print('vetor', vetor_producoes[valor])
             if valor == -1:
-                tokenEsperado = "//"
-                for j in range(len(pilha.lista)-1, 0, -1):
-                    if pilha.lista[j] in terminal:
-                        tokenEsperado = pilha.lista[j]
-                        break
-                if tokenEsperado != "//":
-                    print("ERRO! ERA ESPERADO TOKEN: ",tokenEsperado)
-                else:
-                    print(f"ERRO. TOKEN INESPERADO RECEBIDO! \nTOKEN: {token.atributo}".format(token.atributo))
+                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
+
 
                 exit()
             else:
@@ -159,60 +151,15 @@ def algoritmo_analise_preditiva():
                     for i in range (0, len(producao)):
                         pilha.push(producao[i])
     if proxToken != "$":
-        print(f"ERRO. TOKEN INESPERADO RECEBIDO! \nTOKEN: {token.atributo}".format(token.atributo))
+        print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
         exit()
 
     else:
-        print("SUCESSO! SEU PROGRAMA FOI ACEITO PELA LINGUAGEM!!!")
+        print("SUCESSO! SEU PROGRAMA FOI ACEITO PELO ANALISADOR SINTÁTICO!!!")
         #Retorna Arvore construida
         return
 
 
-
-def algoritmo_analise_preditiva_demonstrativo():
-    terminal = ["programa", "identificador", "inicio", "fim", "tipo", ";", ":", "se", "(", ")", "entao", "senao", "enquanto", "faca", "repita", "<--", "op_rela", "+", "-", "*", "/", "^", "numero", "letra", ",", "$"]
-    pilha = Pilha()
-    pilha.push("S")
-    proxToken = "programa"
-    while pilha.pilha_vazia() == False:
-        x = pilha.pega_topo()
-        if x in terminal:
-            if x == proxToken:
-                pilha.pop()
-                proxToken = lexico.lex()
-            else:
-                print("Erro. Token inesperado.")
-        else:
-            valor = pegaValorTabela(x, proxToken)
-            if pegaValorTabela(x,proxToken) == -1:
-                print("Erro. Token inesperado.")
-            else:
-                #Trata Produção : Construi a Arovore
-                pilha.pop()
-                producao = pega_vetor_producoes(x,proxToken)
-                for i in range (0, len(producao)):
-                    pilha.push(producao[i])
-                print("A pilha ficou assim: ", pilha)
-                pilha.pop()
-                pilha.pop()
-                pilha.pop()
-
-
-
-def pilha_demonstrativo():
-    p = Pilha()
-    p.push("S")
-    p.push(20)
-    p.push(30)
-    p.push(50)
-    p.pop()
-    p.pop()
-    p.pop()
-
-    x = p.pega_topo()
-    print(p)
-    print(x)
-    print(p.pilha_vazia())
 
 if __name__ == '__main__':
     algoritmo_analise_preditiva()
