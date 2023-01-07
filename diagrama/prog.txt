@@ -1,4 +1,4 @@
-programa prog22 [ Programa com erro sintatico ]
+programa prog13 [ Programa com erro sintatico ]
 inicio
     char : x; int : y;
 
