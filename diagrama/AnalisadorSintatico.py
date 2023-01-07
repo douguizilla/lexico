@@ -130,18 +130,22 @@ def algoritmo_analise_preditiva():
                 proxToken = token.tipo
                 #print(proxToken)
             else:
-                print("Erro. Token inesperado.")
+                print(f"ERRO. TOKEN INESPERADO RECEBIDO! \nTOKEN: {token.atributo}".format(token.atributo))
                 exit()
         else:
             valor = pegaValorTabela(x, proxToken)
             #print('vetor', vetor_producoes[valor])
             if valor == -1:
+                tokenEsperado = "//"
                 for j in range(len(pilha.lista)-1, 0, -1):
                     if pilha.lista[j] in terminal:
                         tokenEsperado = pilha.lista[j]
                         break
+                if tokenEsperado != "//":
+                    print("ERRO! ERA ESPERADO TOKEN: ",tokenEsperado)
+                else:
+                    print(f"ERRO. TOKEN INESPERADO RECEBIDO! \nTOKEN: {token.atributo}".format(token.atributo))
 
-                print("ERRO! ERA ESPERADO TOKEN: ",tokenEsperado)
                 exit()
             else:
                 #Trata Produção : Construi a Arovore
