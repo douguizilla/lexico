@@ -26,14 +26,15 @@ class Atributo:
         self.nome = nome
         self.valor = valor
 
+c = ''
 linhaGlobal = 0
 colunaGlobal = 0
 lerProxGlobal = True
 tabelaSimbolos = {}
 def lex():
     state = 'A'
-    c = ''
     id = ''
+    global c
     global linhaGlobal
     global colunaGlobal
     global tabelaSimbolos
@@ -366,35 +367,15 @@ def lex():
                         tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
                         return Token(tipo,id.strip(),linha,coluna)
             case 'T':
-                state = 'A'
-                tipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else id.strip()))))
-                lerProxGlobal = False
-                if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-                    if id != c:
-                        f.seek(f.tell()-1)
-                        tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-                        return Token(tipo ,id[:-1].strip(),linha,coluna)
-                    else:
-                        tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                        return Token(tipo,id.strip(),linha,coluna)
-                    tabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])
-                    return Token(tipo,id[:-1],linha,coluna)
-                elif c in [' ',';',')','+']:
-                    if id != c:
-                        f.seek(f.tell()-1)
-                        tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-                        return Token(tipo,id[:-1].strip(),linha,coluna)
-                    else:
-                        tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                        return Token(tipo,id.strip(),linha,coluna)
+                tipo = ';'
+                lerProxGlobal = True
+                if id == c:
+                    tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
+                    return Token(tipo, id.strip(), linha, coluna)
                 else:
-                    if id != c:
-                        f.seek(f.tell()-1)
-                        tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-                        return Token(tipo,id[:-1].strip(),linha,coluna)
-                    else:
-                        tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                        return Token(tipo,id.strip(),linha,coluna)
+                    state = 'A'
+                    f.seek(f.tell() + 1)
+
             case 'RA':
                 state = 'A'
                 tipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else id.strip()))))
@@ -2238,37 +2219,11 @@ def lex():
                     state = 'ER'
                     return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
             case 'AT':
-                state = 'A'
                 tipo = 'numero'
-                lerProxGlobalGlobal = False
-                if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
-                    if id != c:
-                        f.seek(f.tell()-1)
-                        tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-                        return Token(tipo ,id[:-1].strip(),linha,coluna)
-                    else:
-                        tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                        return Token(tipo,id.strip(),linha,coluna)
-
-                elif c in [' ',';',')','+']:
-                    if id != c:
-	                    lerProxGlobal = False
-	                    f.seek(f.tell()-1)
-	                    tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-	                    return Token(tipo,id[:-1].strip(),linha,coluna)
-                    else:
-                        tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                        return Token(tipo,id.strip(),linha,coluna)
-                else:
-                    if id != c:
-                        f.seek(f.tell()-1)
-                        print('voltei uma casa')
-                        tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-                        return Token(tipo,id[:-1].strip(),linha,coluna)
-                    else:
-                        print('nao voltei uma casa')
-                        tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                        return Token(tipo,id.strip(),linha,coluna)
+                lerProxGlobal = False
+                f.seek(f.tell() - 1)
+                tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
+                return Token(tipo, id[:-1].strip(), linha, coluna)
             case 'AA':
                 c = nextChar()
                 id += c

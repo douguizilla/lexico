@@ -1,2 +1,4 @@
-inicio x - 10 fim
-
+inicio
+x - 10 ;
+fim
+$
