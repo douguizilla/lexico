@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from diagrama.lexico import lex
+import lexico
 
 #************************** TABELA DE ANALISE PREDITIVA E VETOR DE PRODUÇÕES ************************************
 
@@ -34,8 +34,8 @@ def pega_linha_coluna(simbolo):
 
 #Função que retorna valores da tabela, dado um Não Terminal e um Terminal. Ex: pegaValorTabela("declaracao_das_variaveis","identificador")
 def pegaValorTabela(NTerminal, Terminal):
-    print('Nterminal', NTerminal)
-    print('terminal', Terminal)
+    #print('Nterminal', NTerminal)
+    #print('terminal', Terminal)
     linhaNTerminal, colunaNTerminal = pega_linha_coluna(NTerminal)
     linhaTerminal, colunaTerminal = pega_linha_coluna(Terminal)
 
@@ -118,25 +118,26 @@ def algoritmo_analise_preditiva():
     terminal = ["programa", "identificador", "inicio", "fim", "tipo", ";", ":", "se", "(", ")", "entao", "senao", "enquanto", "faca", "repita", "<--", "op_rela", "+", "-", "*", "/", "^", "numero", "letra", ",", "$"]
     pilha = Pilha()
     pilha.push("S")
-    token = lex()
+    token = lexico.lex()
     proxToken = token.tipo
-    print(proxToken)
+    #print(proxToken)
     while pilha.pilha_vazia() == False:
         x = pilha.pega_topo()
         if x in terminal:
             if x == proxToken:
                 pilha.pop()
-                token = lex()
+                token = lexico.lex()
                 proxToken = token.tipo
-                print(proxToken)
+                #print(proxToken)
             else:
-                print("Erro. Token inesperado.")
+                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
                 exit()
         else:
             valor = pegaValorTabela(x, proxToken)
-            #print('vetor', vetor_producoes[valor])
             if valor == -1:
-                print("Erro. Token inesperado.")
+                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
+
+
                 exit()
             else:
                 #Trata Produção : Construi a Arovore
@@ -150,59 +151,15 @@ def algoritmo_analise_preditiva():
                     for i in range (0, len(producao)):
                         pilha.push(producao[i])
     if proxToken != "$":
-        print("Erro. Token inesperado.")
+        print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
         exit()
 
     else:
+        print("SUCESSO! SEU PROGRAMA FOI ACEITO PELO ANALISADOR SINTÁTICO!!!")
         #Retorna Arvore construida
         return
 
 
-
-def algoritmo_analise_preditiva_demonstrativo():
-    terminal = ["programa", "identificador", "inicio", "fim", "tipo", ";", ":", "se", "(", ")", "entao", "senao", "enquanto", "faca", "repita", "<--", "op_rela", "+", "-", "*", "/", "^", "numero", "letra", ",", "$"]
-    pilha = Pilha()
-    pilha.push("S")
-    proxToken = "programa"
-    while pilha.pilha_vazia() == False:
-        x = pilha.pega_topo()
-        if x in terminal:
-            if x == proxToken:
-                pilha.pop()
-                proxToken = lex()
-            else:
-                print("Erro. Token inesperado.")
-        else:
-            valor = pegaValorTabela(x, proxToken)
-            if pegaValorTabela(x,proxToken) == -1:
-                print("Erro. Token inesperado.")
-            else:
-                #Trata Produção : Construi a Arovore
-                pilha.pop()
-                producao = pega_vetor_producoes(x,proxToken)
-                for i in range (0, len(producao)):
-                    pilha.push(producao[i])
-                print("A pilha ficou assim: ", pilha)
-                pilha.pop()
-                pilha.pop()
-                pilha.pop()
-
-
-
-def pilha_demonstrativo():
-    p = Pilha()
-    p.push("S")
-    p.push(20)
-    p.push(30)
-    p.push(50)
-    p.pop()
-    p.pop()
-    p.pop()
-
-    x = p.pega_topo()
-    print(p)
-    print(x)
-    print(p.pilha_vazia())
 
 if __name__ == '__main__':
     algoritmo_analise_preditiva()
