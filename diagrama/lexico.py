@@ -176,7 +176,7 @@ def lex():
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
 			case 'L':
 				state = 'A'
-				tipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else id.strip()))))
+				tipo = '-'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					if id != c:
@@ -188,7 +188,7 @@ def lex():
 						return Token(tipo,id.strip(),linha,coluna)
 					tabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])
 					return Token(tipo,id[:-1],linha,coluna)
-				elif c in [' ',';',')','+']:
+				elif c in [' ',';',')','+','-']:
 					if id != c:
 						f.seek(f.tell()-1)
 						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
@@ -206,7 +206,7 @@ def lex():
 						return Token(tipo,id.strip(),linha,coluna)
 			case 'M':
 				state = 'A'
-				tipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else id.strip()))))
+				tipo = '+'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					if id != c:
@@ -236,7 +236,7 @@ def lex():
 						return Token(tipo,id.strip(),linha,coluna)
 			case 'N':
 				state = 'A'
-				tipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else id.strip()))))
+				tipo = '/'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					if id != c:
@@ -248,7 +248,7 @@ def lex():
 						return Token(tipo,id.strip(),linha,coluna)
 					tabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])
 					return Token(tipo,id[:-1],linha,coluna)
-				elif c in [' ',';',')','+']:
+				elif c in [' ',';',')','+','/']:
 					if id != c:
 						f.seek(f.tell()-1)
 						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
@@ -266,7 +266,7 @@ def lex():
 						return Token(tipo,id.strip(),linha,coluna)
 			case 'O':
 				state = 'A'
-				tipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else id.strip()))))
+				tipo = '*'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					if id != c:
@@ -278,7 +278,7 @@ def lex():
 						return Token(tipo,id.strip(),linha,coluna)
 					tabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])
 					return Token(tipo,id[:-1],linha,coluna)
-				elif c in [' ',';',')','+']:
+				elif c in [' ',';',')','+','*']:
 					if id != c:
 						f.seek(f.tell()-1)
 						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
@@ -296,9 +296,9 @@ def lex():
 						return Token(tipo,id.strip(),linha,coluna)
 			case 'P':
 				state = 'A'
-				tipo = 'op_rela' if id in ['=','<','>','<>','<=','>='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else  ('identificador' if re.search('[a-zA-Z_]+([a-zA-Z0-9_])*',id.strip()) else ('numero' if re.search('[0-9]([0-9]*)?(.[0-9]([0-9]))?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else id.strip()))))
+				tipo = '^'
 				lerProx = False
-				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
+				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=','^']:
 					if id != c:
 						f.seek(f.tell()-1)
 						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
@@ -308,7 +308,7 @@ def lex():
 						return Token(tipo,id.strip(),linha,coluna)
 					tabelaSimbolos[id[:-1]] = Atributo(tipo,id[:-1])
 					return Token(tipo,id[:-1],linha,coluna)
-				elif c in [' ',';',')','+']:
+				elif c in [' ',';',')','+','^']:
 					if id != c:
 						f.seek(f.tell()-1)
 						tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
@@ -5864,7 +5864,7 @@ def lex():
 					return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
 			case 'BY':
 				state = 'A'
-				tipo = 'atribuicao'
+				tipo = '<--'
 				lerProx = False
 				if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
 					if id != c:
@@ -9737,7 +9737,7 @@ def lex():
 				tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
 				return Token(tipo,id.strip(),linha,coluna)
 
-def simuladorSintatico():
+'''def simuladorSintatico():
 	global tabelaSimbolos
 	while True:
 		try:
@@ -9750,4 +9750,4 @@ def simuladorSintatico():
 	print('Tabela de simbolos')
 	for key, value in tabelaSimbolos.items():
 		print(f"key {key} nome {value.nome} valor {value.valor}")
-simuladorSintatico()
+simuladorSintatico()'''

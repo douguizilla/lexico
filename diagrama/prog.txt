@@ -2,7 +2,7 @@ programa prog22 [ Programa com erro sintatico ]
 inicio
 enquanto (x <> 10) faca
     inicio
-        x<--x+1;
+        x <-- x/1;
     fim
 fim
 
