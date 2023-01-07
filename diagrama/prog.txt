@@ -11,7 +11,7 @@ inicio
 
     se (x = 10) entao
     inicio
-        y <-- 1 [erro aqui]
+        y <-- 1; [erro aqui]
     fim
 fim
 
