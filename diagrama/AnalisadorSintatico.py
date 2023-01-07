@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from diagrama.lexico import lex
+import lexico
 
 #************************** TABELA DE ANALISE PREDITIVA E VETOR DE PRODUÇÕES ************************************
 
@@ -34,8 +34,8 @@ def pega_linha_coluna(simbolo):
 
 #Função que retorna valores da tabela, dado um Não Terminal e um Terminal. Ex: pegaValorTabela("declaracao_das_variaveis","identificador")
 def pegaValorTabela(NTerminal, Terminal):
-    print('Nterminal', NTerminal)
-    print('terminal', Terminal)
+    #print('Nterminal', NTerminal)
+    #print('terminal', Terminal)
     linhaNTerminal, colunaNTerminal = pega_linha_coluna(NTerminal)
     linhaTerminal, colunaTerminal = pega_linha_coluna(Terminal)
 
@@ -118,17 +118,17 @@ def algoritmo_analise_preditiva():
     terminal = ["programa", "identificador", "inicio", "fim", "tipo", ";", ":", "se", "(", ")", "entao", "senao", "enquanto", "faca", "repita", "<--", "op_rela", "+", "-", "*", "/", "^", "numero", "letra", ",", "$"]
     pilha = Pilha()
     pilha.push("S")
-    token = lex()
+    token = lexico.lex()
     proxToken = token.tipo
-    print(proxToken)
+    #print(proxToken)
     while pilha.pilha_vazia() == False:
         x = pilha.pega_topo()
         if x in terminal:
             if x == proxToken:
                 pilha.pop()
-                token = lex()
+                token = lexico.lex()
                 proxToken = token.tipo
-                print(proxToken)
+                #print(proxToken)
             else:
                 print("Erro. Token inesperado.")
                 exit()
@@ -136,7 +136,12 @@ def algoritmo_analise_preditiva():
             valor = pegaValorTabela(x, proxToken)
             #print('vetor', vetor_producoes[valor])
             if valor == -1:
-                print("Erro. Token inesperado.")
+                for j in range(len(pilha.lista)-1, 0, -1):
+                    if pilha.lista[j] in terminal:
+                        tokenEsperado = pilha.lista[j]
+                        break
+
+                print("ERRO! ERA ESPERADO TOKEN: ",tokenEsperado)
                 exit()
             else:
                 #Trata Produção : Construi a Arovore
@@ -150,10 +155,11 @@ def algoritmo_analise_preditiva():
                     for i in range (0, len(producao)):
                         pilha.push(producao[i])
     if proxToken != "$":
-        print("Erro. Token inesperado.")
+        print(f"ERRO. TOKEN INESPERADO RECEBIDO! \nTOKEN: {token.atributo}".format(token.atributo))
         exit()
 
     else:
+        print("SUCESSO! SEU PROGRAMA FOI ACEITO PELA LINGUAGEM!!!")
         #Retorna Arvore construida
         return
 
@@ -169,7 +175,7 @@ def algoritmo_analise_preditiva_demonstrativo():
         if x in terminal:
             if x == proxToken:
                 pilha.pop()
-                proxToken = lex()
+                proxToken = lexico.lex()
             else:
                 print("Erro. Token inesperado.")
         else:
