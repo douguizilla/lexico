@@ -1,5 +1,6 @@
 inicio
-x <-- 3.02E-2;[oi]
-y <-- 0;
+se (x <> 10E-2)
+entao
+  x <-- 1
 fim
 $
