@@ -1,4 +1,4 @@
 inicio
-x >= 10 ;
+x <-- 'A' ;
 fim
 $

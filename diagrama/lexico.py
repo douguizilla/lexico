@@ -3624,9 +3624,8 @@ def lex():
                     state = 'ER'
                     return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
             case 'BL':
-                state = 'A'
-                tipo = 'caracter'
-                lerProxGlobal = False
+                tipo = 'letra'
+                lerProxGlobal = True
                 tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
                 return Token(tipo,id.strip(),linha,coluna)
             case 'AW':
