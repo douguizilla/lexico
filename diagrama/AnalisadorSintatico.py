@@ -34,6 +34,8 @@ def pega_linha_coluna(simbolo):
 
 #Função que retorna valores da tabela, dado um Não Terminal e um Terminal. Ex: pegaValorTabela("declaracao_das_variaveis","identificador")
 def pegaValorTabela(NTerminal, Terminal):
+    print('Nterminal', NTerminal)
+    print('terminal', Terminal)
     linhaNTerminal, colunaNTerminal = pega_linha_coluna(NTerminal)
     linhaTerminal, colunaTerminal = pega_linha_coluna(Terminal)
 
@@ -118,6 +120,7 @@ def algoritmo_analise_preditiva():
     pilha.push("S")
     token = lex()
     proxToken = token.tipo
+    print(proxToken)
     while pilha.pilha_vazia() == False:
         x = pilha.pega_topo()
         if x in terminal:
@@ -125,13 +128,14 @@ def algoritmo_analise_preditiva():
                 pilha.pop()
                 token = lex()
                 proxToken = token.tipo
+                print(proxToken)
             else:
                 print("Erro. Token inesperado.")
                 exit()
         else:
-            print(proxToken)
             valor = pegaValorTabela(x, proxToken)
-            if pegaValorTabela(x,proxToken) == -1:
+            #print('vetor', vetor_producoes[valor])
+            if valor == -1:
                 print("Erro. Token inesperado.")
                 exit()
             else:
@@ -141,8 +145,10 @@ def algoritmo_analise_preditiva():
                 #Pega vetor de producao correspondente
                 producao = pega_vetor_producoes(x,proxToken)
                 #Empilha todos os simbolos na ordem inversa
-                for i in range (0, len(producao)):
-                    pilha.push(producao[i])
+                #print('producao', producao)
+                if producao[0] != 'ε':
+                    for i in range (0, len(producao)):
+                        pilha.push(producao[i])
     if proxToken != "$":
         print("Erro. Token inesperado.")
         exit()
