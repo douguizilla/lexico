@@ -39,8 +39,6 @@ def lex():
     global colunaGlobal
     global tabelaSimbolos
     global lerProxGlobal
-    coluna = colunaGlobal
-    linha = linhaGlobal
     while True:
         match state:
             case 'A':
@@ -143,7 +141,7 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
+                    colunaGlobal = 0
                     state = 'Y'
                 elif c.lower() == '\t':
                     state = 'Y'
@@ -175,7 +173,7 @@ def lex():
                     state = 'AA'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'L':
                 #Estado final retorna token '-'
                 state = 'A'
@@ -183,51 +181,51 @@ def lex():
                 lerProxGlobal = True
                 c = ''
                 tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
-                return Token(tipo, id.strip(), linha, coluna)
+                return Token(tipo, id.strip(), linhaGlobal, colunaGlobal)
             case 'M':
                 tipo = '+'
                 lerProxGlobal = True
                 c = ''
                 tabelaSimbolos[tipo] = Atributo(tipo, tipo)
-                return Token(tipo, tipo, linha, coluna)
+                return Token(tipo, tipo, linhaGlobal, colunaGlobal)
             case 'N':
                 tipo = '/'
                 lerProxGlobal = True
                 c = ''
                 tabelaSimbolos[tipo] = Atributo(tipo, tipo)
-                return Token(tipo, tipo, linha, coluna)
+                return Token(tipo, tipo, linhaGlobal, colunaGlobal)
             case 'O':
                 tipo = '*'
                 lerProxGlobal = True
                 c = ''
                 tabelaSimbolos[tipo] = Atributo(tipo, tipo)
-                return Token(tipo, tipo, linha, coluna)
+                return Token(tipo, tipo, linhaGlobal, colunaGlobal)
             case 'P':
                 tipo = '^'
                 lerProxGlobal = True
                 c = ''
                 tabelaSimbolos[tipo] = Atributo(tipo, tipo)
-                return Token(tipo, tipo, linha, coluna)
+                return Token(tipo, tipo, linhaGlobal, colunaGlobal)
             case 'R':
                 tipo = 'op_rela'
                 lerProxGlobal = True
                 c = ''
                 tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
-                return Token(tipo, id.strip(), linha, coluna)
+                return Token(tipo, id.strip(), linhaGlobal, colunaGlobal)
             case 'ER':
-                return Token('Erro',id,linha,colunaGlobal)
+                return Token('Erro',id,linhaGlobal,colunaGlobal)
             case 'S':
                 tipo = ','
                 lerProxGlobal = True
                 tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
-                return Token(tipo, id.strip(), linha, coluna)
+                return Token(tipo, id.strip(), linhaGlobal, colunaGlobal)
             case 'T':
                 tipo = ';'
                 lerProxGlobal = True
                 if id == c:
 	                c = ''
 	                tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
-	                return Token(tipo, id.strip(), linha, coluna)
+	                return Token(tipo, id.strip(), linhaGlobal, colunaGlobal)
                 elif c == '[':
 	                state = 'W'
                 else:
@@ -240,19 +238,19 @@ def lex():
                 lerProxGlobal = True
                 c = ''
                 tabelaSimbolos[tipo] = Atributo(tipo, id.strip())
-                return Token(tipo, id.strip(), linha, coluna)
+                return Token(tipo, id.strip(), linhaGlobal, colunaGlobal)
             case 'U':
                 tipo = '('
                 lerProxGlobal = True
                 c = ''
                 tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
-                return Token(tipo, id.strip(), linha, coluna)
+                return Token(tipo, id.strip(), linhaGlobal, colunaGlobal)
             case 'V':
                 tipo = ')'
                 lerProxGlobal = True
                 c = ''
                 tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
-                return Token(tipo, id.strip(), linha, coluna)
+                return Token(tipo, id.strip(), linhaGlobal, colunaGlobal)
             case 'X':
                 state = 'A'
                 lerProxGlobal = True
@@ -260,7 +258,7 @@ def lex():
                 tipo = '$'
                 lerProxGlobal = True
                 tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
-                return Token(tipo, id.strip(), linha, coluna)
+                return Token(tipo, id.strip(), linhaGlobal, colunaGlobal)
             case 'B':
                 c = nextChar()
                 id += c
@@ -354,7 +352,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -386,14 +383,14 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AC':
                 tipo = 'identificador'
                 lerProxGlobal = True
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
 
 
             case 'C':
@@ -489,7 +486,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -521,7 +517,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'D':
                 c = nextChar()
                 id += c
@@ -615,7 +611,7 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
+
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -647,7 +643,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'E':
                 c = nextChar()
                 id += c
@@ -741,7 +737,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -773,7 +768,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'F':
                 c = nextChar()
                 id += c
@@ -867,7 +862,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -899,7 +893,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'G':
                 c = nextChar()
                 id += c
@@ -993,7 +987,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -1025,7 +1018,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'H':
                 c = nextChar()
                 id += c
@@ -1119,7 +1112,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -1151,7 +1143,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'I':
                 c = nextChar()
                 id += c
@@ -1245,7 +1237,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -1277,7 +1268,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'J':
                 c = nextChar()
                 id += c
@@ -1371,7 +1362,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -1403,7 +1393,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'K':
                 c = nextChar()
                 id += c
@@ -1497,7 +1487,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AM'
                 elif c.lower() == '\t':
                     state = 'AM'
@@ -1529,20 +1518,20 @@ def lex():
                     state = 'AM'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AM':
                 tipo = 'op_rela'
                 lerProxGlobal = True
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'AO':
                 c = ''
                 tabelaSimbolos[id.strip()] = Atributo('op_rela',id.strip())
-                return Token('op_rela',id.strip(),linha,coluna)
+                return Token('op_rela',id.strip(),linhaGlobal,colunaGlobal)
             case 'AP':
                 c = ''
                 tabelaSimbolos[id.strip()] = Atributo('op_rela',id.strip())
-                return Token('op_rela',id.strip(),linha,coluna)
+                return Token('op_rela',id.strip(),linhaGlobal,colunaGlobal)
             case 'Q':
                 c = nextChar()
                 id += c
@@ -1636,7 +1625,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AQ'
                 elif c.lower() == '\t':
                     state = 'AQ'
@@ -1668,18 +1656,18 @@ def lex():
                     state = 'AQ'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AQ':
                 tipo = 'op_rela'
                 lerProxGlobal = True
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'AR':
                 tipo = 'op_rela'
                 lerProxGlobal = True
                 c = ''
                 tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                return Token(tipo,id.strip(),linha,coluna)
+                return Token(tipo,id.strip(),linhaGlobal,colunaGlobal)
             case 'Y':
                 c = nextChar()
                 id += c
@@ -1773,7 +1761,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'Y'
                 elif c.lower() == '\t':
                     state = 'Y'
@@ -1805,7 +1792,7 @@ def lex():
                     state = 'AS'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AS':
                 state = 'A'
                 lerProxGlobal = False
@@ -1902,7 +1889,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AT'
                 elif c.lower() == '\t':
                     state = 'AT'
@@ -1934,14 +1920,14 @@ def lex():
                     state = 'AT'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AT':
                 tipo = 'numero'
                 lerProxGlobal = True
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'AA':
                 c = nextChar()
                 id += c
@@ -2035,7 +2021,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'ER'
                 elif c.lower() == '\t':
                     state = 'ER'
@@ -2067,7 +2052,7 @@ def lex():
                     state = 'ER'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AB':
                 c = nextChar()
                 id += c
@@ -2161,7 +2146,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -2193,7 +2177,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AD':
                 c = nextChar()
                 id += c
@@ -2287,7 +2271,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -2319,7 +2302,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AE':
                 c = nextChar()
                 id += c
@@ -2413,7 +2396,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -2445,7 +2427,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AF':
                 c = nextChar()
                 id += c
@@ -2539,7 +2521,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -2571,7 +2552,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AG':
                 c = nextChar()
                 id += c
@@ -2665,7 +2646,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -2697,7 +2677,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AH':
                 c = nextChar()
                 id += c
@@ -2791,7 +2771,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -2823,7 +2802,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AI':
                 c = nextChar()
                 id += c
@@ -2917,7 +2896,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -2949,7 +2927,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AJ':
                 c = nextChar()
                 id += c
@@ -3043,7 +3021,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -3075,7 +3052,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AK':
                 c = nextChar()
                 id += c
@@ -3169,7 +3146,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -3201,7 +3177,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AL':
                 c = nextChar()
                 id += c
@@ -3295,7 +3271,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'BI'
                 elif c.lower() == '\t':
                     state = 'BI'
@@ -3327,14 +3302,14 @@ def lex():
                     state = 'BI'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BI':
                 tipo = 'se'
                 lerProxGlobal = True
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'AN':
                 c = nextChar()
                 id += c
@@ -3348,13 +3323,13 @@ def lex():
                     if c not in ['\n', '\t', ' ','+','-','/',',','*',':',';','(',')','=']:
                         f.seek(f.tell()-1)
                         tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-                        return Token(tipo,id[:-1].strip(),linha,coluna)
+                        return Token(tipo,id[:-1].strip(),linhaGlobal,colunaGlobal)
                     elif c in ['\n', '\t', ' ',';',')','+']:
                         tabelaSimbolos[id] = Atributo(tipo,id)
-                        return Token(tipo,id,linha,coluna)
+                        return Token(tipo,id,linhaGlobal,colunaGlobal)
                     else:
                         tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                        return Token(tipo,id.strip(),linha,coluna)
+                        return Token(tipo,id.strip(),linhaGlobal,colunaGlobal)
             case 'AU':
                 c = nextChar()
                 id += c
@@ -3448,7 +3423,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'ER'
                 elif c.lower() == '\t':
                     state = 'ER'
@@ -3480,7 +3454,7 @@ def lex():
                     state = 'ER'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AV':
                 c = nextChar()
                 id += c
@@ -3574,7 +3548,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'ER'
                 elif c.lower() == '\t':
                     state = 'ER'
@@ -3606,12 +3579,12 @@ def lex():
                     state = 'BL'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BL':
                 tipo = 'letra'
                 lerProxGlobal = True
                 tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                return Token(tipo,id.strip(),linha,coluna)
+                return Token(tipo,id.strip(),linhaGlobal,colunaGlobal)
             case 'AW':
                 c = nextChar()
                 id += c
@@ -3705,7 +3678,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'BM'
                 elif c.lower() == '\t':
                     state = 'BM'
@@ -3737,14 +3709,14 @@ def lex():
                     state = 'BM'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BM':
                 tipo = 'ate'
                 lerProxGlobal = True
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'AY':
                 c = nextChar()
                 id += c
@@ -3838,7 +3810,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -3870,7 +3841,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AX':
                 c = nextChar()
                 id += c
@@ -3964,7 +3935,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -3996,7 +3966,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AZ':
                 c = nextChar()
                 id += c
@@ -4090,7 +4060,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -4122,7 +4091,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AZZ':
                 c = nextChar()
                 id += c
@@ -4214,7 +4183,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -4246,7 +4214,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BA':
                 c = nextChar()
                 id += c
@@ -4340,7 +4308,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -4372,7 +4339,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BB':
                 c = nextChar()
                 id += c
@@ -4466,7 +4433,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'BR'
                 elif c.lower() == '\t':
                     state = 'BR'
@@ -4498,12 +4464,12 @@ def lex():
                     state = 'BR'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BR':
                 tipo = 'fim'
                 lerProxGlobal = True
                 tabelaSimbolos[tipo] = Atributo(tipo, tipo)
-                return Token(tipo, tipo, linha, coluna)
+                return Token(tipo, tipo, linhaGlobal, colunaGlobal)
             case 'BC':
                 c = nextChar()
                 id += c
@@ -4597,7 +4563,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -4629,7 +4594,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BD':
                 c = nextChar()
                 id += c
@@ -4723,7 +4688,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -4755,7 +4719,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BE':
                 c = nextChar()
                 id += c
@@ -4849,7 +4813,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'BU'
                 elif c.lower() == '\t':
                     state = 'BU'
@@ -4881,7 +4844,7 @@ def lex():
                     state = 'BU'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BU':
                 state = 'A'
                 tipo = 'tipo'
@@ -4889,7 +4852,7 @@ def lex():
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'BF':
                 c = nextChar()
                 id += c
@@ -4983,7 +4946,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -5015,7 +4977,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BG':
                 c = nextChar()
                 id += c
@@ -5109,7 +5071,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -5141,7 +5102,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BH':
                 c = nextChar()
                 id += c
@@ -5235,7 +5196,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -5267,7 +5227,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BJ':
                 c = nextChar()
                 id += c
@@ -5361,7 +5321,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'BY'
                 elif c.lower() == '\t':
                     state = 'BY'
@@ -5393,14 +5352,14 @@ def lex():
                     state = 'BY'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BY':
                 tipo = '<--'
                 lerProxGlobal = True
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'BK':
                 c = nextChar()
                 id += c
@@ -5494,7 +5453,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'CA'
                 elif c.lower() == '\t':
                     state = 'CA'
@@ -5526,7 +5484,7 @@ def lex():
                     state = 'CA'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CA':
                 tipo = 'numero'
                 lerProxGlobal = True
@@ -5536,7 +5494,7 @@ def lex():
 	                lerProxGlobal = False
                 f.seek(f.tell() - 1)
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'BM':
                 c = nextChar()
                 id += c
@@ -5630,7 +5588,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -5662,7 +5619,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BN':
                 c = nextChar()
                 id += c
@@ -5756,7 +5713,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'CB'
                 elif c.lower() == '\t':
                     state = 'CB'
@@ -5788,7 +5744,7 @@ def lex():
                     state = 'CB'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CB':
                 state = 'A'
                 tipo = 'tipo'
@@ -5796,7 +5752,7 @@ def lex():
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
 
             case 'BO':
                 c = nextChar()
@@ -5891,7 +5847,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -5923,7 +5878,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BP':
                 c = nextChar()
                 id += c
@@ -6017,7 +5972,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'CD'
                 elif c.lower() == '\t':
                     state = 'CD'
@@ -6049,14 +6003,14 @@ def lex():
                     state = 'CD'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CD':
                 tipo = 'entao'
                 lerProxGlobal = True
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'BQ':
                 c = nextChar()
                 id += c
@@ -6150,7 +6104,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'CE'
                 elif c.lower() == '\t':
                     state = 'CE'
@@ -6182,14 +6135,14 @@ def lex():
                     state = 'CE'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CE':
                 tipo = 'faca'
                 lerProxGlobal = True
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'BS':
                 c = nextChar()
                 id += c
@@ -6283,7 +6236,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -6315,7 +6267,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BT':
                 c = nextChar()
                 id += c
@@ -6409,7 +6361,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -6441,7 +6392,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BV':
                 c = nextChar()
                 id += c
@@ -6535,7 +6486,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -6567,7 +6517,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BW':
                 c = nextChar()
                 id += c
@@ -6661,7 +6611,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -6693,7 +6642,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BX':
                 c = nextChar()
                 id += c
@@ -6787,7 +6736,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -6819,7 +6767,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'BZ':
                 c = nextChar()
                 id += c
@@ -6913,7 +6861,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'ER'
                 elif c.lower() == '\t':
                     state = 'ER'
@@ -6945,7 +6892,7 @@ def lex():
                     state = 'ER'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CC':
                 c = nextChar()
                 id += c
@@ -7039,7 +6986,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -7071,7 +7017,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CF':
                 c = nextChar()
                 id += c
@@ -7165,7 +7111,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'CN'
                 elif c.lower() == '\t':
                     state = 'CN'
@@ -7197,7 +7142,7 @@ def lex():
                     state = 'CN'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CN':
                 state = 'A'
                 tipo = 'tipo'
@@ -7205,7 +7150,7 @@ def lex():
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
 
             case 'CG':
                 c = nextChar()
@@ -7300,7 +7245,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -7332,7 +7276,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CH':
                 c = nextChar()
                 id += c
@@ -7426,7 +7370,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -7458,7 +7401,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CI':
                 c = nextChar()
                 id += c
@@ -7552,7 +7495,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -7584,7 +7526,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CJ':
                 c = nextChar()
                 id += c
@@ -7678,7 +7620,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'CR'
                 elif c.lower() == '\t':
                     state = 'CR'
@@ -7710,12 +7651,12 @@ def lex():
                     state = 'CR'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CR':
                 tipo = 'senao'
                 lerProxGlobal = False
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
 
             case 'CK':
                 c = nextChar()
@@ -7810,7 +7751,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'ER'
                 elif c.lower() == '\t':
                     state = 'ER'
@@ -7842,7 +7782,7 @@ def lex():
                     state = 'ER'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CL':
                 c = nextChar()
                 id += c
@@ -7936,7 +7876,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'CS'
                 elif c.lower() == '\t':
                     state = 'CS'
@@ -7968,12 +7907,12 @@ def lex():
                     state = 'CS'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CS':
                 tipo = 'numero'
                 lerProxGlobal = False
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'CM':
                 c = nextChar()
                 id += c
@@ -8067,7 +8006,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -8099,7 +8037,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CO':
                 c = nextChar()
                 id += c
@@ -8193,7 +8131,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'CU'
                 elif c.lower() == '\t':
                     state = 'CU'
@@ -8225,13 +8162,15 @@ def lex():
                     state = 'CU'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CU':
 	            #Retorna Token 'inicio'
                 tipo = 'inicio'
                 lerProxGlobal = True
+                f.seek(f.tell()-1)
+                c = ''
                 tabelaSimbolos[tipo] = Atributo(tipo, tipo)
-                return Token(tipo, tipo, linha, coluna)
+                return Token(tipo, tipo, linhaGlobal, colunaGlobal)
 
             case 'CP':
                 c = nextChar()
@@ -8326,7 +8265,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -8358,7 +8296,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CQ':
                 c = nextChar()
                 id += c
@@ -8452,7 +8390,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'CW'
                 elif c.lower() == '\t':
                     state = 'CW'
@@ -8484,14 +8421,14 @@ def lex():
                     state = 'CW'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CW':
                 tipo = 'repita'
                 lerProxGlobal = True
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'CT':
                 c = nextChar()
                 id += c
@@ -8585,7 +8522,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -8617,7 +8553,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CV':
                 c = nextChar()
                 id += c
@@ -8711,7 +8647,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'AC'
                 elif c.lower() == '\t':
                     state = 'AC'
@@ -8743,7 +8678,7 @@ def lex():
                     state = 'AC'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CX':
                 c = nextChar()
                 id += c
@@ -8837,7 +8772,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'CZ'
                 elif c.lower() == '\t':
                     state = 'CZ'
@@ -8869,14 +8803,14 @@ def lex():
                     state = 'CZ'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'CZ':
                 tipo = 'enquanto'
                 lerProxGlobal = True
                 f.seek(f.tell() - 1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
             case 'CY':
                 c = nextChar()
                 id += c
@@ -8970,7 +8904,6 @@ def lex():
                 elif c.lower() == '\n':
                     linhaGlobal += 1
                     colunaGlobal = 0
-                    coluna = 0
                     state = 'DA'
                 elif c.lower() == '\t':
                     state = 'DA'
@@ -9002,7 +8935,7 @@ def lex():
                     state = 'DA'
                 else:
                     state = 'ER'
-                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
+                    return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'W':
                 c = nextChar()
                 if c == ']':
@@ -9015,7 +8948,7 @@ def lex():
                 f.seek(f.tell()-1)
                 c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
-                return Token(tipo,id[:-1].strip(),linha,coluna)
+                return Token(tipo,id[:-1].strip(),linhaGlobal,colunaGlobal)
 
 def simuladorSintatico():
     global tabelaSimbolos

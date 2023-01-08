@@ -1,9 +1,7 @@
 programa prog22 [ Programa com erro sintatico ]
 inicio
     char : x; int : y;
-
     x <-- 0;
-
     enquanto(x<>10)faca
     inicio
         x<--x+1;
