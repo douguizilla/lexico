@@ -8950,7 +8950,7 @@ def lex():
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
                 return Token(tipo,id[:-1].strip(),linhaGlobal,colunaGlobal)
 
-'''def simuladorSintatico():
+def simuladorSintatico():
     global tabelaSimbolos
     while True:
         try:
@@ -8963,4 +8963,4 @@ def lex():
     print('Tabela de simbolos')
     for key, value in tabelaSimbolos.items():
         print(f"key {key} nome {value.nome} valor {value.valor}")
-simuladorSintatico()'''
+simuladorSintatico()
