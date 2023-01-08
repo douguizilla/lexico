@@ -201,7 +201,7 @@ def algoritmo_analise_preditiva():
 
     #Se o proxToken for "$", sucesso!
     else:
-        print("SUCESSO! SEU PROGRAMA FOI ACEITO PELO ANALISADOR SINTÁTICO!")
+        print("SUCESSO! SEU PROGRAMA FOI ACEITO PELO ANALISADOR SINTÁTICO!!")
 
         #Retorna Floresta construida
         return floresta
