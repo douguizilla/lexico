@@ -1,3 +1,2 @@
-repita (x >= 1);
-fim
+inicio(x>=10.3E+3);fim
 $
