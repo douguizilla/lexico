@@ -1,2 +1,16 @@
-inicio(x>=10.3E+3);fim
+programa x [
+testen odaksofcma cvld
+
+fapsdklaps
+
+
+dap´sdlapsld
+
+
+daopsdapsdk]
+
+inicio
+    x <-- 1;
+fim
+
 $

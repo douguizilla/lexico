@@ -9034,13 +9034,12 @@ def lex():
                 else:
                     state = 'W'
             case 'DA':
-                state = 'A'
-                lerProxGlobal = False
-                tipo = 'op_rela' if id in ['=','<','>','<>','<=','>=','='] else ('op_arit' if id in ['+','-','*','/','^'] else ( id.strip() if id.strip() in ['se','senao','entao','ate','enquanto', 'programa', 'inicio', 'fim','faca','repita'] else ('numero' if re.search('[0-9]([0-9]?)(.[0-9]([0-9]*)?)?([Ee][+-]?[0-9]([0-9])*)?',id.strip()) else ('identificador' if re.search('([a-zA-Z_]+)([a-zA-Z0-9_])*',id.strip()) else ''))))
-                if c not in ['\n', '\t', ' ']:
-                    f.seek(f.tell()-1)
-                tabelaSimbolos[id.strip()] = Atributo(tipo,id.strip())
-                return Token(tipo,id.strip(),linha,coluna)
+                tipo = 'programa'
+                lerProxGlobal = True
+                f.seek(f.tell()-1)
+                c = ''
+                tabelaSimbolos[id[:-1].strip()] = Atributo(tipo,id[:-1].strip())
+                return Token(tipo,id[:-1].strip(),linha,coluna)
 
 def simuladorSintatico():
     global tabelaSimbolos
