@@ -1,5 +1,4 @@
 inicio
-senao
-(x<--1)
+ float : a, b, c;
 fim
 $
