@@ -225,7 +225,7 @@ def lex():
                 tipo = ';'
                 lerProxGlobal = True
                 if id == c:
-	                f.seek(f.tell() + 1)
+	                c = ''
 	                tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
 	                return Token(tipo, id.strip(), linha, coluna)
                 elif c == '[':
@@ -389,7 +389,7 @@ def lex():
                     return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
             case 'AC':
                 tipo = 'identificador'
-                if c == ';':
+                if c in [';','[']:
 	                lerProxGlobal = False
                 else:
 	                lerProxGlobal = True
