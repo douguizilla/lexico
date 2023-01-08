@@ -1,6 +1,6 @@
 programa prog13 [ Programa com erro sintatico ]
 inicio
-    char : x; int : y;
+    char:x;int:y;
 
     x <-- 0;
 
