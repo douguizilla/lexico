@@ -386,12 +386,15 @@ def lex():
                     return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linhaGlobal,colunaGlobal)
             case 'AC':
                 tipo = 'identificador'
-                lerProxGlobal = True
-                f.seek(f.tell() - 1)
-                c = ''
+
+                if c != ';':
+	                lerProxGlobal = True
+	                f.seek(f.tell() - 1)
+	                c = ''
+                else:
+                    lerProxGlobal = False
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
                 return Token(tipo, id[:-1].strip(), linhaGlobal, colunaGlobal)
-
 
             case 'C':
                 c = nextChar()
