@@ -219,8 +219,8 @@ def lex():
             case 'S':
                 tipo = ','
                 lerProxGlobal = True
-                tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
-                return Token(tipo, id[:-1].strip(), linha, coluna)
+                tabelaSimbolos[id.strip()] = Atributo(tipo, id.strip())
+                return Token(tipo, id.strip(), linha, coluna)
             case 'T':
                 tipo = ';'
                 lerProxGlobal = True
@@ -389,8 +389,12 @@ def lex():
                     return Token('Erro',f"Erro - caracter {c} nao e reconhecido",linha,coluna)
             case 'AC':
                 tipo = 'identificador'
-                lerProxGlobal = True
-                f.seek(f.tell() - 1)
+                if c == ';':
+	                lerProxGlobal = False
+                else:
+	                lerProxGlobal = True
+	                f.seek(f.tell() - 1)
+	                c = ''
                 tabelaSimbolos[id[:-1].strip()] = Atributo(tipo, id[:-1].strip())
                 return Token(tipo, id[:-1].strip(), linha, coluna)
             case 'C':
