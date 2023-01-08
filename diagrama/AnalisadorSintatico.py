@@ -1,3 +1,9 @@
+'''
+Analisador Sintatico
+Alunos: Douglas Gomes de Paula - Matricula: 11621BCC013
+        Miguel Sanches Rocha - Matricula: 11811BCC001
+'''
+
 import pandas as pd
 import numpy as np
 
@@ -22,7 +28,7 @@ numero_linhasVet = df2.shape[0]
 numero_colunasVet = df2.shape[1]
 
 
-
+#************************** FUNÇÕES AUXILIARES ************************************
 
 #Função para pegar a tupla(linhas,coluna) de determinado simbolo. Ex: pegaLinhaColunaNaoTerminal("S")
 def pega_linha_coluna(simbolo):
@@ -53,7 +59,6 @@ def pega_vetor_producoes(NTerminal, Terminal):
 
 
 
-
 #******************************************* PILHA ****************************************************
 
 class Nodo:
@@ -71,6 +76,7 @@ class Pilha:
     def __init__(self):
         self.topo = None
         self.lista = []
+        self.lista2 = []
         self.tamanho = 0
 
     def __repr__(self):
@@ -114,13 +120,42 @@ class Pilha:
         else:
             return self.lista[len(self.lista)-1]
 
+
+#******************************************* ARVORE ****************************************************
+class Arvore:
+    def __init__(self, chave=None, esquerda=None, direita=None):
+        self.chave = chave
+        self.esquerda = esquerda
+        self.direita = direita
+        self.lista = []
+
+
+    def pega_subarvore(self):
+        return '%s\n %s' % (self.chave, self.lista)
+
+def estrutura_floresta(floresta):
+    for j in range(0, len(floresta)):
+        print(floresta[j])
+
+
+
+
+#********************************** ALGORITMO ANALISE PREDITIVA *******************************************
 def algoritmo_analise_preditiva():
+    #Lista de terminais
     terminal = ["programa", "identificador", "inicio", "fim", "tipo", ";", ":", "se", "(", ")", "entao", "senao", "enquanto", "faca", "repita", "<--", "op_rela", "+", "-", "*", "/", "^", "numero", "letra", ",", "$"]
+
+    #Inicializa Floresta, Pilha, empilha simbolo inicial "S"
+    floresta = []
     pilha = Pilha()
     pilha.push("S")
+
+    #Chama proximo token pro lexico
     token = lexico.lex()
+    #Atribui token.tipo à variavel proxToken
     proxToken = token.tipo
-    #print(proxToken)
+
+    #Enquanto pilha não for vazia
     while pilha.pilha_vazia() == False:
         x = pilha.pega_topo()
         if x in terminal:
@@ -128,41 +163,61 @@ def algoritmo_analise_preditiva():
                 pilha.pop()
                 token = lexico.lex()
                 proxToken = token.tipo
-                #print(proxToken)
             else:
-                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
+                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nErro presente na Linha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
                 exit()
         else:
             valor = pegaValorTabela(x, proxToken)
             if valor == -1:
-                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
-
-
+                print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nErro presente na Linha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
                 exit()
             else:
-                #Trata Produção : Construi a Arovore
+                #Trata Produção : Construi a sub_arvore
+                sub_arvore = Arvore(x)
+
+                #Pega vetor de producao correspondente
+                producao = pega_vetor_producoes(x, proxToken)
+
+                #Adiciona retorno da produção à lista da sub_arvore
+                for k in range(0, len(producao)):
+                    sub_arvore.lista.append(producao[k])
+
+                # Adiciona arvore à floresta
+                floresta.append(sub_arvore.pega_subarvore())
+
                 #Retira o topo da pilha
                 pilha.pop()
                 #Pega vetor de producao correspondente
-                producao = pega_vetor_producoes(x,proxToken)
+                producao = pega_vetor_producoes(x, proxToken)
                 #Empilha todos os simbolos na ordem inversa
-                #print('producao', producao)
                 if producao[0] != 'ε':
                     for i in range (0, len(producao)):
                         pilha.push(producao[i])
+
+    #Ao sair do while, se o proxToken não for "$", erro!
     if proxToken != "$":
-        print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nLinha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
+        print(f"ERRO! TOKEN \"{token.atributo}\" NÃO ERA ESPERADO!\nErro presente na Linha: {token.linha} Coluna: {token.coluna} ".format(token.atributo))
         exit()
 
+    #Se o proxToken for "$", sucesso!
     else:
-        print("SUCESSO! SEU PROGRAMA FOI ACEITO PELO ANALISADOR SINTÁTICO!!!")
-        #Retorna Arvore construida
-        return
+        print("SUCESSO! SEU PROGRAMA FOI ACEITO PELO ANALISADOR SINTÁTICO!")
+
+        #Retorna Floresta construida
+        return floresta
+
+
+
+
 
 
 
 if __name__ == '__main__':
-    algoritmo_analise_preditiva()
+    floresta = algoritmo_analise_preditiva()
+    estrutura_floresta(floresta)
+
+
+
 
 
 
